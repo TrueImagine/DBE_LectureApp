@@ -1,34 +1,61 @@
 <?php
+session_start();
+require_once("../includes/koneksi.php");
+require_once("../includes/functions.php");
+
 
 if(isset($_POST['upload'])){
 	if(!isset($_FILES["profile"])){
-		$response = 0;
+		$response = 1;
 		echo $response;
 	}
 	else{
 		$foto = $_FILES['profile'];
-		$sql = "SELECT allow_ext FROM klinik";
-		$b = mysqli_query($k,$sql);
-		$ext = mysqli_fetch_array($b);
+		$ext = "jpg, jpeg, png, gif";
 
-		$a = check_file_extension($foto['name'], $ext['allow_ext']);
+		$a = check_file_extension($foto['name'], $ext);
 		if($a){
-			$sql = "SELECT id FROM dokter ORDER BY id DESC LIMIT 1";
-			$b = mysqli_query($k,$sql);
-			$a = mysqli_fetch_array($b);
-			$id = $a['id'] + 1;
-			
 			$sumber = $foto['tmp_name'];
-			if(!file_exists('../resources/temp')){
-				mkdir('../resources/temp',0777,true);
+			if(!file_exists('../images/fulls/temp')){
+				mkdir('../images/fulls/temp',0777,true);
 			}
-			$tujuan = "../resources/temp/foto_dokter_$id.".end(explode(".",$foto['name']));
+			$tujuan = "../images/fulls/temp/foto_".$_SESSION['user'].end(explode(".",$foto['name']));
 			move_uploaded_file($sumber,$tujuan);
 			$response = $tujuan;
 			echo $response;
 		}
 		else{
-			echo 0;
+			echo 1;
 		}
 	}
+}
+else if(isset($_SESSION['login']) && $_SESSION['role'] == "Dosen" && isset($_POST['simpan'])){
+	$nama = $_POST['nama'];
+	$tgl_lahir = $_POST['tgl_lahir'];
+	$email = $_POST['email'];
+	
+	$file_path = $_POST['hidpath'];
+	if($file_path != ""){
+		$new_file_path = "../images/fulls/foto/".end(explode("/",$file_path));
+		rename($file_path, $new_file_path);
+	}
+	else{
+		$new_file_path = $file_path;
+	}
+	$sql = "UPDATE dosen SET
+		namaDosen = '$nama',
+		emailDosen = '$email',
+		tglLahirDosen = '$tgl_lahir',
+		fotoDosen = '$new_file_path' WHERE idDosen = $_SESSION[user]";
+	mysqli_query($k,$sql);
+
+	if(mysqli_error($k)){
+		die(mysqli_error($k));
+	}
+	else{
+		echo "2";
+	}
+}
+else{
+	header('Location: index.php');
 }

@@ -17,17 +17,21 @@ $(document).ready(function() {
 			$("#uploadbar").hide(); //hide progress bar on success of upload
 		},
 		complete:function(response){
-			if(response.responseText == 0){//Upload Gagal
-				$("#image").show();
-				$("#pesan").html("Upload Gagal"); //display error if response is 0
+			if(response.responseText == 1){//Upload Gagal
+				$("#pesan").hide();
+				$("#pesan div").remove();
+				$("#pesan").show();
+				$("#pesan").append("<div class=\"alert alert-danger alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>Upload gagal. Pastikan file yang diupload merupakan file gambar (.jpg,.jpeg,.png,.gif) dan dengan ukuran tidak lebih dari 3 MB</p></div>");
+				setTimeout(function(){ $("#msgClose").click(); }, 2000);
+				//display error if response is 0
 			}
-			else if(response.responseText == 1)//User sudah ada
+			else if(response.responseText == 2)//Simpan sukses
 			{
-				$("#pesan").html("User telah digunakan oleh dokter lain, silahkan pilih user lain");
-			}
-			else if(response.responseText == 2)//Simpan Sukses
-			{
-				alert("Simpan Sukses");
+				$("#pesan").hide();
+				$("#pesan div").remove();
+				$("#pesan").show();
+				$("#pesan").append("<div class=\"alert alert-success alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>Simpan berhasil!</p></div>");
+				setTimeout(function(){ $("#msgClose").click(); }, 2000);
 			}
 			else{
 				$("#image").show;
