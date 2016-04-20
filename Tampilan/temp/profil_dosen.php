@@ -27,7 +27,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>LectureApp - Profil Dosen</title>
+    <title>LectureApps - Profil Dosen</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -64,7 +64,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">LectureApp - Portal Dosen</a>
+                <a class="navbar-brand" href="index.html"><b>LectureApps - Portal Dosen</b></a>
             </div>
             <!-- /.navbar-header -->
 
