@@ -173,25 +173,11 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="mahasiswa.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="flot.html">Tentang Kelas</a>
-                                </li>
-								<li>
-                                    <a href="flot.html">Mahasiswa</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">Materi</a>
-                                </li>
-								<li>
-                                    <a href="morris.html">Tugas</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas</a>
+                            
                         </li>
                     </ul>
                 </div>
