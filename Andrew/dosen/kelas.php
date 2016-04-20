@@ -1,9 +1,15 @@
 <?php
-	$idDosen=4;
+	$idDosen=3;
 	require_once('../includes/const.php');
 
+	$sql="SELECT * FROM dosen WHERE idDosen=$idDosen";
+	$hasil2= mysqli_query($k, $sql);
+	$nama=mysqli_fetch_assoc($hasil2);
+	echo "Selamat Siang, Bapak/Ibu ".$nama['namaDosen'];
+	
 	$query = "SELECT * FROM kelas WHERE idDosen=$idDosen";
 	$hasil = mysqli_query($k, $query);
+	
 	?>
 		<table border='1'>
 		<thead>
@@ -24,7 +30,7 @@
 ?>	
 		<tr>
 			<td>
-				<?php echo $b['namaKelas']; ?>
+				<a href="kelas_detail.php?idkelas=<?php echo $b['idKelas']?>"><?php echo $b['namaKelas']; ?></a>
 			</td>
 			<td> 
 				<?php echo $jumlah; ?>
