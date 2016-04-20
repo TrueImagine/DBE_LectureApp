@@ -260,7 +260,7 @@
 					<!-- /.table-responsive -->
 				</div>
 				<!-- /.panel-default -->
-				<a href='kelas_tambah.php?idDosen=<?php echo $idDosen ?>'>+Tambah Kelas</a>
+				<a href='kelas_tambah.php?idDosen=<?php echo $_SESSION['user']; ?>'>+Tambah Kelas</a>
             </div>
             <!-- /.container-fluid -->
         </div>
