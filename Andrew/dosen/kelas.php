@@ -1,6 +1,6 @@
 <?php
 	$idDosen=3;
-	require_once('../includes/const.php');
+	require_once('../includes/koneksi.php');
 
 	$sql="SELECT * FROM dosen WHERE idDosen=$idDosen";
 	$hasil2= mysqli_query($k, $sql);
