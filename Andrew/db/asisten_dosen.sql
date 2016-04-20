@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2016 at 02:42 AM
+-- Generation Time: Apr 20, 2016 at 09:36 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -23,40 +23,17 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dosen`
---
-
-CREATE TABLE IF NOT EXISTS `dosen` (
-`idDosen` int(11) NOT NULL,
-  `namaDosen` varchar(50) NOT NULL,
-  `passwordDosen` varchar(255) NOT NULL,
-  `emailDosen` varchar(100) NOT NULL,
-  `tglLahirDosen` date NOT NULL,
-  `fotoDosen` varchar(255) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `dosen`
---
-
-INSERT INTO `dosen` (`idDosen`, `namaDosen`, `passwordDosen`, `emailDosen`, `tglLahirDosen`, `fotoDosen`) VALUES
-(1, 'Halim Agung', 'debug', 'halimagung@gmail.com', '1990-11-10', 'debug'),
-(2, 'Lukman Hakim', 'debug', 'lukmanhakim@gmail.com', '1990-11-11', 'debug'),
-(3, 'Krintin', 'debug', 'kristin@bundamulia.ac.id', '1990-11-19', 'debug'),
-(4, 'Wawo', 'debug', 'wawo@gmail.com', '1990-11-11', 'debug');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `hasiltgs`
 --
 
 CREATE TABLE IF NOT EXISTS `hasiltgs` (
 `idHasiltgs` int(11) NOT NULL,
   `idTugas` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
   `idKelas` int(11) NOT NULL,
   `fileHasiltgs` varchar(255) NOT NULL,
-  `tglUploadHasiltgs` date NOT NULL
+  `tglUploadHasiltgs` date NOT NULL,
+  `nilai` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
@@ -65,6 +42,8 @@ CREATE TABLE IF NOT EXISTS `hasiltgs` (
 --       `kelas` -> `idKelas`
 --   `idTugas`
 --       `tugas` -> `idTugas`
+--   `idUser`
+--       `user` -> `idUser`
 --
 
 -- --------------------------------------------------------
@@ -95,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `kelas` (
 --
 -- RELATIONS FOR TABLE `kelas`:
 --   `idDosen`
---       `dosen` -> `idDosen`
+--       `user` -> `idUser`
 --
 
 --
@@ -126,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `kelasdtl` (
 --   `idKelas`
 --       `kelas` -> `idKelas`
 --   `idMhs`
---       `mahasiswa` -> `idMhs`
+--       `user` -> `idUser`
 --
 
 --
@@ -136,32 +115,7 @@ CREATE TABLE IF NOT EXISTS `kelasdtl` (
 INSERT INTO `kelasdtl` (`idKelasdtl`, `idKelas`, `idMhs`) VALUES
 (1, 1, 1),
 (2, 1, 2),
-(3, 2, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `mahasiswa`
---
-
-CREATE TABLE IF NOT EXISTS `mahasiswa` (
-`idMhs` int(11) NOT NULL,
-  `namaMhs` varchar(50) NOT NULL,
-  `passwordMhs` varchar(50) NOT NULL,
-  `emailMhs` varchar(50) NOT NULL,
-  `tglLahirMhs` date NOT NULL,
-  `fotoMhs` varchar(255) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `mahasiswa`
---
-
-INSERT INTO `mahasiswa` (`idMhs`, `namaMhs`, `passwordMhs`, `emailMhs`, `tglLahirMhs`, `fotoMhs`) VALUES
-(1, 'Andrew', 'debug', 'andrew@gmail.com', '1996-01-01', 'debug'),
-(2, 'Fedrico', 'debug', 'fedrico@gmail.com', '1995-01-01', 'debug'),
-(3, 'Antony', 'debug', 'antony@gmail.com', '1990-01-01', 'debug'),
-(4, 'Richie', 'debug', 'richie@gmail.com', '1991-01-01', 'debug');
+(3, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -243,21 +197,40 @@ INSERT INTO `tugas` (`idTugas`, `namaTugas`, `deskripsiTugas`, `tglMulaiTugas`, 
 (1, 'TUGAS_DBE_PERT1', 'buat di doc', '2016-04-12', '2016-04-19', 'debug', '2016-04-05', 1),
 (2, 'TUGAS_DBE_PERT1', 'buat di doc', '2016-04-12', '2016-04-19', 'debug', '2016-04-05', 2);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+`idUser` int(11) NOT NULL,
+  `namaUser` varchar(50) NOT NULL,
+  `passwordUser` varchar(255) NOT NULL,
+  `emailUser` varchar(100) NOT NULL,
+  `tglLahirUser` date NOT NULL,
+  `fotoUser` varchar(255) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`idUser`, `namaUser`, `passwordUser`, `emailUser`, `tglLahirUser`, `fotoUser`) VALUES
+(1, 'John', 'debug', 'halimagung@gmail.com', '1990-11-10', '../images/fulls/foto/foto_1jpg'),
+(2, 'Lukman Hakim', 'debug', 'lukmanhakim@gmail.com', '1990-11-11', 'debug'),
+(3, 'Krintin', 'debug', 'kristin@bundamulia.ac.id', '1990-11-19', 'debug'),
+(4, 'Wawo', 'debug', 'wawo@gmail.com', '1990-11-11', 'debug');
+
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `dosen`
---
-ALTER TABLE `dosen`
- ADD PRIMARY KEY (`idDosen`);
-
---
 -- Indexes for table `hasiltgs`
 --
 ALTER TABLE `hasiltgs`
- ADD PRIMARY KEY (`idHasiltgs`), ADD KEY `idTugas` (`idTugas`), ADD KEY `idKelas` (`idKelas`);
+ ADD PRIMARY KEY (`idHasiltgs`), ADD KEY `idTugas` (`idTugas`), ADD KEY `idKelas` (`idKelas`), ADD KEY `idUser` (`idUser`);
 
 --
 -- Indexes for table `jenispsn`
@@ -278,12 +251,6 @@ ALTER TABLE `kelasdtl`
  ADD PRIMARY KEY (`idKelasdtl`), ADD KEY `idKelas` (`idKelas`), ADD KEY `idMhs` (`idMhs`);
 
 --
--- Indexes for table `mahasiswa`
---
-ALTER TABLE `mahasiswa`
- ADD PRIMARY KEY (`idMhs`);
-
---
 -- Indexes for table `materi`
 --
 ALTER TABLE `materi`
@@ -302,14 +269,15 @@ ALTER TABLE `tugas`
  ADD PRIMARY KEY (`idTugas`), ADD KEY `idKelas` (`idKelas`);
 
 --
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+ ADD PRIMARY KEY (`idUser`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
---
--- AUTO_INCREMENT for table `dosen`
---
-ALTER TABLE `dosen`
-MODIFY `idDosen` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `hasiltgs`
 --
@@ -331,11 +299,6 @@ MODIFY `idKelas` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 ALTER TABLE `kelasdtl`
 MODIFY `idKelasdtl` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `mahasiswa`
---
-ALTER TABLE `mahasiswa`
-MODIFY `idMhs` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
---
 -- AUTO_INCREMENT for table `materi`
 --
 ALTER TABLE `materi`
@@ -351,6 +314,11 @@ MODIFY `idPesan` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `tugas`
 MODIFY `idTugas` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
 -- Constraints for dumped tables
 --
 
@@ -359,20 +327,21 @@ MODIFY `idTugas` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 ALTER TABLE `hasiltgs`
 ADD CONSTRAINT `hasiltgs_ibfk_1` FOREIGN KEY (`idKelas`) REFERENCES `kelas` (`idKelas`),
-ADD CONSTRAINT `hasiltgs_ibfk_2` FOREIGN KEY (`idTugas`) REFERENCES `tugas` (`idTugas`);
+ADD CONSTRAINT `hasiltgs_ibfk_2` FOREIGN KEY (`idTugas`) REFERENCES `tugas` (`idTugas`),
+ADD CONSTRAINT `hasiltgs_ibfk_3` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`);
 
 --
 -- Constraints for table `kelas`
 --
 ALTER TABLE `kelas`
-ADD CONSTRAINT `kelas_ibfk_1` FOREIGN KEY (`idDosen`) REFERENCES `dosen` (`idDosen`);
+ADD CONSTRAINT `kelas_ibfk_1` FOREIGN KEY (`idDosen`) REFERENCES `user` (`idUser`);
 
 --
 -- Constraints for table `kelasdtl`
 --
 ALTER TABLE `kelasdtl`
 ADD CONSTRAINT `kelasdtl_ibfk_1` FOREIGN KEY (`idKelas`) REFERENCES `kelas` (`idKelas`),
-ADD CONSTRAINT `kelasdtl_ibfk_2` FOREIGN KEY (`idMhs`) REFERENCES `mahasiswa` (`idMhs`);
+ADD CONSTRAINT `kelasdtl_ibfk_2` FOREIGN KEY (`idMhs`) REFERENCES `user` (`idUser`);
 
 --
 -- Constraints for table `materi`
