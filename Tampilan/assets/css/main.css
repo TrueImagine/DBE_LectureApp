@@ -48,32 +48,32 @@
 		-webkit-text-size-adjust: none;
 	}
 	
-	#container{
+	#badan{
 		background: black;
 		color: white;
 	}
 	
-	#container img{
+	#badan img{
 		display: inline-block;
 		width: 15%;
 		height: 15%;
 		margin-left: 15%;
 	}
-	#container div{
+	#badan div{
 		display: inline-block;
 		width: 60%;
 		vertical-align:500%;
 		padding-left: 15%;
 	}
 	
-	#container h1{
+	#badan h1{
 		font-family:Segoe UI;
 		font-size: 24pt;
 		font-weight: bold;
 		color: white;
 	}
 	
-	#container p{
+	#badan p{
 		font-family:Arial;
 		color: white;
 		padding-top: 25px;
@@ -862,6 +862,19 @@
 		text-align: center;
 		width: 100%;
 	}
+	
+	#banner h1{
+		font-size : 40px;
+		text-shadow:
+			0 0 5px white,
+			0 0 10px white,
+			0 0 15px white,
+			0 0 20px white,
+			0 0 25px white,
+			0 0 30px white,
+			0 0 35px white,
+			0 0 40px white;
+	}
 /* Footer */
 
 	#footer {
@@ -1037,10 +1050,10 @@
 		position: absolute;
 		top: 15%;
 		width: calc(100% - 22.5em);
-		height: 80%;
+		height: 100%;
 		left: 0;
 		background-color: transparent;
-		z-index: 1000;
+		z-index: 1;
 	}
 
 		#viewer .inner {
@@ -1296,15 +1309,6 @@
 	
 		
 /* login */
-/*body {
-    background: -webkit-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.15) 30%, rgba(255,255,255,.3) 32%, rgba(255,255,255,0) 33%) 0 0, -webkit-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.1) 11%, rgba(255,255,255,.3) 13%, rgba(255,255,255,0) 14%) 0 0, -webkit-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 17%, rgba(255,255,255,.43) 19%, rgba(255,255,255,0) 20%) 0 110px, -webkit-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 11%, rgba(255,255,255,.4) 13%, rgba(255,255,255,0) 14%) -130px -170px, -webkit-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 11%, rgba(255,255,255,.4) 13%, rgba(255,255,255,0) 14%) 130px 370px, -webkit-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.1) 11%, rgba(255,255,255,.2) 13%, rgba(255,255,255,0) 14%) 0 0, -webkit-linear-gradient(45deg, #343702 0%, #184500 20%, #187546 30%, #006782 40%, #0b1284 50%, #760ea1 60%, #83096e 70%, #840b2a 80%, #b13e12 90%, #e27412 100%);
-    background-color: #840b2a;
-    background: -moz-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.15) 30%, rgba(255,255,255,.3) 32%, rgba(255,255,255,0) 33%) 0 0, -moz-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.1) 11%, rgba(255,255,255,.3) 13%, rgba(255,255,255,0) 14%) 0 0, -moz-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 17%, rgba(255,255,255,.43) 19%, rgba(255,255,255,0) 20%) 0 110px, -moz-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 11%, rgba(255,255,255,.4) 13%, rgba(255,255,255,0) 14%) -130px -170px, -moz-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 11%, rgba(255,255,255,.4) 13%, rgba(255,255,255,0) 14%) 130px 370px, -moz-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.1) 11%, rgba(255,255,255,.2) 13%, rgba(255,255,255,0) 14%) 0 0, -moz-linear-gradient(45deg, #343702 0%, #184500 20%, #187546 30%, #006782 40%, #0b1284 50%, #760ea1 60%, #83096e 70%, #840b2a 80%, #b13e12 90%, #e27412 100%);
-    background-color: #840b2a;
-    background: -o-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.15) 30%, rgba(255,255,255,.3) 32%, rgba(255,255,255,0) 33%) 0 0, -o-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.1) 11%, rgba(255,255,255,.3) 13%, rgba(255,255,255,0) 14%) 0 0, -o-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 17%, rgba(255,255,255,.43) 19%, rgba(255,255,255,0) 20%) 0 110px, -o-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 11%, rgba(255,255,255,.4) 13%, rgba(255,255,255,0) 14%) -130px -170px, -o-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 11%, rgba(255,255,255,.4) 13%, rgba(255,255,255,0) 14%) 130px 370px, -o-radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.1) 11%, rgba(255,255,255,.2) 13%, rgba(255,255,255,0) 14%) 0 0, -o-linear-gradient(45deg, #343702 0%, #184500 20%, #187546 30%, #006782 40%, #0b1284 50%, #760ea1 60%, #83096e 70%, #840b2a 80%, #b13e12 90%, #e27412 100%);
-    background-size: 1000px 1000px, 410px 410px, 610px 610px, 530px 530px, 730px 730px, 1000px 1000px;
-    background-color: #840b2a;
-}*/
 
 .login {
     width: 300px;
@@ -1343,7 +1347,7 @@
 
 .login form input[type=text], .login form input[type=password] {
     width: 200px;
-    font-size: 12px;
+    font-size: 16px;
     padding-top: 14px;
     padding-bottom: 14px;
     padding-left: 40px;
@@ -1382,7 +1386,7 @@
     background: #349e92;
     text-align: center;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: bold;
     color: #FFF;
     text-shadow: 0 -1px #1d7464, 0 1px #7bb8b3;
@@ -1395,7 +1399,7 @@
     overflow: hidden;
     padding-top: 25px;
     padding-bottom: 25px;
-    font-size: 10px;
+    font-size: 14px;
     text-align: center;
 }
 
@@ -1438,3 +1442,6 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+/* CALENDER */
+
