@@ -1,3 +1,26 @@
+<?php
+	session_start();
+	require_once('../includes/koneksi.php');
+/*
+	Dummy data
+*/
+	$_SESSION['login'] = true;
+	$_SESSION['user'] = 1;
+	$_SESSION['role'] = "Mahasiswa";
+/*
+	Dummy data
+*/
+	$sql = "SELECT 
+				a.idKelas z, a.namaKelas,b.namaDosen 
+			FROM 
+				kelas a   
+			INNRER JOIN dosen b 
+			on a.idDosen=b.idDosen ";
+	$a = mysqli_query($k,$sql);
+	if(mysqli_num_rows($a) > 0){
+		$dataMhs = mysqli_fetch_assoc($a);
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -190,7 +213,7 @@
 					<div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Kitchen Sink
+                            Kelas
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -198,15 +221,15 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
+                                            <th>No</th>
+                                            <th>Nama Kelas</th>
+                                            <th>Nama Dosen</th>
+                                          
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>1</td>
+                                            <td><?php echo $dataMhs['z'] ?></td>
                                             <td>Mark</td>
                                             <td>Otto</td>
                                             <td>@mdo</td>
