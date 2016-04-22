@@ -32,8 +32,8 @@
 			<div id="main">
 				<!-- Header -->
 					<header id="header">
-						<section class="login">
-						<?php if(isset($_SESSION['error'])){echo $_SESSION['error'];} ?>
+						<section class="login"> <!--form login-->	
+							
 							<div class="titulo">Login LecturerApps</div>
 								<form action="temp/login_proses.php" method="post" enctype="application/x-www-form-urlencoded">
 									<input type="text" name="username" required title="Username required" placeholder="Email" data-icon="U">
@@ -72,6 +72,5 @@
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/main.js"></script>
-
 	</body>
 </html>

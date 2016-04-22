@@ -3,30 +3,25 @@
 	require_once("../includes/koneksi.php");
 	$user = $_POST['username'];
 	$pass = $_POST['password'];
-	
-	echo $user;
-	echo $pass;
 	$sql = "SELECT * FROM user WHERE emailUser = '$user'";
 	$hasil = mysqli_query($k, $sql);
 	
-	//print_r( mysqli_fetch_array($hasil));
 	
 	$data = mysqli_fetch_array($hasil);
-if(mysqli_num_rows($hasil)){	
-	if($pass==$data['passwordUser']){
-		$_SESSION['login'] = 1;
-		if($data['status']==1){
-			header('Location: mahasiswa.php');
-		}else{
-			header('Location: dosen.php');
+	if(mysqli_num_rows($hasil)){	
+		if(password_verify($pass, $data['passwordUser'])){
+			$_SESSION['login'] = true;
+			$_SESSION['user'] = $data['id'];
+			$_SESSION['role'] = $data['status'];
+			if($data['login']==true){
+				header('Location: mahasiswa.php');
+			}else{
+				header('Location: dosen.php');
+			}
 		}
+		else{
+			echo "<script>alert('Email / Password Anda Salah!'); window.location='../index.php';</script>";						
+		}
+	}else{		
+		echo "<script>alert('Email / Password Anda Salah!'); window.location='../index.php';</script>";						
 	}
-	else{
-		$_SESSION['login'] = null;
-		echo "Username not found";
-		//echo $data['passwordUser'];
-	}
-}else{
-	$_SESSION['login'] = null;
-	echo "Username not found";
-}
