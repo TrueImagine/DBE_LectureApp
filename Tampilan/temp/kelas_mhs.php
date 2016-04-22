@@ -10,16 +10,9 @@
 /*
 	Dummy data
 */
-	$sql = "SELECT 
-				a.idKelas z, a.namaKelas,b.namaDosen 
-			FROM 
-				kelas a   
-			INNRER JOIN dosen b 
-			on a.idDosen=b.idDosen ";
+	$sql = "SELECT kelas.idKelas, kelas.namaKelas, user.namaUser FROM kelas 
+			INNER JOIN user ON kelas.idUser = user.idUser";
 	$a = mysqli_query($k,$sql);
-	if(mysqli_num_rows($a) > 0){
-		$dataMhs = mysqli_fetch_assoc($a);
-	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -215,12 +208,15 @@
                         <div class="panel-heading">
                             Kelas
                         </div>
+						
+						
+					
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
-                                        <tr>
+										<tr>
                                             <th>No</th>
                                             <th>Nama Kelas</th>
                                             <th>Nama Dosen</th>
@@ -228,24 +224,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+									<?php 
+										while($b = mysqli_fetch_assoc($a)){
+									?>
                                         <tr>
-                                            <td><?php echo $dataMhs['z'] ?></td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
+                                            <td><?php echo $b['idKelas'] ?></td>
+                                            <td><a href = "#"><?php echo $b['namaKelas'] ?></a></td>
+											<td><?php echo $b['namaUser'] ?></td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
+									<?php } ?>
                                     </tbody>
                                 </table>
                             </div>
