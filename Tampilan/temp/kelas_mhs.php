@@ -10,13 +10,11 @@
 /*
 	Dummy data
 */
-	$sql = "SELECT namaMhs, emailMhs, tglLahirMhs, fotoMhs FROM mahasiswa WHERE idMhs = $_SESSION[user]";
+	$sql = "SELECT kelas.idKelas, kelas.namaKelas, user.namaUser FROM kelas 
+			INNER JOIN user ON kelas.idUser = user.idUser";
 	$a = mysqli_query($k,$sql);
-	if(mysqli_num_rows($a) > 0){
-		$dataMhs = mysqli_fetch_assoc($a);
-	}
 ?>
-
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -27,7 +25,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>LectureApps - Profil Mahasiswa</title>
+    <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -47,8 +45,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-	
-	
+
 </head>
 
 <body>
@@ -64,12 +61,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><b>LectureApps - Portal Mahasiswa</b></a>
+                <a class="navbar-brand" href="index.html"><b>LectureApps - Portal Pelajar</b></a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -83,7 +79,7 @@
                                         <span class="pull-right text-muted">40% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                             <span class="sr-only">40% Complete (success)</span>
                                         </div>
                                     </div>
@@ -99,7 +95,7 @@
                                         <span class="pull-right text-muted">20% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                             <span class="sr-only">20% Complete</span>
                                         </div>
                                     </div>
@@ -115,7 +111,7 @@
                                         <span class="pull-right text-muted">60% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                             <span class="sr-only">60% Complete (warning)</span>
                                         </div>
                                     </div>
@@ -131,7 +127,7 @@
                                         <span class="pull-right text-muted">80% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                             <span class="sr-only">80% Complete (danger)</span>
                                         </div>
                                     </div>
@@ -149,7 +145,7 @@
                     <!-- /.dropdown-tasks -->
                 </li>
                 <!-- /.dropdown -->
-                <!-- /.dropdown -->
+                
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -172,100 +168,102 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+								</span>
+                            </div>
+                            <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="flot.html">Tentang Kelas</a>
-                                </li>
-								<li>
-                                    <a href="flot.html">Mahasiswa</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">Materi</a>
-                                </li>
-								<li>
-                                    <a href="morris.html">Tugas</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                            <a href="mahasiswa.php".html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas</a>
+							
+						</li>
+                        
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-		
-		<!-- Page Content -->
+
+        <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Profil Mahasiswa</h1>
+                        <h1 class="page-header">Daftar Kelas</h1>
                     </div>
                     <!-- /.col-lg-12 -->
+					
+					<div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Kelas
+                        </div>
+						
+						
+					
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+										<tr>
+                                            <th>No</th>
+                                            <th>Nama Kelas</th>
+                                            <th>Nama Dosen</th>
+                                          
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									<?php 
+										while($b = mysqli_fetch_assoc($a)){
+									?>
+                                        <tr>
+                                            <td><?php echo $b['idKelas'] ?></td>
+                                            <td><a href = "#"><?php echo $b['namaKelas'] ?></a></td>
+											<td><?php echo $b['namaUser'] ?></td>
+                                        </tr>
+									<?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div> <!--/.col-lg-6 -->
                 </div>
                 <!-- /.row -->
-				<div class="col-lg-12">
-                    <div class="row">
-						<div class="col-lg-6">
-							<span id="pesan"></span>
-							<form role="form" method="POST" id="formprofil" action="update_profil_mhs.php">
-								<div class="form-group">
-									<img src="<?php if($dataMhs['fotoMhs'] == "") echo "../images/fulls/c4LR6O.jpg"; else echo $dataMhs['fotoMhs']; ?>" id="image" />
-									<input type="file" name="profile" />
-									<div id="uploadbar" class="progress progress-striped active">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-                                            <span class="sr-only">0% Complete</span>
-                                        </div>
-                                    </div>
-									<input type="hidden" name="hidpath" id="hidpath" value="<?php echo $dataMhs['fotoMhs']; ?>" />
-									<input type="submit" class="btn btn-default" name="upload" value="Upload" />
-								</div>
-								<div class="form-group">
-									<label>Nama</label>
-									<input type="text" name="nama" class="form-control" value="<?php echo $dataMhs['namaMhs']; ?>"/>
-								</div>
-								<div class="form-group">
-									<label>Tanggal Lahir</label>
-									<input type="date" name="tgl_lahir" class="form-control" value="<?php echo $dataMhs['tglLahirMhs']; ?>"/>
-								</div>
-								<div class="form-group">
-									<label>E-mail / Username</label>
-									<input type="email" name="email" class="form-control" value="<?php echo $dataMhs['emailMhs']; ?>"/>
-								</div>
-								<input type="submit" class="btn btn-default" name = "ubahpass" value="Ubah Password" />
-								<input type="submit" class="btn btn-default" name = "simpan" value="Simpan" />
-							</form>
-						</div>
-					</div>
-				</div>
             </div>
             <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
 
-	</div>
+    </div>
     <!-- /#wrapper -->
 
-	<!-- jQuery -->
+    <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	
+
     <!-- Metis Menu Plugin JavaScript -->
     <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
-	<script src="../js/jquery.form.js"></script>
-	
-	<script src="../js/script.js"></script>	
+
 </body>
 
 </html>

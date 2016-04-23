@@ -1,4 +1,7 @@
 <!DOCTYPE HTML>
+<?php
+	require_once("includes/koneksi.php");
+?>
 <html>
 	<head>
 		<title>LectureApps</title>
@@ -29,16 +32,17 @@
 			<div id="main">
 				<!-- Header -->
 					<header id="header">
-						<section class="login">
+						<section class="login"> <!--form login-->	
+							
 							<div class="titulo">Login LecturerApps</div>
-								<form action="#" method="post" enctype="application/x-www-form-urlencoded">
-									<input type="text" required title="Username required" placeholder="Email" data-icon="U">
-									<input type="password" required title="Password required" placeholder="Password" data-icon="x">
+								<form action="temp/login_proses.php" method="post" enctype="application/x-www-form-urlencoded">
+									<input type="text" name="username" required title="Username required" placeholder="Email" data-icon="U">
+									<input type="password" name="password" required title="Password required" placeholder="Password" data-icon="x">
 									<div class="olvido">
-										<div class="col"><a href="#" title="Ver Carásteres">Register</a></div>
-										<div class="col"><a href="#" title="Recuperar Password">Forgot Password?</a></div>
+										<div class="col"><a href="temp/account.php?action=register" title="Daftar">Register</a></div>
+										<div class="col"><a href="temp/account.php?action=lupa" title="Lupa Password">Forgot Password?</a></div>
 									</div>
-									<a href="#" class="enviar">Login</a>
+									<input type="submit" name="login" value="Login" />
 								</form>
 						</section>
 						<ul class="icons">
@@ -68,6 +72,5 @@
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/main.js"></script>
-
 	</body>
 </html>

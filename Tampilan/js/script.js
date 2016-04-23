@@ -4,7 +4,6 @@
 //2 = database insert done
 	
 $(document).ready(function() {
-	
 	$('#formprofil').ajaxForm({
 		beforeSend:function(){
 			$("#uploadbar").show();

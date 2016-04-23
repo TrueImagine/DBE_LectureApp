@@ -164,22 +164,11 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="mahasiswa.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">Tentang Kelas</a>
-                                </li>
-                                <li>
-                                    <a href="#">Materi</a>
-                                </li>
-								<li>
-									<a href="#">Tugas</a>
-								</li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                            <a href="kelas_mhs.php"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas</a>
+							
 						</li>
                         
                     </ul>

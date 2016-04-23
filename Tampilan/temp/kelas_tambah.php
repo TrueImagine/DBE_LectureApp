@@ -1,6 +1,6 @@
 <?php
-	require_once("../includes/koneksi.php");
 	session_start();
+	require_once('../includes/koneksi.php');
 /*
 	Dummy data
 */
@@ -10,9 +10,6 @@
 /*
 	Dummy data
 */
-	$sql ="SELECT * FROM user WHERE idUser=$_SESSION[user]";
-	$hasil2 = mysqli_query($k, $sql);
-	$nama = mysqli_fetch_assoc($hasil2);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +22,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>LectureApps - Portal Dosen</title>
+    <title>LectureApps - Tambah Kelas</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -66,7 +63,7 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-				<?php echo "Selamat siang, Pak/Bu ".$nama['namaUser'];?>
+                <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -80,7 +77,7 @@
                                         <span class="pull-right text-muted">40% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
                                             <span class="sr-only">40% Complete (success)</span>
                                         </div>
                                     </div>
@@ -96,7 +93,7 @@
                                         <span class="pull-right text-muted">20% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
                                             <span class="sr-only">20% Complete</span>
                                         </div>
                                     </div>
@@ -112,7 +109,7 @@
                                         <span class="pull-right text-muted">60% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
                                             <span class="sr-only">60% Complete (warning)</span>
                                         </div>
                                     </div>
@@ -128,7 +125,7 @@
                                         <span class="pull-right text-muted">80% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
                                             <span class="sr-only">80% Complete (danger)</span>
                                         </div>
                                     </div>
@@ -146,15 +143,15 @@
                     <!-- /.dropdown-tasks -->
                 </li>
                 <!-- /.dropdown -->
-                
+                <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="profil_dosen.php"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="profil_dosen.php"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -169,25 +166,13 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-								</span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
                         <li>
                             <a href="dosen.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="kelas_dosen.php"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas</a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas</a>
                             <!-- /.nav-second-level -->
-						</li>
-                        
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -200,70 +185,24 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Portal Dosen</h1>
+                        <h1 class="page-header">Tambah Kelas</h1>
                     </div>
                     <!-- /.col-lg-12 -->
-					<div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bell fa-fw"></i> Notifications Panel
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small"><em>4 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small"><em>12 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                    <span class="pull-right text-muted small"><em>27 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small"><em>43 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small"><em>11:32 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-bolt fa-fw"></i> Server Crashed!
-                                    <span class="pull-right text-muted small"><em>11:13 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-warning fa-fw"></i> Server Not Responding
-                                    <span class="pull-right text-muted small"><em>10:57 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
-                                    <span class="pull-right text-muted small"><em>9:49 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-money fa-fw"></i> Payment Received
-                                    <span class="pull-right text-muted small"><em>Yesterday</em>
-                                    </span>
-                                </a>
-                            </div>
-                            <!-- /.list-group -->
-                            <a href="#" class="btn btn-default btn-block">View All Alerts</a>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
                 </div>
                 <!-- /.row -->
+				<form role="form" action="kelas_tambah_proses.php?idDosen=<?php echo $_GET['idDosen']; ?>" method="POST">
+					<div class="form-group" id="namaKelas">
+						<label class="control-label" for="inputError">Nama Kelas</label>
+						<input type="text" name="namaKelas" class="form-control" data-container="body" data-trigger="manual" data-toggle="popover" data-placement="top" data-content="Kolom ini tidak boleh kosong!" />
+					</div>
+					<div class="form-group">
+						<label>Deskripsi Kelas</label>
+						<textarea name="deskripsiKelas" class="form-control" rows="3"></textarea>
+					</div>
+					<a href="kelas_dosen.php" class="btn btn-danger">Batal</a>
+					<input type="submit" id="tambahButton" name="tambahKelas" value="Tambah" class="btn btn-success" disabled />
+				</form>
+				<!-- /.panel-default -->
             </div>
             <!-- /.container-fluid -->
         </div>
@@ -283,10 +222,9 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
-			<div class="navbar-header" style="width:100%">
-                
-				<h1 style="font-size: 16px; text-align: center;"><i>&copy; LectureApps - 2016</i> </h1>
-            </div>
+	
+	<script src="../js/validation.js"></script>
+
 </body>
 
 </html>
