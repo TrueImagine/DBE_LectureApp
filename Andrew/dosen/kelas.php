@@ -1,5 +1,5 @@
 <?php
-	$idDosen=3;
+	$idDosen=4;
 	require_once('../includes/const.php');
 
 	$sql="SELECT * FROM dosen WHERE idDosen=$idDosen";
