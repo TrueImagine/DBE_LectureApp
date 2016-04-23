@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2016 at 05:27 AM
+-- Generation Time: Apr 20, 2016 at 09:36 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -36,6 +36,16 @@ CREATE TABLE IF NOT EXISTS `hasiltgs` (
   `nilai` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+--
+-- RELATIONS FOR TABLE `hasiltgs`:
+--   `idKelas`
+--       `kelas` -> `idKelas`
+--   `idTugas`
+--       `tugas` -> `idTugas`
+--   `idUser`
+--       `user` -> `idUser`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -56,16 +66,22 @@ CREATE TABLE IF NOT EXISTS `jenispsn` (
 CREATE TABLE IF NOT EXISTS `kelas` (
 `idKelas` int(11) NOT NULL,
   `namaKelas` varchar(50) NOT NULL,
-  `idUser` int(11) NOT NULL,
+  `idDosen` int(11) NOT NULL,
   `deskripsiKelas` varchar(255) DEFAULT NULL,
   `statusKelas` int(11) DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
+-- RELATIONS FOR TABLE `kelas`:
+--   `idDosen`
+--       `user` -> `idUser`
+--
+
+--
 -- Dumping data for table `kelas`
 --
 
-INSERT INTO `kelas` (`idKelas`, `namaKelas`, `idUser`, `deskripsiKelas`, `statusKelas`) VALUES
+INSERT INTO `kelas` (`idKelas`, `namaKelas`, `idDosen`, `deskripsiKelas`, `statusKelas`) VALUES
 (1, '6PTI1 - Basis Data Enterprise ', 4, NULL, 1),
 (2, '6PTI2 - Basis Data Enterprise', 3, NULL, 1),
 (3, '6PTI3 - Basis Data Enterprise', 4, NULL, 1),
@@ -83,6 +99,14 @@ CREATE TABLE IF NOT EXISTS `kelasdtl` (
   `idKelas` int(11) NOT NULL,
   `idMhs` int(11) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- RELATIONS FOR TABLE `kelasdtl`:
+--   `idKelas`
+--       `kelas` -> `idKelas`
+--   `idMhs`
+--       `user` -> `idUser`
+--
 
 --
 -- Dumping data for table `kelasdtl`
@@ -108,6 +132,12 @@ CREATE TABLE IF NOT EXISTS `materi` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
+-- RELATIONS FOR TABLE `materi`:
+--   `idKelas`
+--       `kelas` -> `idKelas`
+--
+
+--
 -- Dumping data for table `materi`
 --
 
@@ -128,6 +158,14 @@ CREATE TABLE IF NOT EXISTS `pesan` (
   `idKelas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+--
+-- RELATIONS FOR TABLE `pesan`:
+--   `idKelas`
+--       `kelas` -> `idKelas`
+--   `idJenispsn`
+--       `jenispsn` -> `idJenispsn`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -144,6 +182,12 @@ CREATE TABLE IF NOT EXISTS `tugas` (
   `tglUploadTugas` date NOT NULL,
   `idKelas` int(11) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- RELATIONS FOR TABLE `tugas`:
+--   `idKelas`
+--       `kelas` -> `idKelas`
+--
 
 --
 -- Dumping data for table `tugas`
@@ -198,7 +242,7 @@ ALTER TABLE `jenispsn`
 -- Indexes for table `kelas`
 --
 ALTER TABLE `kelas`
- ADD PRIMARY KEY (`idKelas`), ADD KEY `idDosen` (`idUser`);
+ ADD PRIMARY KEY (`idKelas`), ADD KEY `idDosen` (`idDosen`);
 
 --
 -- Indexes for table `kelasdtl`
@@ -290,7 +334,7 @@ ADD CONSTRAINT `hasiltgs_ibfk_3` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUs
 -- Constraints for table `kelas`
 --
 ALTER TABLE `kelas`
-ADD CONSTRAINT `kelas_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`);
+ADD CONSTRAINT `kelas_ibfk_1` FOREIGN KEY (`idDosen`) REFERENCES `user` (`idUser`);
 
 --
 -- Constraints for table `kelasdtl`

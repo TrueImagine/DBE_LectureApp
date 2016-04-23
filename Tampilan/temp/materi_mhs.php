@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	require_once('../includes/koneksi.php');
+
 /*
 	Dummy data
 */
@@ -10,13 +11,9 @@
 /*
 	Dummy data
 */
-	$sql = "SELECT kelas.namaKelas, user.namaUser,kelas.idKelas FROM kelas
-			INNER JOIN kelasdtl ON kelasdtl.idKelas = kelas.idKelas
-			INNER JOIN user ON kelas.idDosen = user.idUser
-			WHERE kelasdtl.idMhs = $_SESSION[user]";
-	//$sql = "SELECT kelas.idKelas, kelas.namaKelas, user.namaUser FROM kelas 
-		//	INNER JOIN user ON kelas.idDosen = user.idUser";
+	$sql = "Select * FROM dtl_kelas";
 	$a = mysqli_query($k,$sql);
+	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -184,11 +181,22 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="mahasiswa.php".html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="profil_mhs.php"><i class="fa fa-dashboard fa-fw"></i> Profil</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas</a>
-							
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Tentang Kelas</a>
+                                </li>
+                                <li>
+                                    <a href="#">Materi</a>
+                                </li>
+								<li>
+									<a href="#">Tugas</a>
+								</li>
+                            </ul>
+                            <!-- /.nav-second-level -->
 						</li>
                         
                     </ul>
@@ -203,48 +211,30 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Daftar Kelas</h1>
+						<?php
+							$sql1 = "SELECT namaKelas,deskripsikelas,idKelas FROM kelas WHERE idKelas = '$_GET[idKelas]'";
+							$hasil = mysqli_query($k,$sql1);
+							$a = mysqli_fetch_assoc($hasil);
+						?>
+                        <h1 class="page-header">Detail <?php echo $a['namaKelas'] ?></h1>
                     </div>
                     <!-- /.col-lg-12 -->
-					
 					<div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Kelas
-                        </div>
+						<form role="form" id="detailform" action="updateform.php" method="POST">
 						
-						
-					
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-										<tr>
-                                            <th>Nama Kelas</th>
-                                            <th>Nama Dosen</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-									<?php 
-										while($b = mysqli_fetch_assoc($a)){
-									?>
-                                        <tr>
-											<td>
-												<a href ="kelas_detail_mhs.php?idKelas=<?php echo $b['idKelas'] ?>"> <?php echo $b['namaKelas'] ?> </a>
-											</td>
-											<td><?php echo $b['namaUser'] ?></td>
-                                        </tr>
-									<?php } ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div> <!--/.col-lg-6 -->
+							<a href ="dtl_kelas.php?idKelas=<?php echo $a['idKelas']; ?>">Tentang Kelas </a> | <a href ="#">Materi</a>  |  <a href ="#">Tugas</a> 
+						</br></br>
+						<div class="form-group">
+							<label>Nama</label>
+							<input class="form-control" name="namakelas" rows="3" value="<?php echo $a['namaKelas']; ?>" disabled>
+						</div>
+						<div class="form-group">
+							<label>Deskripsi</label>
+							<textarea class="form-control" name="deskripsikelas" rows="3" disabled><?php echo $a['deskripsikelas']; ?></textarea>
+						</div>
+						</form>
+					</div><!-- col-lg-6  -->	
+                    
                 </div>
                 <!-- /.row -->
             </div>
