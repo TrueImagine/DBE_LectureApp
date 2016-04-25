@@ -41,6 +41,48 @@ $(document).ready(function() {
 		}
 	});
 	
+	$('#tambahmateri').ajaxForm({
+		beforeSend:function(){
+			$("#uploadbar").show();
+		},
+		uploadProgress:function(event,position,total,percentComplete){
+			$(".progress-bar").width(percentComplete+'%'); //dynamically change the progress bar width
+			$(".sr-only").html(percentComplete+'%');//show the percentage number
+		},
+		success:function(){
+			$("#uploadbar").hide(); //hide progress bar on success of upload
+		},
+		complete:function(response){
+			if(response.responseText == 'gagal'){//Upload Gagal
+				$("#pesan").hide();
+				$("#pesan div").remove();
+				$("#pesan").show();
+				$("#pesan").append("<div class=\"alert alert-danger alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>Upload materi gagal, cek apakah file yang diupload berekstensi .pdf</p></div>");
+				setTimeout(function(){ $("#msgClose").click(); }, 2000);
+				//display error if response is 0
+			}
+			else if(response.responseText == 'kosong')//file kosong
+			{
+				$("#pesan").hide();
+				$("#pesan div").remove();
+				$("#pesan").show();
+				$("#pesan").append("<div class=\"alert alert-danger alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>File materi kosong</p></div>");
+				setTimeout(function(){ $("#msgClose").click(); }, 2000);
+			}
+			else if(response.responseText == 'sama')//nama file sudah ada
+			{
+				$("#pesan").hide();
+				$("#pesan div").remove();
+				$("#pesan").show();
+				$("#pesan").append("<div class=\"alert alert-danger alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>Nama File Sudah ada, silahkan gunakan nama lain</p></div>");
+				setTimeout(function(){ $("#msgClose").click(); }, 2000);
+			}
+			else{
+				location.href = "kelas_dosen_materi.php?idkelas="+response.responseText;	
+			}
+		}
+	});
+	
 	
 	//set the progress bar to be hidden on loading
 	$("#uploadbar").hide();

@@ -197,6 +197,7 @@
                 </div>
                 <!-- /.row -->
 				<?php include('../includes/dosen_dtlmenu.php'); ?>
+				<span id="pesan"></span>
 				<div class="row">
 					<div class="panel panel-default">
 						<div class="table-responsive">
@@ -220,11 +221,25 @@
 							</table>
 						</div>
 					</div>
-					<a href="kelas_materi_tambah.php?idkelas=<?php echo $id; ?>">+Tambah Materi</a>
+					
+					<!-- Tambah Materi -->
+					<form id="tambahmateri" action ="kelas_dosen_materi_tambah.php" method="POST" enctype="multipart/form-data">
+						<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
+						<input type="file" name="materi"/>
+						<div id="uploadbar" class="progress progress-striped active">
+							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+								<span class="sr-only">0% Complete</span>
+							</div>
+						</div>
+						<input type="submit" name="tambahMateri" value="Tambah" />
+					</form>
+					
+					<!-- Download ALL -->
 					<form action="materi/materi_download_all.php" method="POST">
 						<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
 						<input type="submit" name="downloadall" class="btn btn-default" value="Save All as ZIP" />
 					</form>
+				
 				</div>
 				<!-- /.panel-default -->
             </div>
@@ -234,7 +249,9 @@
 
     </div>
     <!-- /#wrapper -->
-
+	
+	
+	
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -247,6 +264,8 @@
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
 
+	<script src="../js/jquery.form.js"></script>
+	<script src="../js/script.js"></script>
 </body>
 
 </html>
