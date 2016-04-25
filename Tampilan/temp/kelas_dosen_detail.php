@@ -10,14 +10,18 @@
 /*
 	Dummy data
 */
-	$sql="SELECT * FROM user WHERE idUser = $_SESSION[user]";
-	$hasil2= mysqli_query($k, $sql);
-	$nama = mysqli_fetch_assoc($hasil2);
+	$id = $_GET['idkelas'];
 	
-	//echo "SELECT * FROM kelas WHERE idDosen=$_SESSION[user]";
+	//query nama kelas
+	$sql="SELECT * FROM kelas WHERE idKelas=$id";
+	$hasil=mysqli_query($k, $sql) ;
+	$kelas=mysqli_fetch_assoc($hasil);
 	
-	$query = "SELECT * FROM kelas WHERE idDosen=$_SESSION[user]";
-	$hasil = mysqli_query($k, $query);
+	$idDosen=$kelas['idDosen'];
+	
+	$sql2="SELECT namaUser FROM user WHERE idUser=$idDosen";
+	$hasil2=mysqli_query($k, $sql2);
+	$namaDosen=mysqli_fetch_assoc($hasil2);
 	
 ?>
 <!DOCTYPE html>
@@ -194,75 +198,29 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Daftar Kelas</h1>
+                        <h1 class="page-header"><?php echo "Kelas : ".$kelas['namaKelas'];?></h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->
-				<div class="panel panel-default">
-					<div class="table-responsive">
-						<table class="table table-striped table-bordered table-hover">
-							<thead>
-								<tr>
-									<th>Nama Kelas</th>
-									<th>Jumlah Murid</th>
-									<th>Status</th>
-								</tr>
-							</thead>
-							<tbody>
-<?php
-	$i=1;
-	while ($b = mysqli_fetch_assoc($hasil)){
-		$query2="SELECT * FROM kelasDtl WHERE idKelas=$b[idKelas]";
-		$hasil2= mysqli_query($k, $query2);
-		$jumlah= mysqli_num_rows($hasil2);
-?>	
-		<tr>
-			<td>
-				<a href="kelas_dosen_detail.php?idkelas=<?php echo $b['idKelas']?>"><?php echo $b['namaKelas']; ?></a>
-			</td>
-			<td> 
-				<?php echo $jumlah; ?>
-			</td>
-			<td>
-				<?php
-					if($b['statusKelas']==0){
-						echo "Tidak Aktif";
-					}else{
-						echo "Aktif";
-					}
-				?>
-				
-			</td>
-			<td>
-				<?php 
-					if($b['statusKelas']==1){
-				?>
-						<form action='kelas_nonaktif.php?idKelas=<?php echo $b['idKelas'] ?>' method='POST'>
-							<input type="submit" name="nonaktifkanKelas" value="Tidak Aktif" />
+				<?php include('../includes/dosen_dtlmenu.php'); ?>
+				<div class="row">
+					<div class="col-lg-6">
+						<form role="form" id="detailform" action="kelas_detail_ubah.php" method="POST">
+							<div class="form-group">
+								<label>Nama</label>
+								<input class="form-control" name="namakelas" value="<?php echo $kelas['namaKelas']; ?>" />
+							</div>
+							<div class="form-group">
+								<label>Deskripsi</label>
+								<textarea class="form-control" name="deskripsikelas" rows="3"><?php echo $kelas['deskripsiKelas']; ?></textarea>
+							</div>
+							<input type="hidden" name="idkelas" value="<?php echo $kelas['idKelas'] ?>"/>
+							<input type="submit" name="updatekelas" class="btn btn-default" value="Simpan" />
 						</form>
-				<?php
-					}else{
-				?>
-						<form action='kelas_aktif.php?idKelas=<?php echo $b['idKelas'] ?>' method='POST'>
-							<input type="submit" name="aktifkanKelas" value="Aktif" />
-						</form>
-				<?php
-					}
-				?>
-			</td>
-		</tr>
-<?php
-		$i++;
-	}
-?>
-							</tbody>
-						</table>
 					</div>
-					<!-- /.table-responsive -->
 				</div>
 				<!-- /.panel-default -->
-				<a href='kelas_tambah.php?idDosen=<?php echo $_SESSION['user']; ?>'>+Tambah Kelas</a>
             </div>
             <!-- /.container-fluid -->
         </div>

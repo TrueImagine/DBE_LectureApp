@@ -1,11 +1,10 @@
 <?php
 	$idDosen=4;
 	require_once('../includes/const.php');
-
-	$sql="SELECT * FROM dosen WHERE idDosen=$idDosen";
+	$sql="SELECT * FROM user WHERE idUser=$idDosen";
 	$hasil2= mysqli_query($k, $sql);
 	$nama=mysqli_fetch_assoc($hasil2);
-	echo "Selamat Siang, Bapak/Ibu ".$nama['namaDosen'];
+	echo "Selamat Siang, Bapak/Ibu ".$nama['namaUser'];
 	
 	$query = "SELECT * FROM kelas WHERE idDosen=$idDosen";
 	$hasil = mysqli_query($k, $query);

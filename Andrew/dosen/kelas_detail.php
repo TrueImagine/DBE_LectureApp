@@ -9,37 +9,20 @@
 	$hasil=mysqli_query($k, $sql) ;
 	$kelas=mysqli_fetch_assoc($hasil);
 	
-	//query materi kelas
-	$sql2="SELECT * FROM materi WHERE idKelas=$id";
+	$idDosen=$kelas['idDosen'];
+	
+	$sql2="SELECT namaUser FROM user WHERE idUser=$idDosen";
 	$hasil2=mysqli_query($k, $sql2);
+	$namaDosen=mysqli_fetch_assoc($hasil2);
 	
-	//query tugas kelas
-	$sql3="SELECT * FROM tugas WHERE idKelas=$id";
-	$hasil3=mysqli_query($k, $sql3);
-	
-	echo $kelas['namaKelas'];
+?>
+<a href="kelas_detail.php?idkelas=<?php echo $id; ?>">Tentang Kelas</a> | 
+<a href="kelas_materi.php?idkelas=<?php echo $id; ?>">Materi</a> | 
+<a href="kelas_tugas.php?idkelas=<?php echo $id; ?>">Tugas</a> | 
+<a href="kelas_mahasiswa.php?idkelas=<?php echo $id; ?>">Mahasiswa</a>
+</br></br>
+<?php
+	echo "Kelas : ".$kelas['namaKelas'];
 	echo "</br></br>";
-	
-	echo "============================Materi============================";
-	echo "</br>";
-	WHILE($materi=mysqli_fetch_assoc($hasil2)){
-		echo $materi['namaMateri'];
-		echo "</br>";
-	}
-	echo "============================Tugas=============================";
-	echo "</br>";
-	WHILE($tugas=mysqli_fetch_assoc($hasil3)){
-		echo $tugas['namaTugas'];
-		echo "</br>";
-		echo "Deskripsi : ".$tugas['deskripsiTugas'];
-		echo "</br>";
-		echo "Tanggal : ".$tugas['tglMulaiTugas']." SAMPAI ".$tugas['tglSelesaiTugas'];
-		echo "</br>";
-	}	
-	
-
-
-
-
-
+	echo "Deskripsi : ".$kelas['deskripsiKelas'];
 ?>

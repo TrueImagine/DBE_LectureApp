@@ -10,14 +10,11 @@
 /*
 	Dummy data
 */
-	$sql="SELECT * FROM user WHERE idUser = $_SESSION[user]";
-	$hasil2= mysqli_query($k, $sql);
-	$nama = mysqli_fetch_assoc($hasil2);
+	$id = $_GET['idkelas'];
 	
-	//echo "SELECT * FROM kelas WHERE idDosen=$_SESSION[user]";
-	
-	$query = "SELECT * FROM kelas WHERE idDosen=$_SESSION[user]";
-	$hasil = mysqli_query($k, $query);
+	//query materi
+	$sql="SELECT * FROM materi WHERE idKelas=$id";
+	$hasil=mysqli_query($k, $sql);
 	
 ?>
 <!DOCTYPE html>
@@ -194,75 +191,42 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Daftar Kelas</h1>
+                        <h1 class="page-header">Materi</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->
-				<div class="panel panel-default">
-					<div class="table-responsive">
-						<table class="table table-striped table-bordered table-hover">
-							<thead>
-								<tr>
-									<th>Nama Kelas</th>
-									<th>Jumlah Murid</th>
-									<th>Status</th>
-								</tr>
-							</thead>
-							<tbody>
-<?php
-	$i=1;
-	while ($b = mysqli_fetch_assoc($hasil)){
-		$query2="SELECT * FROM kelasDtl WHERE idKelas=$b[idKelas]";
-		$hasil2= mysqli_query($k, $query2);
-		$jumlah= mysqli_num_rows($hasil2);
-?>	
-		<tr>
-			<td>
-				<a href="kelas_dosen_detail.php?idkelas=<?php echo $b['idKelas']?>"><?php echo $b['namaKelas']; ?></a>
-			</td>
-			<td> 
-				<?php echo $jumlah; ?>
-			</td>
-			<td>
-				<?php
-					if($b['statusKelas']==0){
-						echo "Tidak Aktif";
-					}else{
-						echo "Aktif";
-					}
-				?>
-				
-			</td>
-			<td>
-				<?php 
-					if($b['statusKelas']==1){
-				?>
-						<form action='kelas_nonaktif.php?idKelas=<?php echo $b['idKelas'] ?>' method='POST'>
-							<input type="submit" name="nonaktifkanKelas" value="Tidak Aktif" />
-						</form>
-				<?php
-					}else{
-				?>
-						<form action='kelas_aktif.php?idKelas=<?php echo $b['idKelas'] ?>' method='POST'>
-							<input type="submit" name="aktifkanKelas" value="Aktif" />
-						</form>
-				<?php
-					}
-				?>
-			</td>
-		</tr>
-<?php
-		$i++;
-	}
-?>
-							</tbody>
-						</table>
+				<?php include('../includes/dosen_dtlmenu.php'); ?>
+				<div class="row">
+					<div class="panel panel-default">
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered table-hover">
+								<tbody>
+							<?php
+								WHILE($materi=mysqli_fetch_assoc($hasil)){
+							?>
+							<tr>
+								<td><a href="materi/materi_download.php?idmateri=<?php echo $materi['idMateri']; ?>"><?php echo $materi['namaMateri']; ?></a></td>
+								<td>
+									<form action='kelas_materi_delete_proses.php' method='POST'>
+									<input type="hidden" name="idmateri" value="<?php echo $materi['idMateri']; ?>"/>
+									<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
+									<input type="submit" name="deletemateri" value="Hapus" />
+								</form></td>
+							</tr>
+							<?php
+								}
+							?>
+							</table>
+						</div>
 					</div>
-					<!-- /.table-responsive -->
+					<a href="kelas_materi_tambah.php?idkelas=<?php echo $id; ?>">+Tambah Materi</a>
+					<form action="materi/materi_download_all.php" method="POST">
+						<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
+						<input type="submit" name="downloadall" class="btn btn-default" value="Save All as ZIP" />
+					</form>
 				</div>
 				<!-- /.panel-default -->
-				<a href='kelas_tambah.php?idDosen=<?php echo $_SESSION['user']; ?>'>+Tambah Kelas</a>
             </div>
             <!-- /.container-fluid -->
         </div>
