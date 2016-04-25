@@ -11,12 +11,14 @@
 	if(mysqli_num_rows($hasil)){	
 		if(password_verify($pass, $data['passwordUser'])){
 			$_SESSION['login'] = true;
-			$_SESSION['user'] = $data['id'];
-			$_SESSION['role'] = $data['status'];
-			if($data['login']==true){
-				header('Location: mahasiswa.php');
-			}else{
+			$_SESSION['user'] = $data['idUser'];
+			if($data['status'] == 0){ //dosen
+				$_SESSION['role'] = "Dosen";	
 				header('Location: dosen.php');
+			}
+			else{
+				$_SESSION['role'] = "Mahasiswa";
+				header('Location: mahasiswa.php');
 			}
 		}
 		else{
