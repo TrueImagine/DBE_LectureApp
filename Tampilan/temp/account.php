@@ -59,7 +59,10 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">
 						<?php 
-						if($action=="register"){
+						if($action=="masuk"){
+							echo "Silahkan Masuk";
+						}
+						else if($action=="register"){
 							echo "Register Account";
 						}
 						else if($action=="lupa"){
@@ -71,7 +74,28 @@
                     <div class="panel-body">
 						<span id="pesan"></span> 
 						<?php 
-						if($action=="register"){ //form register
+						if($action=="masuk"){ //form register
+						?>						
+                        <form id="loginform" action="register_proses.php?action=masuk" method="post" role="form">
+                            <fieldset>							
+								<div class="form-group">
+									<label>E-mail</label>
+                                    <input class="form-control" type="email" name="username" required title="Username required" placeholder="Email">									
+                                </div>
+                                <div class="form-group">
+									<label>Password</label></br>
+                                    <input class="form-control" type="password" name="password" required title="Password required" placeholder="Password">									
+								</div>                            
+                                <input type="submit" class="btn btn-outline btn-primary" name="submit" value="Log In" />								
+								
+								<a href="account.php?action=register" title="Daftar" style="margin-left:5%;"><u>Register</u></a>
+								<a href="account.php?action=lupa" title="Lupa Password" style="margin-left:5%;"><u>Forgot Your Password?</u></a>
+							</fieldset>
+                        </form>
+						
+						<?php 
+						}
+						else if($action=="register"){ //form register
 						?>						
                         <form id="registerform" action="register_proses.php?action=register" method="post" role="form">
                             <fieldset>							
@@ -96,7 +120,7 @@
 									<h1 style="font-size:12px; color:grey;">*Kode Captcha harus diisi</h1>
 								</div>
                                 <input type="submit" class="btn btn-outline btn-primary" name="submit" value="Submit" />								
-								<input type="button" class="btn btn-outline btn-primary" onclick="window.location.href='../index.php'" value="Cancel" />
+								<a href="account.php?action=masuk" title="Daftar" style="margin-left:5%;"><u>Have an account? Log In</u></a>
                             </fieldset>
                         </form>
 						<?php
@@ -118,7 +142,7 @@
 									<h1 style="font-size:12px; color:grey;">*Kode Captcha harus diisi</h1>
 								</div>								
                                 <input type="submit" class="btn btn-outline btn-primary" name="submit" value="Submit" />
-								<input type="button" class="btn btn-outline btn-primary" onclick="window.location.href='../index.php'" value="Cancel" />
+								<a href="account.php?action=masuk" title="Daftar" style="margin-left:5%;"><u>Have an account? Log in</u></a>
                             </fieldset>
                         </form>
 						<?php } ?>

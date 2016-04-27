@@ -1,10 +1,37 @@
 <?php
 	session_start();
 	require_once("../includes/koneksi.php");
-	$action = $_GET['action'];
-	$captcha = $_POST['captcha'];
+	$action = $_GET['action'];	
 	if(isset($_POST['submit'])){
-		if($_SESSION['captcha']==$_POST['captcha']){ //jika captcha sesuai
+		if($action=="masuk"){	//untuk login
+			$user = $_POST['username'];
+			$pass = $_POST['password'];
+			$sql = "SELECT * FROM user WHERE emailUser = '$user'";
+			$hasil = mysqli_query($k, $sql);
+			
+			$data = mysqli_fetch_array($hasil);
+			if(mysqli_num_rows($hasil)){	
+				if(password_verify($pass, $data['passwordUser'])){
+					$_SESSION['login'] = true;
+					$_SESSION['user'] = $data['idUser'];
+					if($data['status'] == 0){ //dosen
+						$_SESSION['role'] = "Dosen";	
+						echo "9";
+					}
+					else{
+						$_SESSION['role'] = "Mahasiswa";
+						echo "8";
+					}
+				}
+				else{
+					echo "6";						
+				}
+			}else{		
+				echo "6";						
+			}
+		}
+		else if($_SESSION['captcha']==$_POST['captcha']){ //jika captcha sesuai
+			$captcha = $_POST['captcha'];
 			if($action=="register")		
 			{$nama	= $_POST['nama'];}
 			$email	= $_POST['email'];
