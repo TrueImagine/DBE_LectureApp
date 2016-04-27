@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	require_once('../includes/koneksi.php');
+
 /*
 	Dummy data
 */
@@ -10,17 +11,12 @@
 /*
 	Dummy data
 */
-	/*$sql = "SELECT kelas.namaKelas, user.namaUser,kelas.idKelas FROM kelas
-			INNER JOIN kelasdtl ON kelasdtl.idKelas = kelas.idKelas
-			INNER JOIN user ON kelas.idDosen = user.idUser
-			WHERE kelasdtl.idMhs = $_SESSION[user]";*/
-			
-			
-	$sql = "SELECT kelas.idKelas, kelas.namaKelas, user.namaUser FROM kelas 
-			INNER JOIN user ON kelas.idDosen = user.idUser
-			INNER JOIN kelasdtl ON kelas.idKelas = kelasdtl.idKelas
-			WHERE kelasdtl.idMhs = $_SESSION[user]";
-	$a = mysqli_query($k,$sql);
+	$id = $_GET['idkelas'];
+	
+	//query materi
+	$sql="SELECT * FROM materi WHERE idKelas=$id";
+	$hasil=mysqli_query($k, $sql);
+	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -188,11 +184,22 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="mahasiswa.php".html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="profil_mhs.php"><i class="fa fa-dashboard fa-fw"></i> Profil</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas</a>
-							
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Tentang Kelas</a>
+                                </li>
+                                <li>
+                                    <a href="#">Materi</a>
+                                </li>
+								<li>
+									<a href="#">Tugas</a>
+								</li>
+                            </ul>
+                            <!-- /.nav-second-level -->
 						</li>
                         
                     </ul>
@@ -206,50 +213,44 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">Daftar Kelas</h1>
+				<div class="col-lg-12">
+                        <h1 class="page-header">List Materi</h1>
                     </div>
                     <!-- /.col-lg-12 -->
 					
-					<div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Kelas
-                        </div>
-						
-						
 					
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-										<tr>
-                                            <th>Nama Kelas</th>
-                                            <th>Nama Dosen</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-									<?php 
-										while($b = mysqli_fetch_assoc($a)){
-									?>
-                                        <tr>
-											<td>
-												<a href ="kelas_mhs_detail.php?idKelas=<?php echo $b['idKelas'] ?>"> <?php echo $b['namaKelas'] ?> </a>
-											</td>
-											<td><?php echo $b['namaUser'] ?></td>
-                                        </tr>
-									<?php } ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div> <!--/.col-lg-6 -->
+                    <div class="panel panel-default">
+                        
+					<?php include('../includes/mhs_dtlmenu.php')?>
+                    <div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+								<tbody>
+							<?php
+								WHILE($materi=mysqli_fetch_assoc($hasil)){
+							?>
+							<tr>
+								<td><a href="materi/materi_download.php?idmateri=<?php echo $materi['idMateri']; ?>"><?php echo $materi['namaMateri']; ?></a></td>
+								<td>
+									<form action='kelas_materi_delete_proses.php' method='POST'>
+									<input type="hidden" name="idmateri" value="<?php echo $materi['idMateri']; ?>"/>
+									<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
+									
+								</form></td>
+							</tr>
+							<?php
+								}
+							?>
+								</tbody>
+							</table>
+					
+					</div>
+				</div>
                 </div>
+					<!-- Download ALL -->
+					<form action="materi/materi_download_all.php" method="POST">
+						<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
+						<input type="submit" name="downloadall" class="btn btn-default" value="Save All as ZIP" />
+					</form>
                 <!-- /.row -->
             </div>
             <!-- /.container-fluid -->

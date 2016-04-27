@@ -5,22 +5,30 @@
 	Dummy data
 */
 	$_SESSION['login'] = true;
-	$_SESSION['user'] = 1;
-	$_SESSION['role'] = "Mahasiswa";
+	$_SESSION['user'] = 3;
+	$_SESSION['role'] = "Dosen";
 /*
 	Dummy data
 */
-	/*$sql = "SELECT kelas.namaKelas, user.namaUser,kelas.idKelas FROM kelas
-			INNER JOIN kelasdtl ON kelasdtl.idKelas = kelas.idKelas
-			INNER JOIN user ON kelas.idDosen = user.idUser
-			WHERE kelasdtl.idMhs = $_SESSION[user]";*/
-			
-			
-	$sql = "SELECT kelas.idKelas, kelas.namaKelas, user.namaUser FROM kelas 
-			INNER JOIN user ON kelas.idDosen = user.idUser
-			INNER JOIN kelasdtl ON kelas.idKelas = kelasdtl.idKelas
-			WHERE kelasdtl.idMhs = $_SESSION[user]";
-	$a = mysqli_query($k,$sql);
+	$id = $_GET['idkelas'];
+	$idtugas = $_GET['idtugas'];
+	//query materi
+	$sql="SELECT * FROM tugas WHERE idKelas=$id and idTugas=$idtugas";
+	$hasil=mysqli_query($k, $sql);
+	$tugas=mysqli_fetch_assoc($hasil);
+	
+	$sql2="SELECT 
+				a.*,
+				b.`namaUser` as namaMahasiswa 
+			FROM 
+				hasiltgs a
+				LEFT JOIN USER b
+				ON a.`idUser`=b.`idUser` 
+			WHERE 
+				a.idTugas=$idtugas 
+				AND a.idKelas=$id";
+	$hasil2=mysqli_query($k, $sql2);
+	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +41,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>LectureApps - Daftar Kelas</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -69,11 +77,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><b>LectureApps - Portal Pelajar</b></a>
+                <a class="navbar-brand" href="index.html"><b>LectureApps - Portal Dosen</b></a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
+                <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -87,7 +96,7 @@
                                         <span class="pull-right text-muted">40% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
                                             <span class="sr-only">40% Complete (success)</span>
                                         </div>
                                     </div>
@@ -103,7 +112,7 @@
                                         <span class="pull-right text-muted">20% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
                                             <span class="sr-only">20% Complete</span>
                                         </div>
                                     </div>
@@ -119,7 +128,7 @@
                                         <span class="pull-right text-muted">60% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
                                             <span class="sr-only">60% Complete (warning)</span>
                                         </div>
                                     </div>
@@ -135,7 +144,7 @@
                                         <span class="pull-right text-muted">80% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
                                             <span class="sr-only">80% Complete (danger)</span>
                                         </div>
                                     </div>
@@ -153,7 +162,7 @@
                     <!-- /.dropdown-tasks -->
                 </li>
                 <!-- /.dropdown -->
-                
+                <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -161,7 +170,7 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="profil_dosen.php"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -176,25 +185,13 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-								</span>
-                            </div>
-                            <!-- /input-group -->
+                        <li>
+                            <a href="dosen.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="mahasiswa.php".html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="kelas_dosen.php"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas</a>
+                            <!-- /.nav-second-level -->
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas</a>
-							
-						</li>
-                        
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -207,50 +204,50 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Daftar Kelas</h1>
+                        <h1 class="page-header"><?php echo $tugas['namaTugas'] ?></h1>
                     </div>
                     <!-- /.col-lg-12 -->
-					
-					<div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Kelas
-                        </div>
-						
-						
-					
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-										<tr>
-                                            <th>Nama Kelas</th>
-                                            <th>Nama Dosen</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-									<?php 
-										while($b = mysqli_fetch_assoc($a)){
-									?>
-                                        <tr>
-											<td>
-												<a href ="kelas_mhs_detail.php?idKelas=<?php echo $b['idKelas'] ?>"> <?php echo $b['namaKelas'] ?> </a>
-											</td>
-											<td><?php echo $b['namaUser'] ?></td>
-                                        </tr>
-									<?php } ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div> <!--/.col-lg-6 -->
                 </div>
                 <!-- /.row -->
+				<?php include('../includes/dosen_dtlmenu.php'); ?>
+				<span id="pesan"></span>
+				
+				Deskripsi :
+				<?php echo $tugas['deskripsiTugas']?>
+				<br/><br/>
+				Batas Waktu :
+				<?php echo "<u>".$tugas['tglMulaiTugas']."</u>" ?> s/d <?php echo "<u>".$tugas['tglSelesaiTugas']."</u>" ?>
+				<br/><br/>
+				Attachment :
+				<a href="tugas/tugas_download.php?idtugas=<?php echo $tugas['idTugas']; ?>"><?php echo $tugas['fileTugas']; ?></a>
+				
+					<div class="panel panel-default">
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered table-hover">
+								<tbody>
+							<?php
+								WHILE($kumpul=mysqli_fetch_assoc($hasil2)){
+							?>
+							<tr>
+								<td><?php echo $kumpul['namaMahasiswa'] ?></td>
+								<td><a href="hasiltgs/hasiltgs_download.php?idhasiltgs=<?php echo $kumpul['idHasiltgs']; ?>"><?php echo $kumpul['fileHasiltgs'] ?></a></td>
+								<td></td>
+							</tr>
+							<?php
+								}
+							?>
+							</table>
+							
+						</div>
+					</div>
+					<!-- Download ALL -->
+					<form action="hasiltgs/hasiltgs_download_all.php" method="POST">
+						<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
+						<input type="hidden" name="idtugas" value="<?php echo $tugas['idTugas']; ?>"/>
+						<input type="submit" name="downloadall" class="btn btn-default" value="Save All as ZIP" />
+					</form>
+				</div>
+				<!-- /.panel-default -->
             </div>
             <!-- /.container-fluid -->
         </div>
@@ -258,7 +255,9 @@
 
     </div>
     <!-- /#wrapper -->
-
+	
+	
+	
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -271,6 +270,8 @@
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
 
+	<script src="../js/jquery.form.js"></script>
+	<script src="../js/script.js"></script>
 </body>
 
 </html>
