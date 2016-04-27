@@ -11,10 +11,10 @@
 			
 			$data = mysqli_fetch_array($hasil);
 			if(mysqli_num_rows($hasil)){	
-				if(password_verify($pass, $data['passwordUser'])){
+				if(password_verify($pass, $data['passwordUser'])){ //verifikasi
 					$_SESSION['login'] = true;
 					$_SESSION['user'] = $data['idUser'];
-					if($data['status'] == 0){ //dosen
+					if($data['status'] == 0){ //login sukses
 						$_SESSION['role'] = "Dosen";	
 						echo "9";
 					}
@@ -23,7 +23,7 @@
 						echo "8";
 					}
 				}
-				else{
+				else{ 
 					echo "6";						
 				}
 			}else{		
@@ -45,15 +45,15 @@
 				$hasil = mysqli_query($k, $sql);
 				if(mysqli_num_rows($hasil)){
 					echo "1";
-				}else{
-				$sql = "INSERT INTO user (namaUser, passwordUser, emailUser, tglLahirUser, fotoUser, status) VALUES ('$nama', '$encrypted_pass', '$email', '$tanggalL', '', 0)";
+				}else{ //sukses , input ke database
+				$sql = "INSERT INTO user (namaUser, passwordUser, emailUser, tglLahirUser, fotoUser, status) VALUES ('$nama', '$encrypted_pass', '$email', '$tanggalL', '../images/fulls/nopic', 0)";
 				mysqli_query($k, $sql);
 					echo "3";
 				}
 			}else{ //untuk lupa password
 				$sql = "SELECT emailUser, tglLahirUser FROM user WHERE emailUser='$email' and tglLahirUser='$tanggalL'";
 				$hasil = mysqli_query($k, $sql);
-				if(mysqli_num_rows($hasil)){
+				if(mysqli_num_rows($hasil)){ //sukses , password update
 					$sql= "UPDATE user SET passwordUser = '$encrypted_pass'";
 					mysqli_query($k, $sql);
 					echo "3";

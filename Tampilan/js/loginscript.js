@@ -75,7 +75,7 @@ $(document).ready(function() {
 	
 	$('#lupaform').ajaxForm({
 		complete:function(response){
-			if(response.responseText == 1)//email/password salah
+			if(response.responseText == 1)//email atau password salah
 			{
 				jQuery("#submit input[type='checkbox'], input[type='password'], input[type='email'], input[type='text']").each(function() {
 					this.value = '';
