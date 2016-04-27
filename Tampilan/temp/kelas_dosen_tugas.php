@@ -13,7 +13,7 @@
 	$id = $_GET['idkelas'];
 	
 	//query materi
-	$sql="SELECT * FROM materi WHERE idKelas=$id";
+	$sql="SELECT * FROM tugas WHERE idKelas=$id";
 	$hasil=mysqli_query($k, $sql);
 	
 ?>
@@ -191,7 +191,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Materi</h1>
+                        <h1 class="page-header">Tugas</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -204,16 +204,17 @@
 							<table class="table table-striped table-bordered table-hover">
 								<tbody>
 							<?php
-								WHILE($materi=mysqli_fetch_assoc($hasil)){
+								WHILE($tugas=mysqli_fetch_assoc($hasil)){
 							?>
 							<tr>
-								<td><a href="materi/materi_download.php?idmateri=<?php echo $materi['idMateri']; ?>"><?php echo $materi['namaMateri']; ?></a></td>
+								<td><a href="kelas_dosen_tugas_detail.php?idkelas=<?php echo $id;?>&idtugas=<?php echo $tugas['idTugas'];?>"><?php echo $tugas['namaTugas']?></a></td>
 								<td>
-									<form action='kelas_materi_delete_proses.php' method='POST'>
-									<input type="hidden" name="idmateri" value="<?php echo $materi['idMateri']; ?>"/>
-									<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
-									<input type="submit" name="deletemateri" class="btn btn-default" value="Hapus" />
-								</form></td>
+									<form action="kelas_tugas_delete_proses.php" method="POST">
+										<input type="hidden" name="idtugas" value="<?php echo $tugas['idTugas']; ?>"/>
+										<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
+										<input type="submit" name="deletetugas" class="btn btn-default" value="Hapus" />
+									</form>
+								</td>
 							</tr>
 							<?php
 								}
@@ -221,24 +222,6 @@
 							</table>
 						</div>
 					</div>
-					
-					<!-- Tambah Materi -->
-					<form id="tambahmateri" action ="kelas_dosen_materi_tambah.php" method="POST" enctype="multipart/form-data">
-						<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
-						<input type="file" name="materi"/>
-						<div id="uploadbar" class="progress progress-striped active">
-							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-								<span class="sr-only">0% Complete</span>
-							</div>
-						</div>
-						<input type="submit" name="tambahMateri" value="Tambah" />
-					</form>
-					
-					<!-- Download ALL -->
-					<form action="materi/materi_download_all.php" method="POST">
-						<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
-						<input type="submit" name="downloadall" class="btn btn-default" value="Save All as ZIP" />
-					</form>
 				
 				</div>
 				<!-- /.panel-default -->
