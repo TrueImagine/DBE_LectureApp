@@ -12,7 +12,7 @@ Dummy data
 	$idtugas = $_POST['idtugas'];
 	$iduser = $_SESSION['user'];
 	$idhasil = $_POST['idhasil'];
-	
+
 	if(isset($_POST['idkelas']) && $_POST['idkelas'] == true){
 		$idkelas=$_POST['idkelas'];
 		//print_r($_FILES);
@@ -38,23 +38,27 @@ Dummy data
 					$sql1 = "SELECT * FROM hasiltgs WHERE idTugas = $idtugas and idUser=$iduser";
 					
 					$hasil1 = mysqli_query($k,$sql1);
+					$a = mysqli_fetch_assoc($hasil1);
 					
 					if(mysqli_num_rows($hasil1) == 0)
 					{
 					$sql = "INSERT INTO hasiltgs (idTugas, idUser, idKelas,fileHasiltgs, tglUploadHasiltgs)
 							VALUES ($idtugas,$iduser,$idkelas,'$tujuan','".date("Y-m-d")."')";
-					//$asd = 2;
+							
+					$asd = 2;
 					}
 					else{
 					$sql = "UPDATE hasiltgs SET idTugas = $idtugas, idUser = $iduser, 
 							idKelas = $idkelas,fileHasiltgs = '$tujuan', tglUploadHasiltgs = '".date("Y-m-d")."'
-							WHERE idHasiltgs = $idhasil";		
+							WHERE idHasiltgs = $a[idHasiltgs]";		
 					//echo $sql;
-					//$asd = 1;
+					$asd = 1;
 					}
+					
 					mysqli_query($k, $sql);
-					echo $asd;
-					header('Location: kelas_mhs_tugas_detail.php?idkelas='.$_POST['idkelas'].'&idtugas='.$_POST['idtugas']);
+					
+					$redirect = 'Location: kelas_mhs_tugas_detail.php?idkelas='.$idkelas.'&idtugas='.$idtugas;
+					header($redirect);
 				}
 				else{
 					echo "gagal";

@@ -12,7 +12,8 @@
 */
 	$id = $_GET['idkelas'];
 	$idtugas = $_GET['idtugas'];
-	$idhasil = $_GET['idhasil'];
+	
+	//$idhasil = $_GET['idhasil'];
 	//query materi
 	$sql="SELECT * FROM tugas WHERE idKelas=$id and idTugas=$idtugas";
 	$hasil=mysqli_query($k, $sql);
@@ -20,16 +21,18 @@
 	
 	$sql2="SELECT 
 				hasiltgs.*,
-				user.namaUser 
+				user.namaUser, 
+				user.idUser
 			FROM 
 				hasiltgs
 				LEFT JOIN user
 				ON hasiltgs.idUser=user.idUser 
 			WHERE 
-				hasiltgs.idHasiltgs = $idhasil"; 
+				hasiltgs.idKelas = $id
+				AND hasiltgs.idTugas = $idtugas
+				AND hasiltgs.idUser = $_SESSION[user]"; 
 				
 	$hasil2=mysqli_query($k, $sql2);
-	
 	
 ?>
 <!DOCTYPE html>
@@ -232,6 +235,21 @@
 							?>
 							<tr>
 								<td><?php echo $kumpul['namaUser'] ?></td>
+								<td>Upload Ulang :
+								<form action="kelas_mhs_tugas_upload_proses.php" method="POST" enctype="multipart/form-data">
+										<input type="hidden" name="idtugas" value="<?php echo $idtugas; ?>"/>
+										<input type="hidden" name="idkelas" value="<?php echo $idkelas; ?>"/>
+										<input type="hidden" name="idhasil" value="<?php echo $idhasil; ?>"/>
+										
+										<input type="file" name="tugas"/>
+										<div id="uploadbar" class="progress progress-striped active">
+											<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+												<span class="sr-only">0% Complete</span>
+											</div>
+										</div>
+										<input type="submit" name="upload" value="Upload">	
+								</form>
+								</td>
 								<td><a href="hasiltgs/hasiltgs_download.php?idhasiltgs=<?php echo $kumpul['idHasiltgs']; ?>"><?php echo $kumpul['fileHasiltgs'] ?></a></td>
 								<td>Nilai : <?php echo $kumpul['nilai'] ?></td>
 							</tr>
