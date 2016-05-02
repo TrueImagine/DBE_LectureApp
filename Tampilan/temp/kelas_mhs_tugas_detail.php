@@ -5,29 +5,31 @@
 	Dummy data
 */
 	$_SESSION['login'] = true;
-	$_SESSION['user'] = 3;
-	$_SESSION['role'] = "Dosen";
+	$_SESSION['user'] = 5;
+	$_SESSION['role'] = "Mahasiswa";
 /*
 	Dummy data
 */
 	$id = $_GET['idkelas'];
 	$idtugas = $_GET['idtugas'];
+	$idhasil = $_GET['idhasil'];
 	//query materi
 	$sql="SELECT * FROM tugas WHERE idKelas=$id and idTugas=$idtugas";
 	$hasil=mysqli_query($k, $sql);
 	$tugas=mysqli_fetch_assoc($hasil);
 	
 	$sql2="SELECT 
-				a.*,
-				b.`namaUser` as namaMahasiswa 
+				hasiltgs.*,
+				user.namaUser 
 			FROM 
-				hasiltgs a
-				LEFT JOIN USER b
-				ON a.`idUser`=b.`idUser` 
+				hasiltgs
+				LEFT JOIN user
+				ON hasiltgs.idUser=user.idUser 
 			WHERE 
-				a.idTugas=$idtugas 
-				AND a.idKelas=$id";
+				hasiltgs.idHasiltgs = $idhasil"; 
+				
 	$hasil2=mysqli_query($k, $sql2);
+	
 	
 ?>
 <!DOCTYPE html>
@@ -65,7 +67,7 @@
 </head>
 
 <body>
-
+	
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -229,9 +231,9 @@
 								WHILE($kumpul=mysqli_fetch_assoc($hasil2)){
 							?>
 							<tr>
-								<td><?php echo $kumpul['namaMahasiswa'] ?></td>
+								<td><?php echo $kumpul['namaUser'] ?></td>
 								<td><a href="hasiltgs/hasiltgs_download.php?idhasiltgs=<?php echo $kumpul['idHasiltgs']; ?>"><?php echo $kumpul['fileHasiltgs'] ?></a></td>
-								<td></td>
+								<td>Nilai : <?php echo $kumpul['nilai'] ?></td>
 							</tr>
 							<?php
 								}
@@ -240,12 +242,12 @@
 							
 						</div>
 					</div>
-					<!-- Download ALL -->
+					<!-- Download ALL 
 					<form action="hasiltgs/hasiltgs_download_all.php" method="POST">
 						<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
 						<input type="hidden" name="idtugas" value="<?php echo $tugas['idTugas']; ?>"/>
 						<input type="submit" name="downloadall" class="btn btn-default" value="Save All as ZIP" />
-					</form>
+					</form> -->
 				</div>
 				<!-- /.panel-default -->
             </div>

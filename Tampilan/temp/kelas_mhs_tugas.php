@@ -5,8 +5,8 @@
 	Dummy data
 */
 	$_SESSION['login'] = true;
-	$_SESSION['user'] = 3;
-	$_SESSION['role'] = "Dosen";
+	$_SESSION['user'] = 5;
+	$_SESSION['role'] = "Mahasiswa";
 /*
 	Dummy data
 */
@@ -64,7 +64,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><b>LectureApps - Portal Dosen</b></a>
+                <a class="navbar-brand" href="index.html"><b>LectureApps - Portal Mahasiswa</b></a>
             </div>
             <!-- /.navbar-header -->
 
@@ -157,7 +157,7 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
-                        <li><a href="profil_dosen.php"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="profil_mahasiswa.php"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -211,8 +211,11 @@
 								$c = mysqli_fetch_assoc($hasil2);
 							?>
 							<tr>
-								<td><a href="kelas_mhs_tugas_detail.php?idkelas=<?php echo $id;?>&idtugas=<?php echo $tugas['idTugas'];?>"><?php echo $tugas['namaTugas']?></a></td>
+								<td><a href="kelas_mhs_tugas_detail.php?idkelas=<?php echo $id;?>&idtugas=<?php echo $tugas['idTugas'];?>&idhasil=<?php echo $c['idHasiltgs'];?>"><?php echo $tugas['namaTugas']?></a></td>
 								<td>
+								<?php 
+								if(mysqli_num_rows($hasil2) == 0)
+								{?>
 									<form action="kelas_mhs_tugas_upload_proses.php" method="POST" enctype="multipart/form-data">
 										<input type="hidden" name="idtugas" value="<?php echo $tugas['idTugas']; ?>"/>
 										<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
@@ -226,6 +229,14 @@
 										</div>
 										<input type="submit" name="upload" value="Upload">	
 									</form>
+								<?php
+								}else
+								{
+									$sql3 = "SELECT fileHasiltgs FROM hasiltgs WHERE idHasiltgs = $c[idHasiltgs]";
+									$hasil3 = mysqli_query($k,$sql3);
+									$d = mysqli_fetch_assoc($hasil3);
+									echo $d['fileHasiltgs'];
+								}?>
 								</td>
 								
 								<td>

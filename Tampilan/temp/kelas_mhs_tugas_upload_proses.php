@@ -4,8 +4,8 @@ require_once("../includes/koneksi.php");
 Dummy data
 */
 	$_SESSION['login'] = true;
-	$_SESSION['user'] = 3;
-	$_SESSION['role'] = "Dosen";
+	$_SESSION['user'] = 5;
+	$_SESSION['role'] = "Mahasiswa";
 /*
 	Dummy data
 */

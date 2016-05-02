@@ -11,7 +11,7 @@
 /*
 	Dummy data
 */
-	$id = $_GET['idKelas'];
+	$id = $_GET['idkelas'];
 	$sql = "Select * FROM dtl_kelas";
 	$a = mysqli_query($k,$sql);
 	
@@ -185,9 +185,9 @@
                             <a href="profil_mhs.php"><i class="fa fa-dashboard fa-fw"></i> Profil</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-                                <li>
+                            <a href="kelas_mhs.php"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas</a>
+							<!--<ul class="nav nav-second-level">
+                                <!--<li>
                                     <a href="#">Tentang Kelas</a>
                                 </li>
                                 <li>
@@ -213,7 +213,7 @@
                 <div class="row">
                     <div class="col-lg-12">
 						<?php
-							$sql1 = "SELECT namaKelas,deskripsikelas,idKelas,idDosen FROM kelas WHERE idKelas = '$_GET[idKelas]'";
+							$sql1 = "SELECT namaKelas,deskripsikelas,idKelas,idDosen FROM kelas WHERE idKelas = $id";
 							$hasil = mysqli_query($k,$sql1);
 							$a = mysqli_fetch_assoc($hasil);
 							

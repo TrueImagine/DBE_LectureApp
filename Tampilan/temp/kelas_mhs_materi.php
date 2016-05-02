@@ -229,7 +229,7 @@
 								WHILE($materi=mysqli_fetch_assoc($hasil)){
 							?>
 							<tr>
-								<td><a href="materi/materi_download.php?idmateri=<?php echo $materi['idMateri']; ?>"><?php echo $materi['namaMateri']; ?></a></td>
+								<td><a href="materi_download.php?idmateri=<?php echo $materi['idMateri']; ?>"><?php echo $materi['namaMateri']; ?></a></td>
 								<td>
 									<form action='kelas_materi_delete_proses.php' method='POST'>
 									<input type="hidden" name="idmateri" value="<?php echo $materi['idMateri']; ?>"/>
