@@ -209,7 +209,7 @@
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->
-				<?php include('../includes/dosen_dtlmenu.php'); ?>
+				<?php include('../includes/mhs_dtlmenu.php'); ?>
 				<span id="pesan"></span>
 				
 				Deskripsi :
