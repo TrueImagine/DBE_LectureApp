@@ -173,10 +173,10 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="dosen.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="mahasiswa.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="kelas_dosen.php"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas</a>
+                            <a href="kelas_mhs.php"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas</a>
                             <!-- /.nav-second-level -->
                         </li>
                     </ul>

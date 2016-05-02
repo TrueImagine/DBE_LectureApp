@@ -187,8 +187,8 @@
                             <a href="profil_mhs.php"><i class="fa fa-dashboard fa-fw"></i> Profil</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Kelas</span></a>
+							<!-- <ul class="nav nav-second-level">
                                 <li>
                                     <a href="#">Tentang Kelas</a>
                                 </li>
@@ -199,7 +199,7 @@
 									<a href="#">Tugas</a>
 								</li>
                             </ul>
-                            <!-- /.nav-second-level -->
+                            <!-- /.nav-second-level --> 
 						</li>
                         
                     </ul>
