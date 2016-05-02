@@ -57,7 +57,7 @@ Dummy data
 					
 					mysqli_query($k, $sql);
 					
-					$redirect = 'Location: kelas_mhs_tugas_detail.php?idkelas='.$idkelas.'&idtugas='.$idtugas;
+					$redirect = 'Location:kelas_mhs_tugas_detail.php?idkelas='.$idkelas.'&idtugas='.$idtugas;
 					header($redirect);
 				}
 				else{
