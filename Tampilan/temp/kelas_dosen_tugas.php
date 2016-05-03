@@ -222,7 +222,10 @@
 							</table>
 						</div>
 					</div>
-				
+					<form action="kelas_dosen_tugas_tambah.php" method="POST">
+						<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
+						<input type="submit" name="tambahtugas" class="btn btn-default" value="Tambah Tugas" />
+					</form>
 				</div>
 				<!-- /.panel-default -->
             </div>

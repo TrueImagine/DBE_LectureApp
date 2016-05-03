@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2016 at 07:48 AM
+-- Generation Time: May 02, 2016 at 11:17 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `hasiltgs` (
   `fileHasiltgs` varchar(255) NOT NULL,
   `tglUploadHasiltgs` date NOT NULL,
   `nilai` float NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- RELATIONS FOR TABLE `hasiltgs`:
@@ -51,8 +51,7 @@ CREATE TABLE IF NOT EXISTS `hasiltgs` (
 --
 
 INSERT INTO `hasiltgs` (`idHasiltgs`, `idTugas`, `idUser`, `idKelas`, `fileHasiltgs`, `tglUploadHasiltgs`, `nilai`) VALUES
-(1, 2, 5, 2, 'tugas1.docx', '2016-04-26', 0),
-(2, 2, 6, 2, 'tugas2.docx', '2016-04-27', 0);
+(1, 2, 5, 2, 'tugas1.docx', '2016-04-26', 80);
 
 -- --------------------------------------------------------
 
@@ -138,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `materi` (
   `fileMateri` varchar(255) NOT NULL,
   `idKelas` int(11) NOT NULL,
   `tglUploadMateri` date NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- RELATIONS FOR TABLE `materi`:
@@ -154,7 +153,7 @@ INSERT INTO `materi` (`idMateri`, `namaMateri`, `fileMateri`, `idKelas`, `tglUpl
 (1, 'DBE_PERT1', 'DBE_PERT1.pdf', 1, '2016-04-05'),
 (2, 'DBE_PERT2', 'DBE_PERT2.pdf', 1, '2016-04-05'),
 (3, 'DBE_PERT3', 'DBE_PERT3.pdf', 1, '2016-04-05'),
-(18, 'DBE_PERT1.pdf', 'materi/DBE_PERT1.pdf', 2, '2016-04-26');
+(20, 'NEWS0001780.pdf', 'NEWS0001780.pdf', 1, '2016-04-27');
 
 -- --------------------------------------------------------
 
@@ -192,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `tugas` (
   `fileTugas` varchar(255) NOT NULL,
   `tglUploadTugas` date NOT NULL,
   `idKelas` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- RELATIONS FOR TABLE `tugas`:
@@ -206,7 +205,9 @@ CREATE TABLE IF NOT EXISTS `tugas` (
 
 INSERT INTO `tugas` (`idTugas`, `namaTugas`, `deskripsiTugas`, `tglMulaiTugas`, `tglSelesaiTugas`, `fileTugas`, `tglUploadTugas`, `idKelas`) VALUES
 (1, 'TUGAS_DBE_PERT1', 'buat di doc', '2016-04-12', '2016-04-19', 'debug', '2016-04-05', 1),
-(2, 'TUGAS_DBE_PERT1', 'buat di doc', '2016-04-26', '2016-05-17', 'Tugas Baru.pdf', '2016-04-05', 2);
+(2, 'TUGAS_DBE_PERT1', 'buat di doc', '2016-04-26', '2016-05-17', 'Tugas Baru.pdf', '2016-04-05', 2),
+(4, 'Tugas ANDREW_1', 'Deskripsi Andrew', '2016-04-30', '2016-05-07', '511052.jpg', '2016-04-30', 2),
+(5, 'Tugas ANDREW_2', 'Andrew', '2016-04-30', '2016-05-07', 'Anggaran Dana Lomba.docx', '2016-04-30', 2);
 
 -- --------------------------------------------------------
 
@@ -222,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `tglLahirUser` date NOT NULL,
   `fotoUser` varchar(255) NOT NULL,
   `status` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `user`
@@ -234,7 +235,8 @@ INSERT INTO `user` (`idUser`, `namaUser`, `passwordUser`, `emailUser`, `tglLahir
 (3, 'Krintin', 'debug', 'kristin@bundamulia.ac.id', '1990-11-19', 'debug', 1),
 (4, 'Wawo', 'debug', 'wawo@gmail.com', '1990-11-11', 'debug', 1),
 (5, 'Andrew Nugraha', 'debug', 'rafael012896@gmail.com', '1996-01-28', 'debug', 2),
-(6, 'Antony K.W.', 'debug', 'antony@gmail.com', '1990-11-11', 'debug', 2);
+(6, 'Antony K.W.', 'debug', 'antony@gmail.com', '1990-11-11', 'debug', 2),
+(7, 'Andrew Nugraha', '$2y$10$/0pqIk//.J8MnScF2EC0heCHLiZU3PY3KdSQLAWAky1BpiiB2t1Oi', 'rafael012896@yahoo.com', '1996-01-28', '../images/fulls/nopic', 0);
 
 --
 -- Indexes for dumped tables
@@ -296,7 +298,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `hasiltgs`
 --
 ALTER TABLE `hasiltgs`
-MODIFY `idHasiltgs` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `idHasiltgs` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `jenispsn`
 --
@@ -316,7 +318,7 @@ MODIFY `idKelasdtl` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT for table `materi`
 --
 ALTER TABLE `materi`
-MODIFY `idMateri` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+MODIFY `idMateri` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `pesan`
 --
@@ -326,12 +328,12 @@ MODIFY `idPesan` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `tugas`
 --
 ALTER TABLE `tugas`
-MODIFY `idTugas` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `idTugas` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --

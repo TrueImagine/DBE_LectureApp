@@ -9,7 +9,6 @@ if(isset($_GET['idmateri']) && $_GET['idmateri'] == true){
 	$materi=mysqli_fetch_assoc($hasil);
 	$source = $materi['fileMateri'];
 	
-	
 	if (file_exists($source)) {
 		header('Content-Description: File Transfer');
 		header('Content-Type: application/octet-stream');

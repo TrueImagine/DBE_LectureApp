@@ -10,33 +10,15 @@
 /*
 	Dummy data
 */
-	$id = $_GET['idkelas'];
-	$idtugas = $_GET['idtugas'];
-	//query materi
-	$sql="SELECT * FROM tugas WHERE idKelas=$id and idTugas=$idtugas";
-	$hasil=mysqli_query($k, $sql);
-	$tugas=mysqli_fetch_assoc($hasil);
+	$id = $_POST['idkelas'];
 	
-	$sql2="SELECT 
-				a.*,
-				c.`namaUser` namaMahasiswa,
-				b.`fileHasiltgs`,
-				b.`tglUploadHasiltgs`,
-				b.`nilai`
-			FROM
-				kelasdtl a
-				LEFT JOIN hasiltgs b
-				ON a.`idKelas`=b.`idKelas` AND a.`idMhs`=b.`idUser` AND b.`idTugas`=$idtugas AND b.`idKelas`=$id
-				LEFT JOIN USER c
-				ON a.`idMhs`=c.`idUser`";
-	$hasil2=mysqli_query($k, $sql2);
+	
 	
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,7 +45,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+	
 </head>
 
 <body>
@@ -206,56 +188,38 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header"><?php echo $tugas['namaTugas'] ?></h1>
+                        <h1 class="page-header">Tambah Tugas</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->
-				<?php include('../includes/dosen_dtlmenu.php'); ?>
-				<span id="pesan"></span>
-				
-				Deskripsi :
-				<?php echo $tugas['deskripsiTugas']?>
-				<br/><br/>
-				Batas Waktu :
-				<?php echo "<u>".$tugas['tglMulaiTugas']."</u>" ?> s/d <?php echo "<u>".$tugas['tglSelesaiTugas']."</u>" ?>
-				<br/><br/>
-				Attachment :
-				<a href="tugas/tugas_download.php?idtugas=<?php echo $tugas['idTugas']; ?>"><?php echo $tugas['fileTugas']; ?></a>
-				<br/><br/>
-				TEST :
-				<br/><br/>
-				<form action="kelas_dosen_tugas_edit.php" method="POST" >
-					<input type="submit" name="editTugas" class="btn btn-default" value="Edit Tugas" />
-					<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
-					<input type="hidden" name="idtugas" value="<?php echo $tugas['idTugas']; ?>"/>
-				</form>
-				
-					<div class="panel panel-default">
-						<div class="table-responsive">
-							<table class="table table-striped table-bordered table-hover">
-								<tbody>
-							<?php
-								WHILE($kumpul=mysqli_fetch_assoc($hasil2)){
-							?>
-							<tr>
-								<td><?php echo $kumpul['namaMahasiswa'] ?></td>
-								<td><a href="hasiltgs/hasiltgs_download.php?idhasiltgs=<?php echo $kumpul['idHasiltgs']; ?>"><?php echo $kumpul['fileHasiltgs'] ?></a></td>
-								<td><?php echo $kumpul['nilai'] ?></td>
-							</tr>
-							<?php
-								}
-							?>
-							</table>
-							
-						</div>
+				<?php 
+					include('../includes/dosen_dtlmenu.php'); 
+				?>
+				<div class="row">
+					<div class="col-lg-6">
+					
+					<!--Tambah Tugas-->
+						<form action="kelas_dosen_tugas_tambah_proses.php" method="POST" enctype="multipart/form-data">
+							<label>Nama Tugas : </label>
+							<input class="form-control" type="text" name="nama" />
+							<br/>
+							<label>Deskripsi : </label>
+							<textarea class="form-control" name="deskripsiTugas" rows="3"></textarea>
+							<br/>
+							<label> Batas Waktu : </label>
+							<input class="form-control" type="date" name="tglMulaiTugas"  />
+							<br/>
+							<label> s/d </label>
+							<input class="form-control" type="date" name="tglSelesaiTugas"  />
+							<br/>
+							<label>Attachment : </label>
+							<input type="file" name="tugas" />
+							<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
+							<input class="btn btn-default" type="submit" name="tambahTugas" value="Tambah" />
+						</form>
+					
 					</div>
-					<!-- Download ALL -->
-					<form action="hasiltgs/hasiltgs_download_all.php" method="POST">
-						<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
-						<input type="hidden" name="idtugas" value="<?php echo $tugas['idTugas']; ?>"/>
-						<input type="submit" name="downloadall" class="btn btn-default" value="Save All as ZIP" />
-					</form>
 				</div>
 				<!-- /.panel-default -->
             </div>
@@ -265,9 +229,7 @@
 
     </div>
     <!-- /#wrapper -->
-	
-	
-	
+
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -280,8 +242,6 @@
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
 
-	<script src="../js/jquery.form.js"></script>
-	<script src="../js/script.js"></script>
 </body>
 
 </html>

@@ -20,9 +20,10 @@
 					$sumber=$materi['tmp_name'];
 					//echo $materi['name'];
 					$tujuan="materi/".$materi['name'];
+					$tujuan2=$materi['name'];
 					//echo $tujuan;
 					move_uploaded_file($sumber, $tujuan);
-					$sql = "INSERT INTO materi (namaMateri, fileMateri, idKelas, tglUploadMateri) VALUES ('$nama', '$tujuan', $idKelas,'".date("Y-m-d")."')";
+					$sql = "INSERT INTO materi (namaMateri, fileMateri, idKelas, tglUploadMateri) VALUES ('$nama', '$tujuan2', $idKelas,'".date("Y-m-d")."')";
 					mysqli_query($k, $sql);
 					echo $idKelas;
 				}
