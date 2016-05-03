@@ -36,6 +36,8 @@
 					$tujuan2=$tugas['name'];
 					
 					move_uploaded_file($sumber, $tujuan);
+					$sql = "INSERT INTO tugas (namaTugas, deskripsiTugas, tglMulaiTugas, tglSelesaiTugas, fileTugas, tglUploadTugas, idKelas)
+							VALUES('$nama', '$deskripsitugas', '$tglMulaiTugas', '$tglSelesaiTugas', '$tujuan2', '".date("Y-m-d")."', $idkelas)"; 
 							
 					mysqli_query($k, $sql);
 					header('Location: kelas_dosen_tugas.php?idkelas='.$idkelas);
