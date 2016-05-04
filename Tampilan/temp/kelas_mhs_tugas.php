@@ -44,14 +44,14 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 								$c = mysqli_fetch_assoc($hasil2);
 							?>
 							<tr>
-								<td><a href="kelas_mhs_tugas_detail.php?idkelas=<?php echo $id;?>&idtugas=<?php echo $tugas['idTugas'];?>&idhasil=<?php echo $c['idHasiltgs'];?>"><?php echo $tugas['namaTugas']?></a></td>
+								<td><a href="kelas_mhs_tugas_detail.php?idKelas=<?php echo $id;?>&idtugas=<?php echo $tugas['idTugas'];?>&idhasil=<?php echo $c['idHasiltgs'];?>"><?php echo $tugas['namaTugas']?></a></td>
 								<td>
 								<?php 
 								if(mysqli_num_rows($hasil2) == 0)
 								{?>
 									<form action="kelas_mhs_tugas_upload_proses.php" method="POST" enctype="multipart/form-data">
 										<input type="hidden" name="idtugas" value="<?php echo $tugas['idTugas']; ?>"/>
-										<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
+										<input type="hidden" name="idKelas" value="<?php echo $id; ?>"/>
 										<input type="hidden" name="idhasil" value="<?php echo $c['idHasiltgs']; ?>"/>
 										
 										<input type="file" name="tugas"/>

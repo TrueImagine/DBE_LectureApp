@@ -1,20 +1,13 @@
 <?php
+session_start();
 require_once("../includes/koneksi.php");
-/*
-Dummy data
-*/
-	$_SESSION['login'] = true;
-	$_SESSION['user'] = 5;
-	$_SESSION['role'] = "Mahasiswa";
-/*
-	Dummy data
-*/
+
 	$idtugas = $_POST['idtugas'];
 	$iduser = $_SESSION['user'];
 	$idhasil = $_POST['idhasil'];
 
-	if(isset($_POST['idkelas']) && $_POST['idkelas'] == true){
-		$idkelas=$_POST['idkelas'];
+	if(isset($_POST['idKelas']) && $_POST['idKelas'] == true){
+		$idkelas=$_POST['idKelas'];
 		//print_r($_FILES);
 		if(isset($_FILES['tugas']) && $_FILES['tugas'] == true){
 			$tugas=$_FILES['tugas'];
@@ -32,7 +25,7 @@ Dummy data
 				if($ext[0] == $fileExt || $ext[1] == $fileExt || $ext[2] == $fileExt || $ext[3] == $fileExt || $ext[4] == $fileExt){
 					$sumber=$tugas['tmp_name'];
 					//echo $materi['name'];
-					$tujuan="tugas/".$tugas['name'];
+					$tujuan="hasiltgs/".$tugas['name'];
 					//echo $tujuan;
 					move_uploaded_file($sumber, $tujuan);
 					$sql1 = "SELECT * FROM hasiltgs WHERE idTugas = $idtugas and idUser=$iduser";
@@ -57,8 +50,9 @@ Dummy data
 					
 					mysqli_query($k, $sql);
 					
-					$redirect = 'Location:kelas_mhs_tugas_detail.php?idkelas='.$idkelas.'&idtugas='.$idtugas;
-					header($redirect);
+					$redirect = 'Location:kelas_mhs_tugas_detail.php?idKelas='.$idkelas.'&idtugas='.$idtugas;
+					echo $redirect;
+					//header($redirect);
 				}
 				else{
 					echo "gagal";
