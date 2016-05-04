@@ -4,12 +4,10 @@ session_start();
 if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] == "Mahasiswa"){
 	include("../includes/head_mahasiswa.php");
 	include("../includes/side_mahasiswa.php");	
-	$id = $_GET['idKelas'];
+	$idkelas = $_GET['idKelas'];
 	$idtugas = $_GET['idtugas'];
-	
-	//$idhasil = $_GET['idhasil'];
 	//query materi
-	$sql="SELECT * FROM tugas WHERE idKelas=$id and idTugas=$idtugas";
+	$sql="SELECT * FROM tugas WHERE idKelas=$idkelas and idTugas=$idtugas";
 	$hasil=mysqli_query($k, $sql);
 	$tugas=mysqli_fetch_assoc($hasil);
 	
@@ -22,7 +20,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 				LEFT JOIN user
 				ON hasiltgs.idUser=user.idUser 
 			WHERE 
-				hasiltgs.idKelas = $id
+				hasiltgs.idKelas = $idkelas
 				AND hasiltgs.idTugas = $idtugas
 				AND hasiltgs.idUser = $_SESSION[user]"; 
 				
@@ -64,7 +62,6 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 								<form action="kelas_mhs_tugas_upload_proses.php" method="POST" enctype="multipart/form-data">
 										<input type="hidden" name="idtugas" value="<?php echo $idtugas; ?>"/>
 										<input type="hidden" name="idkelas" value="<?php echo $idkelas; ?>"/>
-										<input type="hidden" name="idhasil" value="<?php echo $idhasil; ?>"/>
 										
 										<input type="file" name="tugas"/>
 										<div id="uploadbar" class="progress progress-striped active">
@@ -75,7 +72,9 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 										<input type="submit" name="upload" value="Upload">	
 								</form>
 								</td>
-								<td><a href="hasiltgs/hasiltgs_download.php?idhasiltgs=<?php echo $kumpul['idHasiltgs']; ?>"><?php echo $kumpul['fileHasiltgs'] ?></a></td>
+								<td>
+									<?php $namafile = explode("/",$kumpul['fileHasiltgs']);?>
+									<a href="hasiltgs/hasiltgs_download.php?idhasiltgs=<?php echo $kumpul['idHasiltgs']; ?>"><?php echo end($namafile); ?></a></td>
 								<td>Nilai : <?php echo $kumpul['nilai'] ?></td>
 							</tr>
 							<?php

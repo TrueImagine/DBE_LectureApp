@@ -5,10 +5,10 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 	include("../includes/head_mahasiswa.php");
 	include("../includes/side_mahasiswa.php");	
 
-	$id = $_GET['idKelas'];
+	$idKelas = $_GET['idKelas'];
 	
 	//query materi
-	$sql="SELECT * FROM materi WHERE idKelas=$id";
+	$sql="SELECT * FROM materi WHERE idKelas=$idKelas";
 	$hasil=mysqli_query($k, $sql);
 	
 ?>
@@ -33,7 +33,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 								<td>
 									<form action='kelas_materi_delete_proses.php' method='POST'>
 									<input type="hidden" name="idmateri" value="<?php echo $materi['idMateri']; ?>"/>
-									<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
+									<input type="hidden" name="idkelas" value="<?php echo $idKelas; ?>"/>
 									
 								</form></td>
 							</tr>
@@ -42,7 +42,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 							?>
 								</tbody>
 							</table>
-					
+				
 					</div>
                 </div>
 					<!-- Download ALL -->

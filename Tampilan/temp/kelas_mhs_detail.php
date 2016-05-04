@@ -5,7 +5,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 	include("../includes/head_mahasiswa.php");
 	include("../includes/side_mahasiswa.php");	
 
-	$id = $_GET['idKelas'];
+	$idKelas = $_GET['idKelas'];
 	$sql = "Select * FROM dtl_kelas";
 	$a = mysqli_query($k,$sql);
 ?>
@@ -15,7 +15,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
                 <div class="row">
                     <div class="col-lg-12">
 						<?php
-							$sql1 = "SELECT namaKelas,deskripsikelas,idKelas,idDosen FROM kelas WHERE idKelas = $id";
+							$sql1 = "SELECT namaKelas,deskripsikelas,idKelas,idDosen FROM kelas WHERE idKelas = $idKelas";
 							$hasil = mysqli_query($k,$sql1);
 							$a = mysqli_fetch_assoc($hasil);
 							

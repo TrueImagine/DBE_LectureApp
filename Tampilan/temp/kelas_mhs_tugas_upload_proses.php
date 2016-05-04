@@ -4,10 +4,10 @@ require_once("../includes/koneksi.php");
 
 	$idtugas = $_POST['idtugas'];
 	$iduser = $_SESSION['user'];
-	$idhasil = $_POST['idhasil'];
+		
 
-	if(isset($_POST['idKelas']) && $_POST['idKelas'] == true){
-		$idkelas=$_POST['idKelas'];
+	if(isset($_POST['idkelas']) && $_POST['idkelas'] == true){
+		$idkelas=$_POST['idkelas'];
 		//print_r($_FILES);
 		if(isset($_FILES['tugas']) && $_FILES['tugas'] == true){
 			$tugas=$_FILES['tugas'];
@@ -52,7 +52,8 @@ require_once("../includes/koneksi.php");
 					
 					$redirect = 'Location:kelas_mhs_tugas_detail.php?idKelas='.$idkelas.'&idtugas='.$idtugas;
 					echo $redirect;
-					//header($redirect);
+					
+					header($redirect);
 				}
 				else{
 					echo "gagal";

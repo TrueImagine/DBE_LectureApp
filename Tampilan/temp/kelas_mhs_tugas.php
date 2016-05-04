@@ -5,10 +5,10 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 	include("../includes/head_mahasiswa.php");
 	include("../includes/side_mahasiswa.php");	
 	
-	$id = $_GET['idKelas'];
+	$idKelas = $_GET['idKelas'];
 	
 	//query materi
-	$sql="SELECT * FROM tugas WHERE idKelas=$id";
+	$sql="SELECT * FROM tugas WHERE idKelas = $idKelas";
 	$hasil=mysqli_query($k, $sql);
 	
 ?>
@@ -39,12 +39,12 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 							<?php
 								WHILE($tugas=mysqli_fetch_assoc($hasil)){
 							 
-								$sql2 = "SELECT idHasiltgs, nilai FROM hasiltgs WHERE idKelas = '$id' AND idUser = '$_SESSION[user]'";
+								$sql2 = "SELECT idHasiltgs, nilai FROM hasiltgs WHERE idKelas = '$idKelas' AND idUser = '$_SESSION[user]'";
 								$hasil2 = mysqli_query($k,$sql2);
 								$c = mysqli_fetch_assoc($hasil2);
 							?>
 							<tr>
-								<td><a href="kelas_mhs_tugas_detail.php?idKelas=<?php echo $id;?>&idtugas=<?php echo $tugas['idTugas'];?>&idhasil=<?php echo $c['idHasiltgs'];?>"><?php echo $tugas['namaTugas']?></a></td>
+								<td><a href="kelas_mhs_tugas_detail.php?idKelas=<?php echo $idKelas;?>&idtugas=<?php echo $tugas['idTugas'];?>&idhasil=<?php echo $c['idHasiltgs'];?>"><?php echo $tugas['namaTugas']?></a></td>
 								<td>
 								<?php 
 								if(mysqli_num_rows($hasil2) == 0)
@@ -68,7 +68,8 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 									$sql3 = "SELECT fileHasiltgs FROM hasiltgs WHERE idHasiltgs = $c[idHasiltgs]";
 									$hasil3 = mysqli_query($k,$sql3);
 									$d = mysqli_fetch_assoc($hasil3);
-									echo $d['fileHasiltgs'];
+									$namafile = explode("/",$d['fileHasiltgs']);
+									echo end($namafile);
 								}?>
 								</td>
 								
