@@ -13,7 +13,7 @@
 	$id = $_GET['idkelas'];
 	
 	//query materi
-	$sql="SELECT * FROM tugas WHERE idKelas=$id";
+	$sql="SELECT * FROM tugas WHERE idKelas=$id ORDER BY tglUploadTugas";
 	$hasil=mysqli_query($k, $sql);
 	
 ?>

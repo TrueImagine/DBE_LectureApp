@@ -20,6 +20,8 @@
 	$sql2="SELECT 
 				a.*,
 				c.`namaUser` namaMahasiswa,
+				c.`idUser` user,
+				b.`idHasiltgs`,
 				b.`fileHasiltgs`,
 				b.`tglUploadHasiltgs`,
 				b.`nilai`
@@ -29,6 +31,7 @@
 				ON a.`idKelas`=b.`idKelas` AND a.`idMhs`=b.`idUser` AND b.`idTugas`=$idtugas AND b.`idKelas`=$id
 				LEFT JOIN USER c
 				ON a.`idMhs`=c.`idUser`";
+	//echo $sql2;
 	$hasil2=mysqli_query($k, $sql2);
 	
 ?>
@@ -223,8 +226,6 @@
 				Attachment :
 				<a href="tugas/tugas_download.php?idtugas=<?php echo $tugas['idTugas']; ?>"><?php echo $tugas['fileTugas']; ?></a>
 				<br/><br/>
-				TEST :
-				<br/><br/>
 				<form action="kelas_dosen_tugas_edit.php" method="POST" >
 					<input type="submit" name="editTugas" class="btn btn-default" value="Edit Tugas" />
 					<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
@@ -241,15 +242,23 @@
 							<tr>
 								<td><?php echo $kumpul['namaMahasiswa'] ?></td>
 								<td><a href="hasiltgs/hasiltgs_download.php?idhasiltgs=<?php echo $kumpul['idHasiltgs']; ?>"><?php echo $kumpul['fileHasiltgs'] ?></a></td>
-								<td><?php echo $kumpul['nilai'] ?></td>
+								<td>
+									<form action="kelas_dosen_simpan_nilai.php" method="POST" >
+										<label>Nilai :</label>
+										<input type="text" name="nilaiTugas<?php echo $kumpul['user']; ?>" value="<?php echo $kumpul['nilai'] ?>" />
+										<input type="hidden" name="id" value="<?php echo $id ?>" />
+										<input type="hidden" name="idtugas" value="<?php echo $idtugas ?>" />
+										<input type="hidden" name="idhasiltgs<?php echo $kumpul['user']; ?>" value="<?php echo $kumpul['idHasiltgs'] ?>" />									
+								</td>
 							</tr>
 							<?php
 								}
 							?>
 							</table>
-							
 						</div>
 					</div>
+										<input type="submit" name="submitNilai" value="SIMPAN NILAI" />
+									</form>
 					<!-- Download ALL -->
 					<form action="hasiltgs/hasiltgs_download_all.php" method="POST">
 						<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>

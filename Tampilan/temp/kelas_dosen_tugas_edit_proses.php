@@ -31,7 +31,9 @@
 			$sama=mysqli_num_rows($hasil2);
 			
 			if($sama){
-				
+			
+			
+			
 			}else{
 				$fileExt = strtolower(end(explode(".", $tugas['name'])));
 				$ext = (explode(",", str_replace(" ", "", $ext)));
