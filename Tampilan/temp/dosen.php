@@ -1,13 +1,7 @@
 <?php
-	require_once("../includes/koneksi.php");
-	session_start();
+session_start();
 if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] == "Dosen"){
-	$sql ="SELECT * FROM user WHERE idUser=$_SESSION[user]";
-	$hasil2 = mysqli_query($k, $sql);
-	$nama = mysqli_fetch_assoc($hasil2);
-	
 	include("../includes/head_dosen.php");
-	include("../includes/top_dosen.php");
 	include("../includes/side_dosen.php");
 ?>
         <!-- Page Content -->
