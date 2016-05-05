@@ -47,7 +47,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
                 </div>
 					<!-- Download ALL -->
 					<form action="materi/materi_download_all.php" method="POST">
-						<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
+						<input type="hidden" name="idkelas" value="<?php echo $idKelas; ?>"/>
 						<input type="submit" name="downloadall" class="btn btn-default" value="Save All as ZIP" />
 					</form>
                 <!-- /.row -->

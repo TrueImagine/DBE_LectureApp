@@ -6,9 +6,20 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 	include("../includes/side_mahasiswa.php");	
 	
 	$idKelas = $_GET['idKelas'];
-	
+	$idMhs= $_SESSION['user'];
 	//query materi
-	$sql="SELECT * FROM tugas WHERE idKelas = $idKelas";
+	$sql="SELECT 
+			a.*,
+			b.`idHasiltgs` idHasiltgs,
+			b.fileHasiltgs,
+			b.nilai
+		FROM
+			tugas a
+			LEFT JOIN hasiltgs b
+			ON a.`idTugas`= b.idTugas AND b.`idUser`= $idMhs
+		WHERE 
+			a.idKelas=$idKelas
+			";
 	$hasil=mysqli_query($k, $sql);
 	
 ?>
@@ -38,43 +49,32 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 								<tbody>
 							<?php
 								WHILE($tugas=mysqli_fetch_assoc($hasil)){
-							 
-								$sql2 = "SELECT idHasiltgs, nilai FROM hasiltgs WHERE idKelas = '$idKelas' AND idUser = '$_SESSION[user]'";
-								$hasil2 = mysqli_query($k,$sql2);
-								$c = mysqli_fetch_assoc($hasil2);
 							?>
 							<tr>
-								<td><a href="kelas_mhs_tugas_detail.php?idKelas=<?php echo $idKelas;?>&idtugas=<?php echo $tugas['idTugas'];?>&idhasil=<?php echo $c['idHasiltgs'];?>"><?php echo $tugas['namaTugas']?></a></td>
+								<td><a href="kelas_mhs_tugas_detail.php?idKelas=<?php echo $idKelas;?>&idtugas=<?php echo $tugas['idTugas'];?>"><?php echo $tugas['namaTugas']?></a></td>
 								<td>
 								<?php 
-								if(mysqli_num_rows($hasil2) == 0)
+								if($tugas['idHasiltgs'] == NULL)
 								{?>
 									<form action="kelas_mhs_tugas_upload_proses.php" method="POST" enctype="multipart/form-data">
 										<input type="hidden" name="idtugas" value="<?php echo $tugas['idTugas']; ?>"/>
-										<input type="hidden" name="idKelas" value="<?php echo $id; ?>"/>
-										<input type="hidden" name="idhasil" value="<?php echo $c['idHasiltgs']; ?>"/>
+										<input type="hidden" name="idkelas" value="<?php echo $idKelas; ?>"/>
+										<input type="hidden" name="idhasil" value="<?php echo $tugas['idHasiltgs']; ?>"/>
 										
 										<input type="file" name="tugas"/>
-										<div id="uploadbar" class="progress progress-striped active">
-											<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-												<span class="sr-only">0% Complete</span>
-											</div>
-										</div>
 										<input type="submit" name="upload" value="Upload">	
 									</form>
 								<?php
-								}else
-								{
-									$sql3 = "SELECT fileHasiltgs FROM hasiltgs WHERE idHasiltgs = $c[idHasiltgs]";
-									$hasil3 = mysqli_query($k,$sql3);
-									$d = mysqli_fetch_assoc($hasil3);
-									$namafile = explode("/",$d['fileHasiltgs']);
-									echo end($namafile);
-								}?>
+								}else{
+								?>	
+									<a href="hasiltgs/hasiltgs_download.php?idhasiltgs=<?php echo $tugas['idHasiltgs']; ?>"><?php echo $tugas['fileHasiltgs'];?></a>
+								<?php 
+									}
+								?>
 								</td>
 								
 								<td>
-								Nilai : <?php echo $c['nilai'] ?> 	
+								Nilai : <?php echo $tugas['nilai'] ?> 	
 								</td>
 							</tr>
 							<?php

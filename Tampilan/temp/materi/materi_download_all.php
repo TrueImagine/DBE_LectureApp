@@ -3,6 +3,7 @@
 	
 	$idkelas=$_POST['idkelas'];
 	$sql="SELECT fileMateri FROM materi WHERE idKelas=$idkelas";
+	//echo $sql;
 	$hasil=mysqli_query($k, $sql);
 	$i=0;
 	while($a=mysqli_fetch_assoc($hasil)){
@@ -10,9 +11,11 @@
 	$i++;
 	}
 	//print_r($files);
+	//print_r($files);
 	$zipname = 'Materi.zip';
 	$zip = new ZipArchive;
 	$zip->open($zipname, ZipArchive::CREATE);
+	///*
 	foreach ($files as $file) {
 	  $zip->addFile($file);
 	}
@@ -23,5 +26,5 @@
 	header('Content-Length: ' . filesize($zipname));
 	readfile($zipname);
 	unlink($zipname);
-	
+	//*/
 ?>

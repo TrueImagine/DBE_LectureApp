@@ -10,10 +10,10 @@
 /*
 	Dummy data
 */
-	$id = $_GET['idkelas'];
-	$idtugas = $_GET['idtugas'];
+	$idKelas = $_GET['idkelas'];
+	$idKelastugas = $_GET['idtugas'];
 	//query materi
-	$sql="SELECT * FROM tugas WHERE idKelas=$id and idTugas=$idtugas";
+	$sql="SELECT * FROM tugas WHERE idKelas=$idKelas and idTugas=$idKelastugas";
 	$hasil=mysqli_query($k, $sql);
 	$tugas=mysqli_fetch_assoc($hasil);
 	
@@ -28,7 +28,7 @@
 			FROM
 				kelasdtl a
 				LEFT JOIN hasiltgs b
-				ON a.`idKelas`=b.`idKelas` AND a.`idMhs`=b.`idUser` AND b.`idTugas`=$idtugas AND b.`idKelas`=$id
+				ON a.`idKelas`=b.`idKelas` AND a.`idMhs`=b.`idUser` AND b.`idTugas`=$idKelastugas AND b.`idKelas`=$idKelas
 				LEFT JOIN USER c
 				ON a.`idMhs`=c.`idUser`";
 	//echo $sql2;
@@ -228,7 +228,7 @@
 				<br/><br/>
 				<form action="kelas_dosen_tugas_edit.php" method="POST" >
 					<input type="submit" name="editTugas" class="btn btn-default" value="Edit Tugas" />
-					<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
+					<input type="hidden" name="idkelas" value="<?php echo $idKelas; ?>"/>
 					<input type="hidden" name="idtugas" value="<?php echo $tugas['idTugas']; ?>"/>
 				</form>
 				
@@ -246,8 +246,8 @@
 									<form action="kelas_dosen_simpan_nilai.php" method="POST" >
 										<label>Nilai :</label>
 										<input type="text" name="nilaiTugas<?php echo $kumpul['user']; ?>" value="<?php echo $kumpul['nilai'] ?>" />
-										<input type="hidden" name="id" value="<?php echo $id ?>" />
-										<input type="hidden" name="idtugas" value="<?php echo $idtugas ?>" />
+										<input type="hidden" name="id" value="<?php echo $idKelas ?>" />
+										<input type="hidden" name="idtugas" value="<?php echo $idKelastugas ?>" />
 										<input type="hidden" name="idhasiltgs<?php echo $kumpul['user']; ?>" value="<?php echo $kumpul['idHasiltgs'] ?>" />									
 								</td>
 							</tr>
@@ -261,7 +261,7 @@
 									</form>
 					<!-- Download ALL -->
 					<form action="hasiltgs/hasiltgs_download_all.php" method="POST">
-						<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>
+						<input type="hidden" name="idkelas" value="<?php echo $idKelas; ?>"/>
 						<input type="hidden" name="idtugas" value="<?php echo $tugas['idTugas']; ?>"/>
 						<input type="submit" name="downloadall" class="btn btn-default" value="Save All as ZIP" />
 					</form>
