@@ -2,14 +2,14 @@
 	session_start();
 	require_once("../includes/koneksi.php");
 if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] == "Mahasiswa"){
+	include("../includes/head_mahasiswa.php");
+	include("../includes/side_mahasiswa.php");
+	
 	$sql = "SELECT kelas.idKelas, kelas.namaKelas, user.namaUser FROM kelas 
 			INNER JOIN user ON kelas.idDosen = user.idUser
 			INNER JOIN kelasdtl ON kelas.idKelas = kelasdtl.idKelas
 			WHERE kelasdtl.idMhs = $_SESSION[user]";
-	$a = mysqli_query($k,$sql);
-	
-	include("../includes/head_mahasiswa.php");
-	include("../includes/side_mahasiswa.php");	
+	$a = mysqli_query($k,$sql);	
 ?>
         <!-- Page Content -->
         <div id="page-wrapper">

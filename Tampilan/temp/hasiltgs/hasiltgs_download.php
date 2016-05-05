@@ -13,7 +13,7 @@ if(isset($_GET['idhasiltgs']) && $_GET['idhasiltgs'] == true){
 	if (file_exists($source)) {
 		header('Content-Description: File Transfer');
 		header('Content-Type: application/octet-stream');
-		header('Content-Disposition: attachment; filename='.basename($source));
+		header("Content-Disposition: attachment; filename=\"".basename($source)."\"");
 		header('Content-Transfer-Encoding: binary');
 		header('Expires: 0');
 		header('Cache-Control: must-revalidate');

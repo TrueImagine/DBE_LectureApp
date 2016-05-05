@@ -82,9 +82,6 @@
             <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
 <?php
 	include("../includes/bottom.php");
 }

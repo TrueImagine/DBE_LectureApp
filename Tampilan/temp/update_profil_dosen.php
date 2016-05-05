@@ -3,7 +3,6 @@ session_start();
 require_once("../includes/koneksi.php");
 require_once("../includes/functions.php");
 
-
 if(isset($_POST['upload'])){
 	if(!isset($_FILES["profile"])){
 		$response = 1;
@@ -19,7 +18,7 @@ if(isset($_POST['upload'])){
 			if(!file_exists('../images/fulls/temp')){
 				mkdir('../images/fulls/temp',0777,true);
 			}
-			$tujuan = "../images/fulls/temp/foto_".$_SESSION['user'].end(explode(".",$foto['name']));
+			$tujuan = "../images/fulls/temp/foto_".$_SESSION['user'].".".end(explode(".",$foto['name']));
 			move_uploaded_file($sumber,$tujuan);
 			$response = $tujuan;
 			echo $response;
@@ -42,11 +41,11 @@ else if(isset($_SESSION['login']) && $_SESSION['role'] == "Dosen" && isset($_POS
 	else{
 		$new_file_path = $file_path;
 	}
-	$sql = "UPDATE dosen SET
-		namaDosen = '$nama',
-		emailDosen = '$email',
-		tglLahirDosen = '$tgl_lahir',
-		fotoDosen = '$new_file_path' WHERE idDosen = $_SESSION[user]";
+	$sql = "UPDATE user SET
+		namaUser = '$nama',
+		emailUser = '$email',
+		tglLahirUser = '$tgl_lahir',
+		fotoUser = '$new_file_path' WHERE idUser = $_SESSION[user]";
 	mysqli_query($k,$sql);
 
 	if(mysqli_error($k)){

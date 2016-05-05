@@ -19,7 +19,7 @@ if(isset($_POST['upload'])){
 			if(!file_exists('../images/fulls/temp')){
 				mkdir('../images/fulls/temp',0777,true);
 			}
-			$tujuan = "../images/fulls/temp/foto_".$_SESSION['user'].end(explode(".",$foto['name']));
+			$tujuan = "../images/fulls/temp/foto_".$_SESSION['user'].".".end(explode(".",$foto['name']));
 			move_uploaded_file($sumber,$tujuan);
 			$response = $tujuan;
 			echo $response;
@@ -42,11 +42,11 @@ else if(isset($_SESSION['login']) && $_SESSION['role'] == "Mahasiswa" && isset($
 	else{
 		$new_file_path = $file_path;
 	}
-	$sql = "UPDATE mahasiswa SET
-		namaMhs = '$nama',
-		emailMhs = '$email',
-		tglLahirMhs = '$tgl_lahir',
-		fotoMhs = '$new_file_path' WHERE idMhs = $_SESSION[user]";
+	$sql = "UPDATE user SET
+		namaUser = '$nama',
+		emailUser = '$email',
+		tglLahirUser = '$tgl_lahir',
+		fotoUser = '$new_file_path' WHERE idUser = $_SESSION[user]";
 	mysqli_query($k,$sql);
 
 	if(mysqli_error($k)){
