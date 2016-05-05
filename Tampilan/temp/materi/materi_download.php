@@ -8,16 +8,15 @@ if(isset($_GET['idmateri']) && $_GET['idmateri'] == true){
 	$hasil=mysqli_query($k, $sql);
 	$materi=mysqli_fetch_assoc($hasil);
 	$source = $materi['fileMateri'];
-	
 	if (file_exists($source)) {
 		header('Content-Description: File Transfer');
 		header('Content-Type: application/octet-stream');
-		header('Content-Disposition: attachment; filename='.basename($source));
+		header("Content-Disposition: attachment; filename=\"".$source."\"");
 		header('Content-Transfer-Encoding: binary');
 		header('Expires: 0');
 		header('Cache-Control: must-revalidate');
 		header('Pragma: public');
-		header('Content-Length: ' . filesize($source));
+		header('Content-Length: '.filesize($source));
 		ob_clean();
 		flush();
 		readfile($source);

@@ -1,5 +1,14 @@
 <?php
 session_start();
+/*
+	Dummy data
+*/
+	$_SESSION['login'] = true;
+	$_SESSION['user'] = 3;
+	$_SESSION['role'] = "Dosen";
+/*
+	Dummy data
+*/
 if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] == "Dosen"){
 	include("../includes/head_dosen.php");
 	include("../includes/side_dosen.php");
@@ -78,8 +87,6 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
         </div>
         <!-- /#page-wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
 <?php
 	include("../includes/bottom.php");
 }
