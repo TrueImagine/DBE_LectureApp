@@ -105,7 +105,7 @@
                                 <div class="form-group">
 									<label>Tanggal Lahir</label></br>
                                     <input class="form-control" placeholder="Tanggal" name="tanggallahir" type="text" id="inputField" value="" readonly>
-									<h1 style="font-size:12px; color:grey;">*Tanggal lahir akan menjadi Password login</h1>
+									<h1 style="font-size:12px; color:grey;">*Tanggal lahir akan menjadi Password login <strong><i>(ddmmyy)</i></strong></h1>
 								</div>                                
 								<div class="form-group">
 									<label>Kode Captcha</label> <img src="../includes/captcha.php" /></br>

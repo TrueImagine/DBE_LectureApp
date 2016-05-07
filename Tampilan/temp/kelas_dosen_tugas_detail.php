@@ -58,10 +58,15 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 					<input type="hidden" name="idkelas" value="<?php echo $idKelas; ?>"/>
 					<input type="hidden" name="idtugas" value="<?php echo $tugas['idTugas']; ?>"/>
 				</form>
-				
+				<br/>
 					<div class="panel panel-default">
 						<div class="table-responsive">
 							<table class="table table-striped table-bordered table-hover">
+								<thead>
+									<th>Nama</th>
+									<th>Attachment</th>
+									<th>Nilai</th>
+								<thead>
 								<tbody>
 							<?php
 								WHILE($kumpul=mysqli_fetch_assoc($hasil2)){
@@ -86,6 +91,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 					</div>
 										<input type="submit" name="submitNilai" value="SIMPAN NILAI" />
 									</form>
+					<br/><br/>
 					<!-- Download ALL -->
 					<form action="hasiltgs/hasiltgs_download_all.php" method="POST">
 						<input type="hidden" name="idkelas" value="<?php echo $idKelas; ?>"/>

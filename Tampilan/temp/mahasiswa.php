@@ -1,9 +1,7 @@
 <?php
 	session_start();
 /* Dummy data */
-	$_SESSION['login'] = true;
-	$_SESSION['user'] = 6;
-	$_SESSION['role'] = "Mahasiswa";
+
 /* Dummy data */
 	if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] == "Mahasiswa"){
 	include("../includes/head_mahasiswa.php");

@@ -27,7 +27,12 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 							<span id="pesan"></span>
 							<form role="form" method="POST" id="formprofil" action="update_profil_dosen.php">
 								<div class="form-group">
-									<img src="<?php if($dataUser['fotoUser'] == "") echo "../images/fulls/c4LR6O.jpg"; else echo $dataUser['fotoUser']; ?>" id="image" />
+									<img src="<?php if($dataUser['fotoUser'] == ""){ 
+														echo "../images/fulls/foto/nopic.jpg"; 
+													}else{ 
+														echo $dataUser['fotoUser'];
+													}
+												?>" id="image" >
 									<input type="file" name="profile" />
 									<div id="uploadbar" class="progress progress-striped active">
                                         <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">

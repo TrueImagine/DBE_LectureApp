@@ -3,9 +3,7 @@ session_start();
 /*
 	Dummy data
 */
-	$_SESSION['login'] = true;
-	$_SESSION['user'] = 3;
-	$_SESSION['role'] = "Dosen";
+	
 /*
 	Dummy data
 */

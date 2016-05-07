@@ -10,24 +10,32 @@
 			$hasil = mysqli_query($k, $sql);
 			
 			$data = mysqli_fetch_array($hasil);
-			if(mysqli_num_rows($hasil)){	
-				if(password_verify($pass, $data['passwordUser'])){ //verifikasi
-					$_SESSION['login'] = true;
-					$_SESSION['user'] = $data['idUser'];
-					if($data['status'] == 0){ //login sukses
-						$_SESSION['role'] = "Dosen";	
-						echo "9";
+			if($data['namaUser']!=NULL){
+				if(mysqli_num_rows($hasil)){	
+					if(password_verify($pass, $data['passwordUser'])){ //verifikasi
+						$_SESSION['login'] = true;
+						$_SESSION['user'] = $data['idUser'];
+						if($data['status'] == 0){ //login sukses
+							$_SESSION['role'] = "Dosen";	
+							echo "9";
+						}
+						else{
+							$_SESSION['role'] = "Mahasiswa";
+							echo "8";
+						}
 					}
-					else{
-						$_SESSION['role'] = "Mahasiswa";
-						echo "8";
+					else{ 
+						echo "6";						
 					}
-				}
-				else{ 
+				}else{		
 					echo "6";						
 				}
-			}else{		
-				echo "6";						
+			}else if($data['namaUser']==NULL){
+				$_SESSION['user'] = $data['idUser'];
+				if($data['status'] == 1){
+					$_SESSION['role'] = "Mahasiswa";
+					echo "99";
+				}	
 			}
 		}
 		else if($_SESSION['captcha']==$_POST['captcha']){ //jika captcha sesuai

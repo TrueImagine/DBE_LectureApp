@@ -25,7 +25,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 						<textarea name="deskripsiKelas" class="form-control" rows="3"></textarea>
 					</div>
 					<a href="kelas_dosen.php" class="btn btn-danger">Batal</a>
-					<input type="submit" id="tambahButton" name="tambahKelas" value="Tambah" class="btn btn-success" disabled />
+					<input type="submit" id="tambahButton" name="tambahKelas" value="Tambah" class="btn btn-success"  />
 				</form>
 				<!-- /.panel-default -->
             </div>

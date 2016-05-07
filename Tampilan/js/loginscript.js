@@ -33,6 +33,10 @@ $(document).ready(function() {
 			{ 
 				window.location='dosen.php';
 			}
+			else if(response.responseText == 99)//pertama
+			{ 
+				window.location='pertama.php';
+			}
 		}
 	});
 	$('#registerform').ajaxForm({
