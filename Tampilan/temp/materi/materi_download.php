@@ -5,9 +5,11 @@ if(isset($_GET['idmateri']) && $_GET['idmateri'] == true){
 	$gambar = $_GET['idmateri'];
 	
 	$sql="SELECT * FROM materi where idMateri=$gambar";
+	//echo $sql;
 	$hasil=mysqli_query($k, $sql);
 	$materi=mysqli_fetch_assoc($hasil);
 	$source = $materi['fileMateri'];
+	
 	if (file_exists($source)) {
 		header('Content-Description: File Transfer');
 		header('Content-Type: application/octet-stream');
@@ -22,4 +24,5 @@ if(isset($_GET['idmateri']) && $_GET['idmateri'] == true){
 		readfile($source);
 		exit;
 	}
+	
 }

@@ -54,8 +54,10 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 									<label>E-mail / Username</label>
 									<input type="email" name="email" class="form-control" value="<?php echo $dataUser['emailUser']; ?>"/>
 								</div>
-								<input type="submit" class="btn btn-default" name = "ubahpass" value="Ubah Password" />
 								<input type="submit" class="btn btn-default" name = "simpan" value="Simpan" />
+							</form>
+							<form action="dosen_ubah_pass.php" method="POST">
+								<input type="submit" class="btn btn-default" name = "ubahpass" value="Ubah Password" />
 							</form>
 						</div>
 					</div>
