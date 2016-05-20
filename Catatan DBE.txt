@@ -3,9 +3,11 @@ ubah password dari profile dosen & mhs //FINISH//
 validasi register pertama mahasiswa kalau password gak match
 validasi upload materi
 validasi batas waktu tugas
-validasi tugas dosen mahasiswa muncul smua , padahal tidak ada di kelas itu
+validasi tugas dosen mahasiswa muncul smua , padahal tidak ada di kelas itu (tergabugn)
 hasil download tugas save all zip tidak masuk smua //finish 
 profil mahsiswa default //FINISH//
 kelas inactive mahasiswa masih buka //FINISH//
 pilihan ekstensi
-
+CSV/PHPExcel
+notifikasi
+hosting
