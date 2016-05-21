@@ -40,18 +40,28 @@ include("../includes/side_mahasiswa.php");
 					{
 					$sql = "INSERT INTO hasiltgs (idTugas, idUser, idKelas,fileHasiltgs, tglUploadHasiltgs)
 							VALUES ($idtugas,$iduser,$idkelas,'$tujuan2','".date("Y-m-d")."')";
-							
+					$sqld = "INSERT INTO pesan (isiPesan, idJenispsn, idKelas, tglPesan) VALUES ('$dos[namaUser] telah melakukan upload tugas $nTugas[namaTugas]', 0, $idkelas, '".date("Y-m-d")."')";
 					$asd = 2;
 					}
 					else{
 					unlink('hasiltgs/'.$a['fileHasiltgs']);
 					$sql = "UPDATE hasiltgs SET idTugas = $idtugas, idUser = $iduser, 
 							idKelas = $idkelas,fileHasiltgs = '$tujuan2', tglUploadHasiltgs = '".date("Y-m-d")."'
-							WHERE idHasiltgs = $a[idHasiltgs]";		
+							WHERE idHasiltgs = $a[idHasiltgs]";
+					$sqld = "INSERT INTO pesan (isiPesan, idJenispsn, idKelas, tglPesan) VALUES ('$dos[namaUser] telah melakukan update upload tugas $nTugas[namaTugas]', 0, $idkelas, '".date("Y-m-d")."')";
 					$asd = 1;
 					}
 					echo $sql;
 					mysqli_query($k, $sql);
+					
+					$sql = "SELECT namaTugas FROM tugas WHERE idTugas = $idtugas";
+					$hasil2 = mysqli_query($k, $sql);
+					$nTugas = mysqli_fetch_assoc($hasil2);
+					$sql ="SELECT namaUser FROM user WHERE idUser=$iduser";
+					$hasil2 = mysqli_query($k, $sql);
+					$dos = mysqli_fetch_assoc($hasil2);
+					
+					mysqli_query($k, $sqld);
 					
 					$redirect = 'Location:kelas_mhs_tugas_detail.php?idKelas='.$idkelas.'&idtugas='.$idtugas;
 					//echo $redirect;
