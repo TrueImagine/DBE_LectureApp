@@ -12,7 +12,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 	$sql2="DELETE FROM kelasdtl WHERE idMhs='$idmhs'";
 	$hasil2=mysqli_query($k, $sql2);
 	
-	header("Location: kelas_dosen_mahasiswa.php?idkelas='$id'" );
+	header("Location: kelas_dosen_mahasiswa.php?idkelas=$id" );
 }
 else{
 	header("Location:../index.php");

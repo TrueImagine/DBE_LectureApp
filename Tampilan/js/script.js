@@ -83,6 +83,14 @@ $(document).ready(function() {
 		}
 	});
 	
+	$(".dellink").click(function(e){
+		e.preventDefault();
+		var a = confirm("Yakin ingin menghapus mahasiswa dari kelas?");
+		if(a){
+			var l = $(this).attr("href");
+			location.href= l;
+		}
+	});
 	
 	//set the progress bar to be hidden on loading
 	$("#uploadbar").hide();
