@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <?php
 	require_once("../includes/koneksi.php");
-	$action = $_GET['action'];
+	if(isset($_GET['action'])){
+		$action = $_GET['action'];
+	}else{
+		$action = "masuk";
+	}
 ?>
 <html lang="en">
 

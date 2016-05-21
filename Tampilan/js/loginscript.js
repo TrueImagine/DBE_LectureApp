@@ -25,6 +25,17 @@ $(document).ready(function() {
 				$("#pesan").append("<div class=\"alert alert-danger alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>Email atau Password Anda Salah!</p></div>");
 				setTimeout(function(){ $("#msgClose").click(); }, 2000);
 			}
+			else if(response.responseText == 10)//Username atau password salah
+			{
+				jQuery("#submit input[type='checkbox'], input[type='password'], input[type='email'], input[type='text']").each(function() {
+					this.value = '';
+				});
+				$("#pesan").hide();
+				$("#pesan div").remove();
+				$("#pesan").show();
+				$("#pesan").append("<div class=\"alert alert-danger alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>Account Belum terdaftar</p></div>");
+				setTimeout(function(){ $("#msgClose").click(); }, 2000);
+			}
 			else if(response.responseText == 8)//sukses 
 			{ 
 				window.location='mahasiswa.php';
@@ -63,6 +74,17 @@ $(document).ready(function() {
 				$("#pesan").append("<div class=\"alert alert-danger alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>Account Anda Sudah Terdaftar!</p></div>");
 				setTimeout(function(){ $("#msgClose").click(); }, 2000);
 			}
+			else if(response.responseText == 4)//jika field kosong
+			{
+				jQuery("#submit input[type='checkbox'], input[type='password'], input[type='email'], input[type='text']").each(function() {
+					this.value = '';
+				});
+				$("#pesan").hide();
+				$("#pesan div").remove();
+				$("#pesan").show();
+				$("#pesan").append("<div class=\"alert alert-danger alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>Semua Field Harus Terisi!</p></div>");
+				setTimeout(function(){ $("#msgClose").click(); }, 2000);
+			}
 			else if(response.responseText == 3)//sukses
 			{
 				jQuery("#submit input[type='checkbox'], input[type='password'], input[type='email'], input[type='text']").each(function() {
@@ -99,6 +121,17 @@ $(document).ready(function() {
 				$("#pesan div").remove();
 				$("#pesan").show();
 				$("#pesan").append("<div class=\"alert alert-danger alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>Kode captcha tidak valid</p></div>");
+				setTimeout(function(){ $("#msgClose").click(); }, 2000);
+			}
+			else if(response.responseText == 4)//jika field kosong
+			{
+				jQuery("#submit input[type='checkbox'], input[type='password'], input[type='email'], input[type='text']").each(function() {
+					this.value = '';
+				});
+				$("#pesan").hide();
+				$("#pesan div").remove();
+				$("#pesan").show();
+				$("#pesan").append("<div class=\"alert alert-danger alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>Semua Field Harus Terisi!</p></div>");
 				setTimeout(function(){ $("#msgClose").click(); }, 2000);
 			}
 			else if(response.responseText == 3)//sukses
