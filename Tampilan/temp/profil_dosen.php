@@ -32,7 +32,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 													}else{ 
 														echo $dataUser['fotoUser'];
 													}
-												?>" id="image" >
+												?>" id="image" width="300px" height="300px">
 									<input type="file" name="profile" />
 									<div id="uploadbar" class="progress progress-striped active">
                                         <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">

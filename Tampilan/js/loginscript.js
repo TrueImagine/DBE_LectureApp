@@ -108,5 +108,37 @@ $(document).ready(function() {
 			}
 		}
 	});
+	
+	$('#pertamaform').ajaxForm({
+		complete:function(response){
+			if(response.responseText == 1)//field username kosong
+			{
+				jQuery("#submit input[type='checkbox'], input[type='password'], input[type='text']").each(function() { //bersihkan isi field
+					this.value = '';
+				});
+				$("#pesan").hide();
+				$("#pesan div").remove();
+				$("#pesan").show();
+				$("#pesan").append("<div class=\"alert alert-danger alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>Field tidak boleh kosong !</p></div>");
+				setTimeout(function(){ $("#msgClose").click(); }, 2000);
+			}
+			else if(response.responseText == 2)//password tidak match
+			{
+				jQuery("#submit input[type='checkbox'], input[type='password'], input[type='text']").each(function() { //bersihkan isi field
+					this.value = '';
+				});
+				$("#pesan").hide();
+				$("#pesan div").remove();
+				$("#pesan").show();
+				$("#pesan").append("<div class=\"alert alert-danger alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>Password tidak sesuai</p></div>");
+				setTimeout(function(){ $("#msgClose").click(); }, 2000);
+			}			
+			else if(response.responseText == 99)//password tidak match
+			{
+				window.location='../index.php';
+			}
+		}
+	});
+	
 	$("#pesan").hide();
 });

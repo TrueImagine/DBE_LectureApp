@@ -54,7 +54,7 @@
 				if(mysqli_num_rows($hasil)){
 					echo "1";
 				}else{ //sukses , input ke database
-				$sql = "INSERT INTO user (namaUser, passwordUser, emailUser, tglLahirUser, fotoUser, status) VALUES ('$nama', '$encrypted_pass', '$email', '$tanggalL', '', 0)";
+				$sql = "INSERT INTO user (namaUser, passwordUser, emailUser, tglLahirUser, fotoUser, status) VALUES ('$nama', '$encrypted_pass', '$email', '$tanggalL', '../images/fulls/foto/nopic.jpg', 0)";
 				mysqli_query($k, $sql);
 					echo "3";
 				}

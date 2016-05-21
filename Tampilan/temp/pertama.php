@@ -18,6 +18,21 @@
     <title>LectureApps - First Login</title>
 	<!--datepicker-->
 	<link rel="stylesheet" type="text/css" media="all" href="../js/datepick/jsDatePick_ltr.min.css" />
+
+	<script type="text/javascript" src="../js/datepick/jsDatePick.min.1.3.js"></script>
+
+	<script type="text/javascript">
+		window.onload = function(){
+			new JsDatePick({
+				useMode:2,
+				target:"inputField",
+				dateFormat:"%Y-%m-%d",
+				limitToToday:true
+			});
+		};
+	</script>
+	<!--datepicker-->
+	<link rel="stylesheet" type="text/css" media="all" href="../js/datepick/jsDatePick_ltr.min.css" />
 	
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -33,7 +48,11 @@
 
 </head>
 <body>
-
+<?php
+	if($_SESSION['user'] == null){
+		header('Location: account.php?action=masuk');
+	}
+?>
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
@@ -45,12 +64,16 @@
                     </div>
                     <div class="panel-body">
 						<span id="pesan"></span> 			
-                        <form action="pertama_proses.php" method="post" role="form">
+                        <form id="pertamaform" action="pertama_proses.php" method="post" role="form">
                             <fieldset>							
 								<div class="form-group">
 									<label>Nama</label>
                                     <input class="form-control" type="text" name="namaUser" />									
                                 </div>
+								<div class="form-group">
+									<label>Tanggal Lahir</label></br>
+                                    <input class="form-control" placeholder="Tanggal" name="tanggallahir" type="text" id="inputField" value="" readonly>
+								</div> 
                                 <div class="form-group">
 									<label>Password</label></br>
                                     <input class="form-control" type="password" name="password1" />									
