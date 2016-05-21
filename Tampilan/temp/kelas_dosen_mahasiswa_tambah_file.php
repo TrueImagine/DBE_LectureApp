@@ -60,6 +60,12 @@ if(isset($_SESSION['login']) && $_SESSION['role'] == "Dosen" && isset($_POST['im
 								$sql3 = "INSERT INTO kelasdtl (idKelas, idMhs)
 											VALUES($idKelas, $idMhs)";
 								mysqli_query($k, $sql3);
+								
+								$sql ="SELECT namaUser FROM user WHERE idUser=$_SESSION[user]";
+								$hasil2 = mysqli_query($k, $sql);
+								$dos = mysqli_fetch_assoc($hasil2);
+								$sql = "INSERT INTO pesan (isiPesan, idJenispsn, idKelas, tglPesan) VALUES ('$dos[namaUser] telah menambah mahasiswa baru', 1, $idKelas, '".date("Y-m-d")."')";
+								mysqli_query($k, $sql);
 							}
 						}
 					}

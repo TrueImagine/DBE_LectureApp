@@ -13,7 +13,13 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 	$hasil=mysqli_query($k, $sql);
 	$tugas=mysqli_fetch_assoc($hasil);
 	
-	$sql2="SELECT 
+	$sql2 = "SELECT a.*, b.`namaUser` namaMahasiswa, b.`idUser` user, c.`idHasiltgs`,
+						c.`fileHasiltgs`, c.`tglUploadHasiltgs`, c.`nilai`
+			FROM `kelasdtl` a
+			LEFT JOIN user b ON b.idUser = a.idMhs
+			LEFT JOIN hasiltgs c ON c.idKelas = a.idKelas AND c.idTugas = $idKelastugas
+			WHERE a.idKelas = $idKelas";
+	/*$sql2="SELECT 
 				a.*,
 				c.`namaUser` namaMahasiswa,
 				c.`idUser` user,
@@ -26,7 +32,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 				LEFT JOIN hasiltgs b
 				ON a.`idKelas`=b.`idKelas` AND a.`idMhs`=b.`idUser` AND b.`idTugas`=$idKelastugas AND b.`idKelas`=$idKelas
 				LEFT JOIN USER c
-				ON a.`idMhs`=c.`idUser`";
+				ON a.`idMhs`=c.`idUser`";*/
 	//echo $sql2;
 	$hasil2=mysqli_query($k, $sql2);
 	

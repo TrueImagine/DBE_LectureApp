@@ -1,9 +1,10 @@
-notifikasi untuk mahasiswa : 
-- dosen tambah ubah hapus tugas
-- dosen tambah hapus materi
-- dosen tambah hapus mahasiswa di kelas 
-- dosen memberi nilai (tidak usah tampilkan nilainya)
+notifikasi untuk mahasiswa : jenis = 1
+- dosen tambahv ubahv hapusv tugas //DONEEEEEE
+- dosen tambahv hapusv materi //DONE
+- dosen tambahv hapusx mahasiswa di kelas 
+- dosen memberi nilaiv (tidak usah tampilkan nilainya)
 
-notifikasi untuk dosen :
+notifikasi untuk dosen : jenis = 0
 - mahasiswa upload tugas
 - mahasiswa ubah tugas
+- Tugas menunggu penilaian
