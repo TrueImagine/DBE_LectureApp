@@ -1,16 +1,16 @@
 <?php
 	session_start();
 	require_once("../includes/koneksi.php");
-if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] == "Dosen"){
-	include("../includes/head_dosen.php");
-	include("../includes/side_dosen.php");
+	if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] == "Mahasiswa"){
+	include("../includes/head_mahasiswa.php");
+	include("../includes/side_mahasiswa.php");
 ?>		
 		<!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Profil Dosen</h1>
+                        <h1 class="page-header">Profil Mahasiswa</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>

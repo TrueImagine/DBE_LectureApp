@@ -23,10 +23,13 @@
 							$sql2= "UPDATE user SET
 									passwordUser='$pass'
 									WHERE idUser=$_SESSION[user]";
-							echo $sql2;
 							mysqli_query($k, $sql2);
 							header('location: profil_mahasiswa.php');
+						}else{
+							echo "2";
 						}
+					}else{
+						echo "2";
 					}
 				}else if($_SESSION['role'] == 'Dosen'){
 					$sql="SELECT passwordUser FROM user WHERE idUser=$_SESSION[user]";
@@ -39,13 +42,22 @@
 							$sql2= "UPDATE user SET
 									passwordUser='$pass'
 									WHERE idUser=$_SESSION[user]";
-							echo $sql2;
 							mysqli_query($k, $sql2);
 							header('location: profil_dosen.php');
+						}else{
+							echo "2";
 						}
+					}else{
+						echo "2";
 					}
 				}
+			}else{
+				echo "1";
 			}
+		}else{
+			echo "1";
 		}
+	}else{
+		echo "1";
 	}
 ?>
