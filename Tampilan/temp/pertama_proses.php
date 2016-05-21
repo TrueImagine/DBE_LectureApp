@@ -21,6 +21,7 @@
 										WHERE idUser=$idMhs";
 								//echo $sql;
 								mysqli_query($k, $sql);
+								$_SESSION['first'] = null;
 								echo "99";
 						}else{
 							echo "99";

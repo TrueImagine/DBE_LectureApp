@@ -3,7 +3,7 @@
 	session_start();
 	//print_r($_SESSION);
 	require_once("../includes/koneksi.php");
-	$idMhs=$_SESSION['user'];
+	$idMhs=$_SESSION['first'];
 ?>
 <html lang="en">
 
@@ -49,7 +49,7 @@
 </head>
 <body>
 <?php
-	if($_SESSION['user'] == null){
+	if($_SESSION['first'] == null){
 		header('Location: account.php?action=masuk');
 	}
 ?>
@@ -83,7 +83,8 @@
                                     <input class="form-control" type="password" name="password2" />									
 								</div> 
 								<input type="hidden" name="idMhs" value="<?php echo $idMhs ?>">
-                                <input type="submit" class="btn btn-outline btn-primary" name="simpan" value="SIMPAN" />								
+                                <input type="submit" class="btn btn-outline btn-primary" name="simpan" value="SIMPAN" />	
+								<button type="button" class="btn btn-default" onclick="window.location.href='account.php'">Cancel</button>
 							</fieldset>
                         </form>
                     </div>

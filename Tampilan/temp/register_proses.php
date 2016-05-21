@@ -10,8 +10,7 @@
 			$hasil = mysqli_query($k, $sql);
 			
 			$data = mysqli_fetch_array($hasil);
-			$cek = mysqli_num_rows($hasil);
-			if($cek[3]>0){ //cek field kosong
+			if(isset($data['emailUser'])){ //cek field kosong
 				if($data['namaUser']!=NULL){
 					if(mysqli_num_rows($hasil)){	
 						if(password_verify($pass, $data['passwordUser'])){ //verifikasi
@@ -33,7 +32,7 @@
 						echo "6";						
 					}
 				}else if($data['namaUser']==NULL){
-					$_SESSION['user'] = $data['idUser'];
+					$_SESSION['first'] = $data['idUser'];
 					if($data['status'] == 1){
 						$_SESSION['role'] = "Mahasiswa";
 						echo "99";
@@ -75,6 +74,9 @@
 				if($email != "" && $tanggalL != ""){ //cek field yang kosong
 					if($_SESSION['captcha']==$_POST['captcha']){ //jika captcha sesuai
 						$captcha = $_POST['captcha'];
+						$ex = explode("-",$tanggalL);
+						$password = $ex[2].$ex[1].substr($ex[0],2,2); //password login ddmmyy
+						$encrypted_pass	= password_hash($password, PASSWORD_BCRYPT); //encrypt password
 						$sql = "SELECT emailUser, tglLahirUser FROM user WHERE emailUser='$email' and tglLahirUser='$tanggalL'";
 						$hasil = mysqli_query($k, $sql);
 						if(mysqli_num_rows($hasil)){ //sukses , password update
