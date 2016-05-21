@@ -1,0 +1,9 @@
+notifikasi untuk mahasiswa : 
+- dosen tambah ubah hapus tugas
+- dosen tambah hapus materi
+- dosen tambah hapus mahasiswa di kelas 
+- dosen memberi nilai (tidak usah tampilkan nilainya)
+
+notifikasi untuk dosen :
+- mahasiswa upload tugas
+- mahasiswa ubah tugas
