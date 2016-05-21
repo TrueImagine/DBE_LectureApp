@@ -92,6 +92,15 @@ $(document).ready(function() {
 		}
 	});
 	
+	$("#awal").change(function(e){
+		var a = $(this).val();
+		$("#akhir").prop("min",a);
+		var b = $("#akhir").val();
+		if(b<a){
+			$("#akhir").val(a);
+		}
+	});
+	
 	//set the progress bar to be hidden on loading
 	$("#uploadbar").hide();
 });

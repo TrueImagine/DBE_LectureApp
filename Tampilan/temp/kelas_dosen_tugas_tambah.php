@@ -32,10 +32,10 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 							<textarea class="form-control" name="deskripsiTugas" rows="3"></textarea>
 							<br/>
 							<label> Batas Waktu : </label>
-							<input class="form-control" type="date" name="tglMulaiTugas"  />
+							<input id="awal" class="form-control" type="date" name="tglMulaiTugas" min="<?php echo date('Y-m-d'); ?>" />
 							<br/>
 							<label> s/d </label>
-							<input class="form-control" type="date" name="tglSelesaiTugas"  />
+							<input id="akhir" class="form-control" type="date" name="tglSelesaiTugas" />
 							<br/>
 							<label> Pilih jenis file yang akan di-upload mahasiswa </label></br>
 							<input type="checkbox" name="file_ext1" value="doc"> doc<br>
