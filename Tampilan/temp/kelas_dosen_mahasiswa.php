@@ -42,6 +42,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 									<tr>
 										<th>Nama</th>
 										<th>Email</th>
+										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -52,6 +53,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 									<tr>
 										<td><?php echo $mhs['namaUser'] ?></td>
 										<td><?php echo $mhs['emailUser'] ?></td>
+										<td><a href="kelas_dosen_mahasiswa_hapus.php?idkelas=<?php echo $id ?>">Hapus</a></td>
 									</tr>
 <?php
 	}
@@ -60,6 +62,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 							</table>
 						</div>
 						<a href="kelas_dosen_mahasiswa_tambah.php?idkelas=<?php echo $id ?>">+ Tambah Mahasiswa</a>
+						
 					</div>
 				</div>
 				<!-- /.panel-default -->

@@ -37,6 +37,15 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 							<label> s/d </label>
 							<input class="form-control" type="date" name="tglSelesaiTugas"  />
 							<br/>
+							<label> Pilih jenis file yang akan di-upload mahasiswa </label></br>
+							<input type="checkbox" name="file_ext1" value="doc"> doc<br>
+							<input type="checkbox" name="file_ext2" value="docx" checked> docx<br>
+							<input type="checkbox" name="file_ext3" value="xls"> xls<br>
+							<input type="checkbox" name="file_ext4" value="xlsx" checked> xlsx<br>
+							<input type="checkbox" name="file_ext5" value="pdf"> pdf<br>
+							<input type="checkbox" name="file_ext6" value="ppt" checked> ppt<br>
+							<input type="checkbox" name="file_ext7" value="pptx" checked> pptx<br>
+							<br/>
 							<label>Attachment : </label>
 							<input type="file" name="tugas" />
 							<input type="hidden" name="idkelas" value="<?php echo $id; ?>"/>

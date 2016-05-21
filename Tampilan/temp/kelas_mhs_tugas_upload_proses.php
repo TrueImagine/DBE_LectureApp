@@ -1,34 +1,30 @@
 <?php
 session_start();
 require_once("../includes/koneksi.php");
+require_once("../includes/functions.php");
+include("../includes/head_mahasiswa.php");
+include("../includes/side_mahasiswa.php");
 	
 	//print_r($_POST);
 	$idtugas = $_POST['idtugas'];
 	$iduser = $_SESSION['user'];
 		
-	echo "test3";
-	if(isset($_POST['idkelas']) && $_POST['idkelas'] == true){
+	
+	if(isset($_POST['idkelas']) && $_POST['idkelas'] == true){	
 		$idkelas=$_POST['idkelas'];
 		//print_r($_FILES);
-		echo "test2";
+		
 		if(isset($_FILES['tugas']) && $_FILES['tugas'] == true){
 			$tugas=$_FILES['tugas'];
 			$nama=$tugas['name'];
-			$ext=array("pdf","docx","doc","ppt","pptx");
 			
-			/*$sql2="SELECT * FROM materi WHERE namaMateri='$nama'";
+			$sql2="SELECT extTugas FROM tugas WHERE idTugas='$idtugas'";
 			$hasil2=mysqli_query($k, $sql2);
-			$sama=mysqli_num_rows($hasil2);
-			
-			if($sama){
-				echo "sama";
-			}else{*/
-				$fileExt = strtolower(end(explode(".", $tugas['name'])));
-				echo "test";
-				if($ext[0] == $fileExt || $ext[1] == $fileExt || $ext[2] == $fileExt || $ext[3] == $fileExt || $ext[4] == $fileExt){
-					
+			$b=mysqli_fetch_assoc($hasil2);
+			$ext=$b['extTugas'];
 				
-					
+				$a = check_file_extension($tugas['name'],$ext);
+				if($a){					
 					$sumber=$tugas['tmp_name'];
 					//echo $materi['name'];
 					$tujuan="hasiltgs/".$tugas['name'];
@@ -63,13 +59,20 @@ require_once("../includes/koneksi.php");
 					header($redirect);
 				}
 				else{
-					echo "gagal";
+					?>
+					<div id="page-wrapper">
+					<label>"Gagal ! Jenis File yang Kamu Upload Tidak Sesuai Dengan Yang Diminta Dosen"</label>
+					
+					
+					<a href="kelas_mhs_tugas_detail.php?idKelas=<?php echo $idkelas?>&idtugas=<?php echo $idtugas?>">Kembali </a>
+					</div>
+					<?php
+					
 				}
-			//}	
 		}
-		else{
-			echo "kosong";
-		}
-	}
-	
+		
+	}else{
+		echo "kosong";
+}
+include("../includes/bottom.php");	
 ?>

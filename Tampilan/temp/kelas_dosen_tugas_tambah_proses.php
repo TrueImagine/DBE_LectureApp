@@ -17,13 +17,44 @@
 			$namaTugas=$tugas['name'];
 			$sumber=$tugas['tmp_name'];
 			$ext="doc, docx, ppt, pptx, pdf";
+			$ext1 = $_POST['file_ext1'];
+			$ext2 = $_POST['file_ext2'];
+			$ext3 = $_POST['file_ext3'];
+			$ext4 = $_POST['file_ext4'];
+			$ext5 = $_POST['file_ext5'];
+			$ext6 = $_POST['file_ext6'];
+			$ext7 = $_POST['file_ext7'];
+			$extfile = "";
 			$maxSize = 2*1024*1024;
+			
+			if($ext1){
+				$extfile = $extfile."doc,";	
+			}
+			if($ext2){
+				$extfile = $extfile."docx,";	
+			}
+			if($ext3){
+				$extfile = $extfile."xls,";	
+			}
+			if($ext4){
+				$extfile = $extfile."xlsx,";	
+			}
+			if($ext5){
+				$extfile = $extfile."pdf,";	
+			}
+			if($ext6){
+				$extfile = $extfile."ppt,";	
+			}
+			if($ext7){
+				$extfile = $extfile."pptx";	
+			}
 			
 			//query nama tugas yang sama
 			$sql2="SELECT * FROM tugas WHERE namaTugas='$namaTugas'";
 			$hasil2=mysqli_query($k, $sql2);
 			$sama=mysqli_num_rows($hasil2);
 			
+
 			if($sama){
 				
 			}else{
@@ -36,8 +67,8 @@
 					$tujuan2=$tugas['name'];
 					
 					move_uploaded_file($sumber, $tujuan);
-					$sql = "INSERT INTO tugas (namaTugas, deskripsiTugas, tglMulaiTugas, tglSelesaiTugas, fileTugas, tglUploadTugas, idKelas)
-							VALUES('$nama', '$deskripsitugas', '$tglMulaiTugas', '$tglSelesaiTugas', '$tujuan2', '".date("Y-m-d")."', $idkelas)"; 
+					$sql = "INSERT INTO tugas (namaTugas, deskripsiTugas, tglMulaiTugas, tglSelesaiTugas, fileTugas, extTugas, tglUploadTugas, idKelas)
+							VALUES('$nama', '$deskripsitugas', '$tglMulaiTugas', '$tglSelesaiTugas', '$tujuan2', '$extfile' , '".date("Y-m-d")."', $idkelas)"; 
 							
 					mysqli_query($k, $sql);
 					header('Location: kelas_dosen_tugas.php?idkelas='.$idkelas);
