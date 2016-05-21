@@ -13,7 +13,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 	$kelas=mysqli_fetch_assoc($hasil);
 	
 	$sql2="SELECT 
-				a.*,b.`namaUser`,b.`emailUser`
+				a.*,b.`idUser`,b.`namaUser`,b.`emailUser`
 			FROM 
 				kelasdtl a
 				LEFT JOIN USER b
@@ -55,7 +55,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 										<td><?php echo $mhs['namaUser'] ?></td>
 										<td><?php echo $mhs['emailUser'] ?></td>
 										
-										<td><a class="dellink" href="kelas_dosen_mahasiswa_hapus.php?idkelas=<?php echo $id; ?>">Hapus</a></td>
+										<td><a class="dellink" href="kelas_dosen_mahasiswa_hapus.php?idMhs=<?php echo $mhs['idUser'] ?>&idkelas=<?php echo $id; ?>">Hapus</a></td>
 										
 									</tr>
 <?php
