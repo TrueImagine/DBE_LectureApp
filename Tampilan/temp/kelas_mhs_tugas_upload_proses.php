@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <?php
 session_start();
 require_once("../includes/koneksi.php");
@@ -30,8 +31,16 @@ include("../includes/side_mahasiswa.php");
 					$tujuan="hasiltgs/".$tugas['name'];
 					$tujuan2=$tugas['name'];
 					move_uploaded_file($sumber, $tujuan);
-					$sql1 = "SELECT * FROM hasiltgs WHERE idTugas = $idtugas and idUser=$iduser";
 					
+					$sqlk = "SELECT namaTugas FROM tugas WHERE idTugas = $idtugas";
+					$hasilk = mysqli_query($k, $sqlk);
+					$nTugas = mysqli_fetch_assoc($hasilk);
+					
+					$sqll ="SELECT namaUser FROM user WHERE idUser=$iduser";
+					$hasill = mysqli_query($k, $sqll);
+					$dos = mysqli_fetch_assoc($hasill);
+					
+					$sql1 = "SELECT * FROM hasiltgs WHERE idTugas = $idtugas and idUser=$iduser";
 					$hasil1 = mysqli_query($k,$sql1);
 					$a = mysqli_fetch_assoc($hasil1);
 					
@@ -53,13 +62,7 @@ include("../includes/side_mahasiswa.php");
 					}
 					echo $sql;
 					mysqli_query($k, $sql);
-					
-					$sql = "SELECT namaTugas FROM tugas WHERE idTugas = $idtugas";
-					$hasil2 = mysqli_query($k, $sql);
-					$nTugas = mysqli_fetch_assoc($hasil2);
-					$sql ="SELECT namaUser FROM user WHERE idUser=$iduser";
-					$hasil2 = mysqli_query($k, $sql);
-					$dos = mysqli_fetch_assoc($hasil2);
+				
 					
 					mysqli_query($k, $sqld);
 					
@@ -86,3 +89,4 @@ include("../includes/side_mahasiswa.php");
 }
 include("../includes/bottom.php");	
 ?>
+<?php ob_flush(); ?>

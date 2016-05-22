@@ -3,6 +3,10 @@
 	$sql ="SELECT * FROM user WHERE idUser=$_SESSION[user]";
 	$hasil2 = mysqli_query($k, $sql);
 	$nama = mysqli_fetch_assoc($hasil2);
+	
+	
+	
+	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,71 +48,41 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-tasks">
-                        <li>
+                    
+					<ul class="dropdown-menu dropdown-tasks">
+                        <?php 
+						
+						$sql2 = "SELECT * FROM kelasdtl WHERE idMhs=$_SESSION[user]";
+						$hasil = mysqli_query($k,$sql2);
+						$b = mysqli_fetch_assoc($hasil);
+						while($b = mysqli_fetch_assoc($hasil)){
+		
+						$sql3 = "SELECT * FROM tugas WHERE idKelas=$b[idKelas]";
+						$hasil3 = mysqli_query($k,$sql3);
+						while($c = mysqli_fetch_assoc($hasil3)){ ?>
+						<li>
                             <a href="#">
                                 <div>
+									<?php
+										$time = strtotime($c['tglSelesaiTugas']);
+										$selesai = date("Y-m-d",$time);
+										$sisa = date("Y-m-d");
+									?>
                                     <p>
-                                        <strong>Task 1</strong>
-                                        <span class="pull-right text-muted">40% Complete</span>
+                                        <strong><?php echo $c['namaTugas'];?></strong>
+                                        <span class="pull-right text-muted"><?php echo $selesai.$sisa; ?></span>
                                     </p>
                                     <div class="progress progress-striped active">
                                         <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                            <span class="sr-only">40% Complete (success)</span>
+                                            <span class="sr-only"></span>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 2</strong>
-                                        <span class="pull-right text-muted">20% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                            <span class="sr-only">20% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 3</strong>
-                                        <span class="pull-right text-muted">60% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                            <span class="sr-only">60% Complete (warning)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 4</strong>
-                                        <span class="pull-right text-muted">80% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                            <span class="sr-only">80% Complete (danger)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
+						<?php }
+						} ?>
+                        
                         <li>
                             <a class="text-center" href="#">
                                 <strong>See All Tasks</strong>
@@ -116,10 +90,11 @@
                             </a>
                         </li>
                     </ul>
+					
                     <!-- /.dropdown-tasks -->
                 </li>
                 <!-- /.dropdown -->
-                
+              
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -136,4 +111,4 @@
                     <!-- /.dropdown-user -->
                 </li>
                 <!-- /.dropdown -->
-            </ul>
+        </ul>      
