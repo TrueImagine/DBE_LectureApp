@@ -49,7 +49,7 @@
 			if($ext7){
 				$extfile = $extfile."pptx";	
 			}
-			echo $extfile;
+			
 			
 			//query nama tugas yang sama
 			$sql2="SELECT * FROM tugas WHERE namaTugas='$namaTugas'";
@@ -78,7 +78,7 @@
 					$dos = mysqli_fetch_assoc($hasil2);
 					$sql = "INSERT INTO pesan (isiPesan, idJenispsn, idKelas, tglPesan) VALUES ('$dos[namaUser] telah menambahkan tugas baru dengan judul $nama!', 1, $idkelas, '".date("Y-m-d")."')";
 					mysqli_query($k, $sql);
-					//header('Location: kelas_dosen_tugas.php?idkelas='.$idkelas);
+					header('Location: kelas_dosen_tugas.php?idkelas='.$idkelas);
 				}else{
 					
 				}

@@ -1,6 +1,6 @@
 hapus mahasiswa di kelas
 ubah password dari profile dosen & mhs //FINISH//
-validasi register pertama mahasiswa kalau password gak match
+validasi register pertama mahasiswa kalau password gak match //FINISH//
 validasi upload materi
 validasi batas waktu tugas
 validasi tugas dosen mahasiswa muncul smua , padahal tidak ada di kelas itu (tergabugn)
@@ -11,3 +11,21 @@ pilihan ekstensi
 CSV/PHPExcel
 notifikasi
 hosting
+
+$(".dellink").click(function(e){
+		e.preventDefault();
+		var a = confirm("Yakin ingin menghapus mahasiswa dari kelas?");
+		if(a){
+			var l = $(this).attr("href");
+			location.href= l;
+		}
+	});
+
+
+
+
+
+Warning: unlink(hasiltgs/Banner.docx): No such file or directory in C:\xampp\htdocs\DBE_LectureApp\Tampilan\temp\kelas_mhs_tugas_upload_proses.php on line 55
+
+UPDATE hasiltgs SET idTugas = 10, idUser = 8, idKelas = 9,fileHasiltgs = 'tugas2 (1).docx', tglUploadHasiltgs = '2016-05-22' WHERE idHasiltgs = 45
+Warning: Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\DBE_LectureApp\Tampilan\includes\head_mahasiswa.php:108) in C:\xampp\htdocs\DBE_LectureApp\Tampilan\temp\kelas_mhs_tugas_upload_proses.php on line 71
