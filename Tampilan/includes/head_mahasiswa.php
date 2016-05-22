@@ -1,11 +1,9 @@
 <?php
+	date_default_timezone_set('Asia/Jakarta');
 	require_once("../includes/koneksi.php");
 	$sql ="SELECT * FROM user WHERE idUser=$_SESSION[user]";
 	$hasil2 = mysqli_query($k, $sql);
 	$nama = mysqli_fetch_assoc($hasil2);
-	
-	
-	
 	
 ?>
 <!DOCTYPE html>
@@ -59,36 +57,63 @@
 		
 						$sql3 = "SELECT * FROM tugas WHERE idKelas=$b[idKelas]";
 						$hasil3 = mysqli_query($k,$sql3);
-						while($c = mysqli_fetch_assoc($hasil3)){ ?>
+						
+						
+						
+						while($c = mysqli_fetch_assoc($hasil3)){ 
+						$sql4 ="SELECT * FROM hasiltgs WHERE idTugas=$c[idTugas]";
+						$hasil4 = mysqli_query($k,$sql4);
+						$d= mysqli_fetch_assoc($hasil4);?>
 						<li>
                             <a href="#">
                                 <div>
 									<?php
 										$time = strtotime($c['tglSelesaiTugas']);
-										$selesai = date("Y-m-d",$time);
-										$sisa = date("Y-m-d");
+										$sisa = ($time - time()) / 3600;
+										$sisa = $sisa/24;
+										$sisa1 = floor($sisa);
+										
+										$sisa2 = $sisa-$sisa1;
+										$sisa2 = floor($sisa2*24);
 									?>
                                     <p>
                                         <strong><?php echo $c['namaTugas'];?></strong>
-                                        <span class="pull-right text-muted"><?php echo $selesai.$sisa; ?></span>
+                                        <span class="pull-right text-muted">Sisa waktu :<?php echo $sisa1.'hari '.$sisa2.'jam'; ?></span>
+										<?php echo $d['fileHasiltgs']; ?>
                                     </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                            <span class="sr-only"></span>
-                                        </div>
-                                    </div>
+								<?php 	
+									if($d['fileHasiltgs'] != NULL)
+									{?>
+										<div class="progress progress-striped active">
+											<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+												<span class="sr-only"></span>
+											</div>
+										</div>
+								<?php } 
+									else if($d['fileHasiltgs'] === NULL) 
+									{ 
+										if($sisa1 < 3){ ?>
+										<div class="progress progress-striped active">
+											<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+												<span class="sr-only"></span>
+											</div>
+										</div>
+										<?php }
+										else if($sisa1 >= 3){ ?>
+										<div class="progress progress-striped active">
+											<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+												<span class="sr-only"></span>
+											</div>
+										</div>
+										
+										<?php }
+									} ?>
                                 </div>
                             </a>
                         </li>
 						<?php }
 						} ?>
                         
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Tasks</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
                     </ul>
 					
                     <!-- /.dropdown-tasks -->

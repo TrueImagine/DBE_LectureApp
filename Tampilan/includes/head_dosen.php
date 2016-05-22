@@ -1,4 +1,5 @@
 <?php
+	date_default_timezone_set('Asia/Jakarta');
 	require_once("../includes/koneksi.php");
 	$sql ="SELECT * FROM user WHERE idUser=$_SESSION[user]";
 	$hasil2 = mysqli_query($k, $sql);
