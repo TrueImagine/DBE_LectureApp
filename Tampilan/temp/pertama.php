@@ -3,7 +3,11 @@
 	session_start();
 	//print_r($_SESSION);
 	require_once("../includes/koneksi.php");
-	$idMhs=$_SESSION['first'];
+	if($_SESSION['first']==null){
+		header("location: ../index.php");
+	}else{
+		$idMhs=$_SESSION['first'];
+	}
 ?>
 <html lang="en">
 

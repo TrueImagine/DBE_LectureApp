@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <?php
+	session_start();
+	$_SESSION['first'] = null;
+	$_SESSION['role'] = null;
+	$_SESSION['user'] = null;
+	$_SESSION['login'] = false;
+	
 	require_once("../includes/koneksi.php");
 	if(isset($_GET['action'])){
 		$action = $_GET['action'];

@@ -166,8 +166,9 @@ $(document).ready(function() {
 				$("#pesan").append("<div class=\"alert alert-danger alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>Password tidak sesuai</p></div>");
 				setTimeout(function(){ $("#msgClose").click(); }, 2000);
 			}			
-			else if(response.responseText == 99)//password tidak match
+			else if(response.responseText == 99)//sukses
 			{
+				alert('Account Telah Sukses Dibuat!'); 
 				window.location='../index.php';
 			}
 		}

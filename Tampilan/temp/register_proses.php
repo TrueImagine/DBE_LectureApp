@@ -11,7 +11,7 @@
 			
 			$data = mysqli_fetch_array($hasil);
 			if(isset($data['emailUser'])){ //cek field kosong
-				if($data['namaUser']!=NULL){
+				if($data['namaUser'] != NULL){
 					if(mysqli_num_rows($hasil)){	
 						if(password_verify($pass, $data['passwordUser'])){ //verifikasi
 							$_SESSION['login'] = true;
@@ -84,13 +84,13 @@
 							mysqli_query($k, $sql);
 							echo "3";
 						}else{
-							echo "1";			
+							echo "4";			
 						}
 					}else{		//ajax captcha salah		
 						echo "2";			
 					}
 				}else{
-					echo "4";
+					echo "1";
 				}
 			}
 		}

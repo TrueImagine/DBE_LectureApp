@@ -24,7 +24,7 @@
 									passwordUser='$pass'
 									WHERE idUser=$_SESSION[user]";
 							mysqli_query($k, $sql2);
-							header('location: profil_mahasiswa.php');
+							echo "3";
 						}else{
 							echo "2";
 						}
@@ -43,7 +43,7 @@
 									passwordUser='$pass'
 									WHERE idUser=$_SESSION[user]";
 							mysqli_query($k, $sql2);
-							header('location: profil_dosen.php');
+							echo "3";
 						}else{
 							echo "2";
 						}

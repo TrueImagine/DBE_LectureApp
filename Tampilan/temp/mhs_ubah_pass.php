@@ -32,6 +32,7 @@
 									<label>Re-Type Password Baru</label>
 									<input class="form-control" type="password" name="password2" value="" />
 								</div>
+								<input type="hidden" id="ubahp" value="umhs">
 								<input class="btn btn-default" type="submit" name="ubahPassword" value="SIMPAN" />
 							</form>
 						</div>

@@ -32,6 +32,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 									<label>Re-Type Password Baru</label>
 									<input class="form-control" type="password" name="password2" value="" />
 								</div>
+								<input type="hidden" id="ubahp" value="udosen">
 								<input class="btn btn-default" type="submit" name="ubahPassword" value="SIMPAN" />
 							</form>
 						</div>

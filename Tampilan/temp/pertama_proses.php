@@ -13,7 +13,7 @@
 							$tanggallahir = $_POST['tanggallahir'];
 							$password1 = $_POST['password1'];
 							$password2 = $_POST['password2'];
-														
+							$_POST['idMhs'] = null;							
 							$password1 = password_hash($password1, PASSWORD_BCRYPT);
 							$password2 = password_hash($password2, PASSWORD_BCRYPT);
 								$sql = "UPDATE user

@@ -78,7 +78,8 @@ $(document).ready(function() {
 				setTimeout(function(){ $("#msgClose").click(); }, 2000);
 			}
 			else{
-				location.href = "kelas_dosen_materi.php?idkelas="+response.responseText;	
+				alert('Password Berhasil Direset!'); 
+				window.location='../index.php';
 			}
 		}
 	});
@@ -107,7 +108,16 @@ $(document).ready(function() {
 				$("#pesan").append("<div class=\"alert alert-danger alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>Password Tidak Sesuai !</p></div>");
 				setTimeout(function(){ $("#msgClose").click(); }, 2000);
 			}
-			
+			else if(response.responseText == 3)//reset sukses
+			{
+				alert('Password Berhasil Diubah!');
+				var back = $("#ubahp").val();
+				if(back == "udosen"){
+					window.location='profil_dosen.php';
+				}else{
+					window.location='profil_mahasiswa.php';
+				}
+			}
 		}
 	});
 	
