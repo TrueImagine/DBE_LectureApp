@@ -78,8 +78,8 @@ $(document).ready(function() {
 				setTimeout(function(){ $("#msgClose").click(); }, 2000);
 			}
 			else{
-				alert('Password Berhasil Direset!'); 
-				window.location='../index.php';
+				alert('Berhasil tambah materi!'); 
+				location.href='kelas_dosen_materi.php?idkelas='+response.responseText;
 			}
 		}
 	});
