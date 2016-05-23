@@ -45,7 +45,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 				Deskripsi :
 				<?php echo $tugas['deskripsiTugas']?>
 				<br/><br/>
-				Jenis File :
+				Jenis File : <!--! jenis ext -->
 				<?php echo $tugas['extTugas']; ?>
 				<br/><br/>
 				Batas Waktu :
