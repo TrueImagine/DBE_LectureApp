@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2016 at 06:45 PM
+-- Generation Time: May 23, 2016 at 04:30 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `hasiltgs` (
   `fileHasiltgs` varchar(255) NOT NULL,
   `tglUploadHasiltgs` date NOT NULL,
   `nilai` float NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
 
 --
 -- RELATIONS FOR TABLE `hasiltgs`:
@@ -54,7 +54,8 @@ INSERT INTO `hasiltgs` (`idHasiltgs`, `idTugas`, `idUser`, `idKelas`, `fileHasil
 (41, 2, 5, 2, 'tugas/blueprint_UTS.docx', '2016-05-02', 0),
 (42, 2, 6, 2, 'hasiltgs/jurnal_itprof.docx', '2016-05-04', 0),
 (43, 3, 8, 8, 'blueprint_UTS.docx', '2016-05-11', 0),
-(44, 6, 8, 9, '', '2016-05-21', 0);
+(44, 6, 8, 9, '', '2016-05-21', 0),
+(45, 10, 16, 10, 'Pert 15.ppt', '2016-05-23', 0);
 
 -- --------------------------------------------------------
 
@@ -121,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `kelasdtl` (
 `idKelasdtl` int(11) NOT NULL,
   `idKelas` int(11) NOT NULL,
   `idMhs` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- RELATIONS FOR TABLE `kelasdtl`:
@@ -146,7 +147,8 @@ INSERT INTO `kelasdtl` (`idKelasdtl`, `idKelas`, `idMhs`) VALUES
 (11, 10, 12),
 (12, 10, 13),
 (13, 10, 14),
-(15, 10, 16);
+(15, 10, 16),
+(16, 10, 17);
 
 -- --------------------------------------------------------
 
@@ -160,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `materi` (
   `fileMateri` varchar(255) NOT NULL,
   `idKelas` int(11) NOT NULL,
   `tglUploadMateri` date NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- RELATIONS FOR TABLE `materi`:
@@ -178,7 +180,8 @@ INSERT INTO `materi` (`idMateri`, `namaMateri`, `fileMateri`, `idKelas`, `tglUpl
 (3, 'DBE_PERT3', 'DBE_PERT3.pdf', 1, '2016-04-05'),
 (18, 'DBE_PERT1.pdf', 'materi/DBE_PERT1.pdf', 2, '2016-04-26'),
 (19, 'Tugas Baru.pdf', 'Tugas Baru.pdf', 8, '2016-05-11'),
-(20, 'SIB07-Cyberlaw.pdf', 'SIB07-Cyberlaw.pdf', 10, '2016-05-21');
+(20, 'SIB07-Cyberlaw.pdf', 'SIB07-Cyberlaw.pdf', 10, '2016-05-21'),
+(21, 'PB15MAT_session 15.pdf', 'PB15MAT_session 15.pdf', 10, '2016-05-22');
 
 -- --------------------------------------------------------
 
@@ -191,8 +194,8 @@ CREATE TABLE IF NOT EXISTS `pesan` (
   `isiPesan` text NOT NULL,
   `idJenispsn` int(11) NOT NULL,
   `idKelas` int(11) NOT NULL,
-  `tglPesan` date NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+  `tglPesan` datetime NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
 
 --
 -- RELATIONS FOR TABLE `pesan`:
@@ -207,20 +210,15 @@ CREATE TABLE IF NOT EXISTS `pesan` (
 --
 
 INSERT INTO `pesan` (`idPesan`, `isiPesan`, `idJenispsn`, `idKelas`, `tglPesan`) VALUES
-(3, 'ocol telah menambahkan tugas baru dengan judul Tugas Kedua!', 1, 8, '2016-05-21'),
-(5, 'ocol telah mengubah tugas Tugas Kedua!', 1, 8, '2016-05-21'),
-(7, 'ocol telah menambahkan tugas baru dengan judul Tugas Kedua!', 1, 8, '2016-05-21'),
-(8, 'ocol telah menghapus tugas Tugas Kedua!', 1, 8, '2016-05-21'),
-(9, 'Antoni telah menambahkan tugas baru dengan judul Tugas 1!', 1, 10, '2016-05-21'),
-(10, 'Antoni telah menambahkan materi baru', 1, 10, '2016-05-21'),
-(11, 'Antoni telah menambahkan materi baru', 1, 10, '2016-05-21'),
-(12, 'Antoni telah menghapus materi SIB07-Pemanfaat_IT.pdf', 1, 10, '2016-05-21'),
-(14, 'Antoni telah menambah mahasiswa baru', 1, 10, '2016-05-21'),
-(15, 'Antoni telah menambah mahasiswa baru', 1, 10, '2016-05-21'),
-(16, 'Antoni telah menambah mahasiswa baru', 1, 10, '2016-05-21'),
-(17, 'Antoni telah memberi penilaian pada tugas Tugas 1', 1, 10, '2016-05-21'),
-(18, 'Antoni telah menghapus tugas Tugas 1!', 1, 10, '2016-05-21'),
-(19, 'Antoni telah menambahkan tugas baru dengan judul Tugas 1!', 1, 10, '2016-05-21');
+(22, 'Antoni telah mengubah tugas Apel Merah!', 1, 10, '2016-05-23 15:25:55'),
+(23, 'Antoni telah mengubah tugas Apel!', 1, 10, '2016-05-23 20:29:58'),
+(24, 'Antoni telah menambahkan tugas baru dengan judul Keju!', 1, 10, '2016-05-23 20:34:39'),
+(25, 'Antoni telah menghapus tugas Keju!', 1, 10, '2016-05-23 20:34:43'),
+(26, 'Antoni telah menambahkan materi baru', 1, 10, '2016-05-23 20:37:46'),
+(27, 'Antoni telah menghapus materi PB8MAT_session 8.pdf', 1, 10, '2016-05-23 20:37:53'),
+(28, 'Antoni telah menambah mahasiswa baru', 1, 10, '2016-05-23 20:40:54'),
+(29, 'Antoni telah memberi penilaian pada tugas Apel', 1, 10, '2016-05-23 20:43:10'),
+(30, 'Kazuraba Kouta telah melakukan upload tugas Apel', 0, 10, '2016-05-23 20:46:35');
 
 -- --------------------------------------------------------
 
@@ -238,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `tugas` (
   `extTugas` varchar(255) NOT NULL,
   `tglUploadTugas` date NOT NULL,
   `idKelas` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- RELATIONS FOR TABLE `tugas`:
@@ -257,7 +255,8 @@ INSERT INTO `tugas` (`idTugas`, `namaTugas`, `deskripsiTugas`, `tglMulaiTugas`, 
 (4, 'Tugas Proposal', 'proposal baru', '2016-05-21', '2016-05-24', 'Proposal aplikasi V.2.1.pdf', '', '2016-05-21', 9),
 (6, 'Tugas 2', 'matematika', '2016-05-21', '2016-05-28', 'when_zachman.docx', 'doc,docx,xls,xlsx,', '2016-05-21', 9),
 (7, 'Tugas doc', '', '2016-05-11', '2016-05-31', '', '', '2016-05-21', 9),
-(9, 'Tugas 1', 'Bla', '2016-05-21', '2016-05-29', '', '', '2016-05-21', 10);
+(9, 'Tugas 1', 'Bla', '2016-05-21', '2016-05-29', '', '', '2016-05-21', 10),
+(10, 'Apel', '', '2016-05-22', '2016-05-25', '32130012-Tugas OLC Pertemuan 9.doc', 'doc,docx,xlsx,ppt,pptx', '2016-05-23', 10);
 
 -- --------------------------------------------------------
 
@@ -273,7 +272,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `tglLahirUser` date NOT NULL,
   `fotoUser` varchar(255) NOT NULL,
   `status` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `user`
@@ -289,12 +288,13 @@ INSERT INTO `user` (`idUser`, `namaUser`, `passwordUser`, `emailUser`, `tglLahir
 (7, 'Richie Budiman', '$2y$10$8dG9ZIfJNxVfCgy5mEpqOe/WbwnFW/wbh0doXFNbZJsNFJMtXAFPK', 'Richie_peace@rocketmail.com', '1995-07-05', '../images/fulls/nopic', 0),
 (8, 'ocol', '$2y$10$btgMnAzQxJvHLnyLkgefF.N7gklj1lJfWPsukesjfTK1655uEPosa', 'richie.peace1995@gmail.com', '0000-00-00', '', 1),
 (9, 'RichieDosen', '$2y$10$37Me.AZtlQx9hSxnG/70VuBCkcCP9YGsA48ByR/P.uPIelTSzVmIW', 'Richie_dosen@gmail.com', '1995-07-05', '', 0),
-(10, 'Antoni', '$2y$10$XGNj1/W/4yWBDnhHzKjBDe0hCs5uwrzzbU05nRIKcywdarskDcace', 'antoni@gmail.com', '1993-12-05', '../images/fulls/foto/nopic.jpg', 0),
+(10, 'Antoni', '$2y$10$LxCRypy1yBj.QUP43NGa5.Et9aAG4B9oTJrfsxQlzTn9NGvrRMN2W', 'antoni@gmail.com', '1993-12-05', '../images/fulls/foto/nopic.jpg', 0),
 (11, '', '$2y$10$.S.0qlmrXfPKq12EDiC4Qu5377qeGVFdXrmUInOouD.sDqCEx0HlS', 'apel@email.com', '0000-00-00', '', 1),
 (12, '', '$2y$10$cTzyKycAvw34zwVbXJOYeeF9YLhYuAI7aW71ZILFRfQ/p.8TrXIy2', 'jeruk@email.com', '0000-00-00', '', 1),
 (13, '', '$2y$10$3bUkhZw/oZ6dCpKHUi/Z8.l6UxAZ.it1Taj4d6Vmoh2tr6.trCaUS', 'banana@email.com', '0000-00-00', '', 1),
 (14, '', '$2y$10$4Ci4.rYwZxNlp73l7qbzV.Fn9NlJU.1EJRfI4ArACJ9VVJumD2wj2', 'kachidoki@gmail.com', '0000-00-00', '', 1),
-(16, 'Kazuraba Kouta', '$2y$10$Q8jdj3FkuG0SbbesCwS0augKsg5fG1A0SOkzMr7QpRSLdoTJEwvBS', 'kiwami@gmail.com', '1993-12-05', '../images/fulls/foto/nopic.jpg', 1);
+(16, 'Kazuraba Kouta', '$2y$10$Q8jdj3FkuG0SbbesCwS0augKsg5fG1A0SOkzMr7QpRSLdoTJEwvBS', 'kiwami@gmail.com', '1993-12-05', '../images/fulls/foto/nopic.jpg', 1),
+(17, '', '$2y$10$2AodGkb4jUjlj4g042HlHe1/Zf1dnTrY60J7BUOd4b/6KHLF.PP9i', 'drive@gmail.com', '0000-00-00', '', 1);
 
 --
 -- Indexes for dumped tables
@@ -356,7 +356,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `hasiltgs`
 --
 ALTER TABLE `hasiltgs`
-MODIFY `idHasiltgs` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=45;
+MODIFY `idHasiltgs` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=46;
 --
 -- AUTO_INCREMENT for table `jenispsn`
 --
@@ -371,27 +371,27 @@ MODIFY `idKelas` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 -- AUTO_INCREMENT for table `kelasdtl`
 --
 ALTER TABLE `kelasdtl`
-MODIFY `idKelasdtl` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+MODIFY `idKelasdtl` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `materi`
 --
 ALTER TABLE `materi`
-MODIFY `idMateri` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+MODIFY `idMateri` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `pesan`
 --
 ALTER TABLE `pesan`
-MODIFY `idPesan` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+MODIFY `idPesan` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `tugas`
 --
 ALTER TABLE `tugas`
-MODIFY `idTugas` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+MODIFY `idTugas` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- Constraints for dumped tables
 --
