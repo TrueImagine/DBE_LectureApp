@@ -52,18 +52,18 @@
 						
 						$sql2 = "SELECT * FROM kelasdtl WHERE idMhs=$_SESSION[user]";
 						$hasil = mysqli_query($k,$sql2);
-						$b = mysqli_fetch_assoc($hasil);
 						while($b = mysqli_fetch_assoc($hasil)){
 		
 						$sql3 = "SELECT * FROM tugas WHERE idKelas=$b[idKelas]";
 						$hasil3 = mysqli_query($k,$sql3);
 						
 						
-						
 						while($c = mysqli_fetch_assoc($hasil3)){ 
 						$sql4 ="SELECT * FROM hasiltgs WHERE idTugas=$c[idTugas]";
 						$hasil4 = mysqli_query($k,$sql4);
-						$d= mysqli_fetch_assoc($hasil4);?>
+						$d= mysqli_fetch_assoc($hasil4);
+						
+						?>
 						<li>
                             <a href="#">
                                 <div>
