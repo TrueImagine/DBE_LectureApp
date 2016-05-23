@@ -1,6 +1,7 @@
 <!-- kelas_dosen_tugas_tambah_proses.php -->
 <?php
 	session_start();
+	date_default_timezone_set("Asia/Jakarta");
 	require_once("../includes/koneksi.php");
 	if(isset($_POST['idkelas']) && $_POST['idkelas'] == true){
 		$idkelas=$_POST['idkelas'];
@@ -50,7 +51,6 @@
 				$extfile = $extfile."pptx";	
 			}
 			
-			
 			//query nama tugas yang sama
 			$sql2="SELECT * FROM tugas WHERE namaTugas='$namaTugas'";
 			$hasil2=mysqli_query($k, $sql2);
@@ -76,7 +76,7 @@
 					$sql ="SELECT namaUser FROM user WHERE idUser=$_SESSION[user]";
 					$hasil2 = mysqli_query($k, $sql);
 					$dos = mysqli_fetch_assoc($hasil2);
-					$sql = "INSERT INTO pesan (isiPesan, idJenispsn, idKelas, tglPesan) VALUES ('$dos[namaUser] telah menambahkan tugas baru dengan judul $nama!', 1, $idkelas, '".date("Y-m-d")."')";
+					$sql = "INSERT INTO pesan (isiPesan, idJenispsn, idKelas, tglPesan) VALUES ('$dos[namaUser] telah menambahkan tugas baru dengan judul $nama!', 1, $idkelas, '".date("Y-m-d H:i:s")."')";
 					mysqli_query($k, $sql);
 					header('Location: kelas_dosen_tugas.php?idkelas='.$idkelas);
 				}else{
@@ -99,7 +99,7 @@
 			$hasil2 = mysqli_query($k, $sql);
 			$dos = mysqli_fetch_assoc($hasil2);
 			
-			$sql = "INSERT INTO pesan (isiPesan, idJenispsn, idKelas, tglPesan) VALUES ('$dos[namaUser] telah menambahkan tugas baru dengan judul $nama!', 1, $idkelas, '".date("Y-m-d")."')";
+			$sql = "INSERT INTO pesan (isiPesan, idJenispsn, idKelas, tglPesan) VALUES ('$dos[namaUser] telah menambahkan tugas baru dengan judul $nama!', 1, $idkelas, '".date("Y-m-d H:i:s")."')";
 			mysqli_query($k, $sql);
 			header('Location: kelas_dosen_tugas.php?idkelas='.$idkelas);
 		}

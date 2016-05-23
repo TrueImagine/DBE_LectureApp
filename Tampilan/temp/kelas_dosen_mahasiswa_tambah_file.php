@@ -1,6 +1,7 @@
 <?php
 //kelas_dosen_mahasiswa_tambah_file.php
 	session_start();
+	date_default_timezone_set("Asia/Jakarta");
 	require_once("../includes/koneksi.php");
 	require_once("../includes/functions.php");
 	require_once("../Classes/PHPExcel.php");
@@ -64,7 +65,7 @@ if(isset($_SESSION['login']) && $_SESSION['role'] == "Dosen" && isset($_POST['im
 								$sql ="SELECT namaUser FROM user WHERE idUser=$_SESSION[user]";
 								$hasil2 = mysqli_query($k, $sql);
 								$dos = mysqli_fetch_assoc($hasil2);
-								$sql = "INSERT INTO pesan (isiPesan, idJenispsn, idKelas, tglPesan) VALUES ('$dos[namaUser] telah menambah mahasiswa baru', 1, $idKelas, '".date("Y-m-d")."')";
+								$sql = "INSERT INTO pesan (isiPesan, idJenispsn, idKelas, tglPesan) VALUES ('$dos[namaUser] telah menambah mahasiswa baru', 1, $idKelas, '".date("Y-m-d H:i:s")."')";
 								mysqli_query($k, $sql);
 							}
 						}

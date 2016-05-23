@@ -1,6 +1,7 @@
 <?php ob_start(); ?>
 <?php
 session_start();
+date_default_timezone_set("Asia/Jakarta");
 require_once("../includes/koneksi.php");
 require_once("../includes/functions.php");
 include("../includes/head_mahasiswa.php");
@@ -49,7 +50,7 @@ include("../includes/side_mahasiswa.php");
 					{
 					$sql = "INSERT INTO hasiltgs (idTugas, idUser, idKelas,fileHasiltgs, tglUploadHasiltgs)
 							VALUES ($idtugas,$iduser,$idkelas,'$tujuan2','".date("Y-m-d")."')";
-					$sqld = "INSERT INTO pesan (isiPesan, idJenispsn, idKelas, tglPesan) VALUES ('$dos[namaUser] telah melakukan upload tugas $nTugas[namaTugas]', 0, $idkelas, '".date("Y-m-d")."')";
+					$sqld = "INSERT INTO pesan (isiPesan, idJenispsn, idKelas, tglPesan) VALUES ('$dos[namaUser] telah melakukan upload tugas $nTugas[namaTugas]', 0, $idkelas, '".date("Y-m-d H:i:s")."')";
 					$asd = 2;
 					}
 					else{
@@ -57,7 +58,7 @@ include("../includes/side_mahasiswa.php");
 					$sql = "UPDATE hasiltgs SET idTugas = $idtugas, idUser = $iduser, 
 							idKelas = $idkelas,fileHasiltgs = '$tujuan2', tglUploadHasiltgs = '".date("Y-m-d")."'
 							WHERE idHasiltgs = $a[idHasiltgs]";
-					$sqld = "INSERT INTO pesan (isiPesan, idJenispsn, idKelas, tglPesan) VALUES ('$dos[namaUser] telah melakukan update upload tugas $nTugas[namaTugas]', 0, $idkelas, '".date("Y-m-d")."')";
+					$sqld = "INSERT INTO pesan (isiPesan, idJenispsn, idKelas, tglPesan) VALUES ('$dos[namaUser] telah melakukan update upload tugas $nTugas[namaTugas]', 0, $idkelas, '".date("Y-m-d H:i:s")."')";
 					$asd = 1;
 					}
 					echo $sql;

@@ -1,5 +1,6 @@
 <?php
 	require_once("../includes/koneksi.php");
+	date_default_timezone_set("Asia/Jakarta");
 	session_start();
 	if(isset($_POST['idkelas']) && $_POST['idkelas'] == true){
 		if(isset($_POST['idmateri']) && $_POST['idmateri'] == true){
@@ -16,7 +17,7 @@
 			$sql ="SELECT namaUser FROM user WHERE idUser=$_SESSION[user]";
 			$hasil2 = mysqli_query($k, $sql);
 			$dos = mysqli_fetch_assoc($hasil2);
-			$sql = "INSERT INTO pesan (isiPesan, idJenispsn, idKelas, tglPesan) VALUES ('$dos[namaUser] telah menghapus materi $materi[namaMateri]', 1, $idkelas, '".date("Y-m-d")."')";
+			$sql = "INSERT INTO pesan (isiPesan, idJenispsn, idKelas, tglPesan) VALUES ('$dos[namaUser] telah menghapus materi $materi[namaMateri]', 1, $idkelas, '".date("Y-m-d H:i:s")."')";
 			mysqli_query($k, $sql);
 			
 			header('Location:kelas_dosen_materi.php?idkelas='.$idkelas);

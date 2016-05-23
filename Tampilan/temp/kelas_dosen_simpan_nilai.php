@@ -1,5 +1,6 @@
 <?php
 	require_once("../includes/koneksi.php");
+	date_default_timezone_set("Asia/Jakarta");
 	session_start();
 	if(isset($_POST['id']) && $_POST['id'] == true){
 		if(isset($_POST['idtugas']) && $_POST['idtugas'] == true){
@@ -35,7 +36,7 @@
 			$sql ="SELECT namaUser FROM user WHERE idUser=$_SESSION[user]";
 			$hasil2 = mysqli_query($k, $sql);
 			$dos = mysqli_fetch_assoc($hasil2);
-			$sql = "INSERT INTO pesan (isiPesan, idJenispsn, idKelas, tglPesan) VALUES ('$dos[namaUser] telah memberi penilaian pada tugas $nTugas[namaTugas]', 1, $id, '".date("Y-m-d")."')";
+			$sql = "INSERT INTO pesan (isiPesan, idJenispsn, idKelas, tglPesan) VALUES ('$dos[namaUser] telah memberi penilaian pada tugas $nTugas[namaTugas]', 1, $id, '".date("Y-m-d H:i:s")."')";
 			mysqli_query($k, $sql);
 			header('Location: kelas_dosen_tugas_detail.php?idkelas='.$id.'&idtugas='.$idtugas);		
 		}
