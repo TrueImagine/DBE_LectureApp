@@ -15,9 +15,8 @@
 		$deskripsitugas	= $_POST['deskripsiTugas'];
 		$tglMulaiTugas = $_POST['tglMulaiTugas'];
 		$tglSelesaiTugas = $_POST['tglSelesaiTugas'];
-		//echo $_FILES['tugas']['size'];
-		if($_FILES['tugas']['size']>0){
-			echo "test1";
+		$size = $_FILES['tugas']['size'];
+		if($size > 0){
 			//print_r($_POST);
 			//print_r($_FILES['tugas']);
 			
@@ -37,7 +36,8 @@
 			
 			
 			}else{
-				$fileExt = strtolower(end(explode(".", $tugas['name'])));
+				$ext2 = explode(".", $tugas['name']);
+				$fileExt = strtolower(end($ext2));
 				$ext = (explode(",", str_replace(" ", "", $ext)));
 				//print_r($ext);
 				//echo $fileExt;

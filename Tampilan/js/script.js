@@ -121,6 +121,52 @@ $(document).ready(function() {
 		}
 	});
 	
+	$('#formimport').ajaxForm({
+		beforeSend:function(){
+			$("#uploadbar").show();
+		},
+		uploadProgress:function(event,position,total,percentComplete){
+			$(".progress-bar").width(percentComplete+'%'); //dynamically change the progress bar width
+			$(".sr-only").html(percentComplete+'%');//show the percentage number
+		},
+		success:function(){
+			$("#uploadbar").hide(); //hide progress bar on success of upload
+		},
+		complete:function(response){
+			if(response.responseText == 1){//Upload Gagal
+				$("#pesan").hide();
+				$("#pesan div").remove();
+				$("#pesan").show();
+				$("#pesan").append("<div class=\"alert alert-danger alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>Upload gagal. Pastikan file yang diupload merupakan file dengan format .xls/.xlsx dan dengan ukuran tidak lebih dari 3 MB</p></div>");
+				setTimeout(function(){ $("#msgClose").click(); }, 2000);
+				//display error if response is 0
+			}
+			else if(response.responseText == 2)//Simpan sukses
+			{
+				$("#pesan").hide();
+				$("#pesan div").remove();
+				$("#pesan").show();
+				$("#pesan").append("<div class=\"alert alert-success alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>Penambahan mahasiswa berhasil!</p></div>");
+				setTimeout(function(){ $("#msgClose").click(); }, 2000);
+			}
+			else if(response.responseText == 3)//Simpan sukses
+			{
+				$("#pesan").hide();
+				$("#pesan div").remove();
+				$("#pesan").show();
+				$("#pesan").append("<div class=\"alert alert-success alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>File belum di upload. Lakukan upload file terlebih dahulu!</p></div>");
+				setTimeout(function(){ $("#msgClose").click(); }, 2000);
+			}
+			else{
+				$("#pesan").hide();
+				$("#pesan div").remove();
+				$("#pesan").show();
+				$("#pesan").append("<div class=\"alert alert-success alert-dismissable fade in\"><button id=\"msgClose\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button><p>"+response.responseText+"</p></div>");
+				setTimeout(function(){ $("#msgClose").click(); }, 2000);
+			}
+		}
+	});
+	
 	$(".dellink").click(function(e){
 		e.preventDefault();
 		var a = confirm("Yakin ingin menghapus mahasiswa dari kelas?");

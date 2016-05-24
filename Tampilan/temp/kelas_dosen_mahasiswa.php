@@ -11,12 +11,12 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['role'] 
 	$sql="SELECT * FROM kelas WHERE idKelas=$id";
 	$hasil=mysqli_query($k, $sql) ;
 	$kelas=mysqli_fetch_assoc($hasil);
-	
+		
 	$sql2="SELECT 
 				a.*,b.`idUser`,b.`namaUser`,b.`emailUser`
 			FROM 
 				kelasdtl a
-				LEFT JOIN USER b
+				LEFT JOIN user b
 				ON b.`idUser`=a.`idMhs`
 			WHERE
 				idKelas=$id";

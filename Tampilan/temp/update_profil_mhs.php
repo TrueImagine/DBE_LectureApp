@@ -19,7 +19,8 @@ if(isset($_POST['upload'])){
 			if(!file_exists('../images/fulls/temp')){
 				mkdir('../images/fulls/temp',0777,true);
 			}
-			$tujuan = "../images/fulls/temp/foto_".$_SESSION['user'].".".end(explode(".",$foto['name']));
+			$ext2 = explode(".",$foto['name']);
+			$tujuan = "../images/fulls/temp/foto_".$_SESSION['user'].".".end($ext2);
 			move_uploaded_file($sumber,$tujuan);
 			$response = $tujuan;
 			echo $response;
@@ -36,7 +37,8 @@ else if(isset($_SESSION['login']) && $_SESSION['role'] == "Mahasiswa" && isset($
 	
 	$file_path = $_POST['hidpath'];
 	if($file_path != ""){
-		$new_file_path = "../images/fulls/foto/".end(explode("/",$file_path));
+		$fp = explode("/",$file_path);
+		$new_file_path = "../images/fulls/foto/".end($fp);
 		rename($file_path, $new_file_path);
 	}
 	else{

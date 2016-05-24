@@ -50,7 +50,7 @@
 			if($ext7){
 				$extfile = $extfile."pptx";	
 			}
-			
+
 			//query nama tugas yang sama
 			$sql2="SELECT * FROM tugas WHERE namaTugas='$namaTugas'";
 			$hasil2=mysqli_query($k, $sql2);
@@ -60,7 +60,8 @@
 			if($sama){
 				
 			}else{
-				$fileExt = strtolower(end(explode(".", $tugas['name'])));
+				$ext2 = explode(".", $tugas['name']);
+				$fileExt = strtolower(end($ext2));
 				$ext = (explode(",", str_replace(" ", "", $ext)));
 				//print_r($ext);
 				//echo $fileExt;
@@ -90,8 +91,41 @@
 			$tglMulaiTugas = $_POST['tglMulaiTugas'];
 			$tglSelesaiTugas = $_POST['tglSelesaiTugas'];
 			
-			$sql = "INSERT INTO tugas (namaTugas, deskripsiTugas, tglMulaiTugas, tglSelesaiTugas, tglUploadTugas, idKelas)
-					VALUES('$nama', '$deskripsitugas', '$tglMulaiTugas', '$tglSelesaiTugas', '".date("Y-m-d")."', $idkelas)"; 
+			$ext="doc, docx, ppt, pptx, pdf";
+			$ext1 = $_POST['file_ext1'];
+			$ext2 = $_POST['file_ext2'];
+			$ext3 = $_POST['file_ext3'];
+			$ext4 = $_POST['file_ext4'];
+			$ext5 = $_POST['file_ext5'];
+			$ext6 = $_POST['file_ext6'];
+			$ext7 = $_POST['file_ext7'];
+			$extfile = "";
+			$maxSize = 2*1024*1024;
+			
+			if($ext1){
+				$extfile = $extfile."doc,";	
+			}
+			if($ext2){
+				$extfile = $extfile."docx,";	
+			}
+			if($ext3){
+				$extfile = $extfile."xls,";	
+			}
+			if($ext4){
+				$extfile = $extfile."xlsx,";	
+			}
+			if($ext5){
+				$extfile = $extfile."pdf,";	
+			}
+			if($ext6){
+				$extfile = $extfile."ppt,";	
+			}
+			if($ext7){
+				$extfile = $extfile."pptx";	
+			}
+			
+			$sql = "INSERT INTO tugas (namaTugas, deskripsiTugas, tglMulaiTugas, tglSelesaiTugas, tglUploadTugas, idKelas, extTugas)
+					VALUES('$nama', '$deskripsitugas', '$tglMulaiTugas', '$tglSelesaiTugas', '".date("Y-m-d")."', $idkelas, '$extfile')"; 
 					
 			mysqli_query($k, $sql);
 			

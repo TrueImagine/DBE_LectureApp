@@ -41,7 +41,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><b>LectureApps - Portal Dosen</b></a>
+                <a class="navbar-brand" href="dosen.php"><b>LectureApps - Portal Dosen</b></a>
             </div>
             <!-- /.navbar-header -->
 

@@ -17,7 +17,8 @@
 			if($sama){
 				echo "sama";
 			}else{
-				$fileExt = strtolower(end(explode(".", $nama)));
+				$ext2 = explode(".", $nama);
+				$fileExt = strtolower(end($ext2));
 				if($ext == $fileExt){
 					$sumber=$materi['tmp_name'];
 					//echo $materi['name'];
